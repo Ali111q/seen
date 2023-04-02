@@ -1,0 +1,6 @@
+framework module flutter_ijkplayer {
+  umbrella header "flutter_ijkplayer-umbrella.h"
+
+  export *
+  module * { export * }
+}

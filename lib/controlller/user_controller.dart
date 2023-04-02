@@ -26,7 +26,6 @@ class UserController extends ChangeNotifier {
     print(_res.body);
     if (_res.statusCode == 200) {
       var json = await jsonDecode(_res.body);
-
       if (json['success']) {
         user = User.fromJson(json['data']);
         if (user != null) {

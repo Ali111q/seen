@@ -46,11 +46,11 @@
 		</data>
 		<key>Modules/BSImagePicker.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		8z9OABeyalPHMxhxLKazpWl0VhU=
+		ZVXzHGsRMi6TXE3Ouc6+JZ4vzGE=
 		</data>
 		<key>Modules/BSImagePicker.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		GCmAVjFl3pDLlt5tiTlCOC12YDc=
+		3eKX2OlArUL+HaucfaRpTl5J8aM=
 		</data>
 		<key>Modules/BSImagePicker.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -62,7 +62,7 @@
 		</data>
 		<key>Modules/BSImagePicker.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		lSkj68IFS0Uhofow+igszztQeYI=
+		d8auahRIU6RMJnwLxBVPhmi9zGw=
 		</data>
 		<key>Modules/BSImagePicker.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -74,7 +74,7 @@
 		</data>
 		<key>Modules/BSImagePicker.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		ZCqt8z4Rs6EMw5QxA9XkNUZ/pNE=
+		ptGvXIePHP+MDARZ268GgO9jVwY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -186,22 +186,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8z9OABeyalPHMxhxLKazpWl0VhU=
+			ZVXzHGsRMi6TXE3Ouc6+JZ4vzGE=
 			</data>
 			<key>hash2</key>
 			<data>
-			uAVIEn4pM8tJwOju9jqAsXz7/1Ks1AY+3tK4zve75Bo=
+			yZ05C0X+YjtgS9C0LyDjZ1oGl1BAUiSYgvLIQzWjOCg=
 			</data>
 		</dict>
 		<key>Modules/BSImagePicker.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GCmAVjFl3pDLlt5tiTlCOC12YDc=
+			3eKX2OlArUL+HaucfaRpTl5J8aM=
 			</data>
 			<key>hash2</key>
 			<data>
-			XzFKlfd6wHFE9BShHqfjEui3OxsppTUOYGZVYZdfCAg=
+			KRpZkcqHSM4AcTmPnYqsxpWbw/Ijk7WtyvjBhv2oHPY=
 			</data>
 		</dict>
 		<key>Modules/BSImagePicker.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
@@ -230,11 +230,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			lSkj68IFS0Uhofow+igszztQeYI=
+			d8auahRIU6RMJnwLxBVPhmi9zGw=
 			</data>
 			<key>hash2</key>
 			<data>
-			/QX5frghtYyeW9qSc4T0tqPHwyGke/hXdEC/4uctsaw=
+			JjUfIJPlI/Lv2TYVLeVRXIM38kCJH6J7J6XkJfE0vRU=
 			</data>
 		</dict>
 		<key>Modules/BSImagePicker.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
@@ -263,11 +263,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZCqt8z4Rs6EMw5QxA9XkNUZ/pNE=
+			ptGvXIePHP+MDARZ268GgO9jVwY=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZypM3o959Oj9OUu67ReATEy/aL4BBptZzy4VlTiWNj4=
+			dNFUNuXll1UL/3lk9aiw0rC3yvrxsZQ4V1yxmbpNyMA=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

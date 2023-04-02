@@ -39,9 +39,10 @@ dependencies:
   shared_preferences: ^2.0.18
   http: ^0.13.5
   image_picker: ^0.8.7
-  video_player: ^2.5.3
+  video_player: ^2.6.0
   multi_image_picker: ^4.8.01
   flutter_svg: ^2.0.4
+  chewie: ^1.4.0
 
 dev_dependencies:
   flutter_test:

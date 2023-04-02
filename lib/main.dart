@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controlller/user_controller.dart';
+import 'package:seen/jj.dart';
 
-import 'layout/kasem.dart';
 import 'layout/login.dart';
+import 'layout/main_layout.dart';
 
 void main(List<String> args) {
   runApp(MultiProvider(
@@ -21,10 +22,11 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
+      initialRoute: '/',
       routes: {
         '/login': (context) => Login(),
-        '/home': (context) => HomeScreen()
+        '/home': (context) => MainLayout(),
+        '/': (context) => jj()
       },
     );
   }

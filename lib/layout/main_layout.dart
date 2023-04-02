@@ -4,14 +4,14 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../utils/colors.dart' as myColors;
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class MainLayout extends StatefulWidget {
+  const MainLayout({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeState();
+  State<MainLayout> createState() => _HomeState();
 }
 
-class _HomeState extends State<HomeScreen> {
+class _HomeState extends State<MainLayout> {
   int _currentIndex = 0;
 
   void onTabTapped(int index) {
