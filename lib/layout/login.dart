@@ -47,9 +47,9 @@ class _LoginState extends State<Login> {
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
             toolbarHeight: h * 0.15,
-            title: Icon(
-              Icons.abc,
-              size: w * 0.33,
+            title: SvgPicture.asset(
+              'assets/images/seen.svg',
+              width: 150,
             ),
             centerTitle: true,
           ),
@@ -88,12 +88,17 @@ class _LoginState extends State<Login> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      'انشاء حساب',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/register');
+                      },
+                      child: Text(
+                        'انشاء حساب',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
+                      ),
                     ),
                   ],
                 ),
@@ -152,15 +157,7 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.only(top: 22.0, right: 40),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'التسجيل لاحقا',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ],
+                  children: [],
                 ),
               ),
             ],

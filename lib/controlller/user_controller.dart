@@ -36,4 +36,27 @@ class UserController extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  Future<void> register(String email, String name, String password) async {
+    _service.initialize();
+
+    http.Response _res = await http.post(Uri.parse(registerUrl), body: {
+      'email': email,
+      'password': password,
+      'name': name,
+    }, headers: {
+      'Accept': 'application/json'
+    });
+    print(_res.statusCode);
+    print(_res.body);
+    if (_res.statusCode == 200) {
+      var json = await jsonDecode(_res.body);
+      if (json['success']) {
+        user = User.fromJson(json['data']);
+        print(user!.email);
+        _service.saveUser(user!);
+      }
+    }
+    notifyListeners();
+  }
 }

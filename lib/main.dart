@@ -5,6 +5,7 @@ import 'package:seen/jj.dart';
 
 import 'layout/login.dart';
 import 'layout/main_layout.dart';
+import 'layout/register.dart';
 
 void main(List<String> args) {
   runApp(MultiProvider(
@@ -22,11 +23,12 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/home',
       routes: {
         '/login': (context) => Login(),
+        '/register': (context) => RegisterScreen(),
         '/home': (context) => MainLayout(),
-        '/': (context) => jj()
+        // '/': (context) => jj()
       },
     );
   }
