@@ -16,7 +16,7 @@ class MainLayout extends StatefulWidget {
 
 class _HomeState extends State<MainLayout> {
   List pages = [
-    HomePage(),
+    MainScreen(),
     Container(),
     Container(),
     Container(),

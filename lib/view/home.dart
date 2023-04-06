@@ -1,72 +1,199 @@
 import 'package:flutter/material.dart';
+import '../utils/colors.dart' as myColors;
 
-class HomePage extends StatefulWidget {
+class MainScreen extends StatefulWidget {
   @override
-  _TelegramProfileState createState() => _TelegramProfileState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _TelegramProfileState extends State<HomePage> {
-  double _appBarHeight = 200.0;
-  double _avatarRadius = 60.0;
+class _MainScreenState extends State<MainScreen> {
+  late ScrollController _scrollController;
+  bool _showAlternativeWidget = false;
+  double _Offset = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    setState(() {
+      _Offset = _scrollController.offset;
+    });
+
+    if (_scrollController.offset > 400) {
+      // adjust threshold as needed
+      setState(() {
+        _showAlternativeWidget = true;
+      });
+    } else {
+      setState(() {
+        _showAlternativeWidget = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NotificationListener<ScrollNotification>(
-        onNotification: (scrollNotification) {
-          if (scrollNotification is ScrollUpdateNotification) {
-            setState(() {
-              _appBarHeight -= scrollNotification.scrollDelta!;
-              _avatarRadius -= scrollNotification.scrollDelta! / 2;
-            });
-          }
-          return true;
-        },
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              pinned: true,
-              expandedHeight: _appBarHeight,
-              flexibleSpace: FlexibleSpaceBar(
-                background: Image.network(
-                  'https://picsum.photos/id/237/200/300',
-                  fit: BoxFit.cover,
-                ),
+      backgroundColor: Colors.transparent,
+      body: CustomScrollView(
+        controller: _scrollController,
+        slivers: [
+          SliverAppBar(
+              expandedHeight: MediaQuery.of(context).size.height * 0.6,
+              backgroundColor: Colors.transparent,
+              flexibleSpace: _showAlternativeWidget
+                  ? Container(
+                      color: Colors.transparent,
+                      child: Center(
+                        child: Text(
+                          'Home',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                      ),
+                    )
+                  : FlexibleSpaceBar(
+                      background: Stack(
+                        children: [
+                          Center(
+                            child: Image.network(
+                              'https://thumbs.dreamstime.com/b/aspect-ratio-beach-background-summer-concept-187699731.jpg',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height *
+                                0.6 *
+                                ((1000 - _Offset) / 1000),
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.transparent,
+                                  Color(0xff0A1D2D).withOpacity(0.6),
+                                  Color(0xff091726),
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                              right: MediaQuery.of(context).size.width * 0.3,
+                              left: MediaQuery.of(context).size.width * 0.3,
+                              top: MediaQuery.of(context).size.height *
+                                  0.4 *
+                                  ((400 - _Offset) / 400),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Us',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 60,
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      ...['name', 'صخي'].map((e) => Text(
+                                            ' $e .',
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 18,
+                                            ),
+                                          )),
+                                      Text(' 2022',
+                                          style: TextStyle(
+                                            color: Colors.grey,
+                                          ))
+                                    ],
+                                  ),
+                                  Text(
+                                    'الحلقة ١ الموسم ١',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  ElevatedButton(
+                                      onPressed: () {},
+                                      child: Text('عرض الان'),
+                                      style: ButtonStyle(
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30.0),
+                                          ),
+                                        ),
+                                      )),
+                                ],
+                              ))
+                        ],
+                      ),
+                    )),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.width * 0.09,
+                    color: Colors.white,
+                  ),
+                ],
               ),
-            ),
-            SliverToBoxAdapter(
-              child: Container(
-                height: 150,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: _avatarRadius,
-                      backgroundImage: NetworkImage(
-                        'https://picsum.photos/200',
-                      ),
+              Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'برامج seen',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
-                    SizedBox(height: 16.0),
-                    Text(
-                      'John Doe',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 8.0),
-                    Text(
-                      'johndoe@gmail.com',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                      ),
-                    ),
-                  ],
-                ),
+                  )),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                reverse: true,
+                child: Row(children: [
+                  ...List.generate(
+                      20,
+                      (index) => Container(
+                            margin: EdgeInsets.all(6),
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: MediaQuery.of(context).size.width * 0.6,
+                            decoration: BoxDecoration(
+                                color: index % 2 == 1
+                                    ? Colors.white
+                                    : Color.fromARGB(255, 85, 255, 0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      offset: Offset(-1, 1),
+                                      color: Colors.black,
+                                      blurRadius: 3,
+                                      spreadRadius: 3)
+                                ]),
+                          ))
+                ]),
               ),
-            ),
-          ],
-        ),
+              Container(
+                height: 30,
+              )
+            ]),
+          ),
+        ],
       ),
     );
   }
