@@ -43,6 +43,8 @@ dependencies:
   multi_image_picker: ^4.8.01
   flutter_svg: ^2.0.4
   chewie: ^1.4.0
+  go_router: ^6.5.5
+  card_swiper: ^2.0.4
 
 dev_dependencies:
   flutter_test:

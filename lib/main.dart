@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:seen/controlller/home_controller.dart';
 import 'package:seen/controlller/user_controller.dart';
 import 'package:seen/jj.dart';
 
@@ -10,6 +11,7 @@ import 'layout/register.dart';
 void main(List<String> args) {
   runApp(MultiProvider(
     providers: [
+      ChangeNotifierProvider<HomeController>(create: (_) => HomeController()),
       ChangeNotifierProvider<UserController>(create: (_) => UserController()),
     ],
     child: Home(),

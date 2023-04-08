@@ -1,0 +1,14 @@
+{
+  'version': 0,
+  'use-external-names': 'false',
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/azuco/Documents/GitHub/seen/build/macos/Build/Products/Debug/wakelock_macos/wakelock_macos.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/azuco/Documents/GitHub/seen/build/macos/Build/Intermediates.noindex/Pods.build/Debug/wakelock_macos.build/unextended-module.modulemap",
+    }]
+  }]
+}

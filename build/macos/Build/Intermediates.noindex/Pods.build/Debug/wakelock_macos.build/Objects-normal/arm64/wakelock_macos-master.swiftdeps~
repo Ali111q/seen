@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
+options: "22b8bbcf5ab8c13a2c149d52cee2e23c46ecf61cf9e699e79760ebf8b25feaa2"
+build_start_time: [1680960398, 277395963]
+build_end_time: [1680960398, 296893119]
+inputs:
+  "/Users/azuco/.pub-cache/hosted/pub.dev/wakelock_macos-0.4.0/macos/Classes/WakelockMacosPlugin.swift": !private [1680459477, 156656742]

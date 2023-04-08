@@ -20,6 +20,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "card_swiper",
+      "rootUri": "file:///Users/azuco/.pub-cache/hosted/pub.dev/card_swiper-2.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "characters",
       "rootUri": "file:///Users/azuco/.pub-cache/hosted/pub.dev/characters-1.2.1",
       "packageUri": "lib/",
@@ -116,6 +122,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "go_router",
+      "rootUri": "file:///Users/azuco/.pub-cache/hosted/pub.dev/go_router-6.5.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "html",
       "rootUri": "file:///Users/azuco/.pub-cache/hosted/pub.dev/html-0.15.2",
       "packageUri": "lib/",
@@ -174,6 +186,12 @@
       "rootUri": "file:///Users/azuco/.pub-cache/hosted/pub.dev/lints-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "logging",
+      "rootUri": "file:///Users/azuco/.pub-cache/hosted/pub.dev/logging-1.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "matcher",
@@ -464,7 +482,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-04-02T18:40:19.992617Z",
+  "generated": "2023-04-08T18:01:18.364956Z",
   "generator": "pub",
   "generatorVersion": "2.19.2"
 }

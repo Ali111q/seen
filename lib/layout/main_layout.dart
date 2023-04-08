@@ -3,9 +3,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:seen/helper/appbar.dart';
-import 'package:seen/view/ad_page.dart';
+import 'package:seen/view/ads_page.dart';
+import 'package:seen/view/contact_us.dart';
+import 'package:seen/view/sections_page.dart';
 import '../utils/colors.dart' as myColors;
 import '../view/home.dart';
+import '../view/reels_page.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
@@ -17,10 +20,10 @@ class MainLayout extends StatefulWidget {
 class _HomeState extends State<MainLayout> {
   List pages = [
     MainScreen(),
-    Container(),
-    Container(),
-    Container(),
-    AdPage(),
+    ReelsPage(),
+    const ContactUs(),
+    SectionsPage(),
+    AdsPage()
   ];
   int _currentIndex = 0;
 
@@ -43,48 +46,107 @@ class _HomeState extends State<MainLayout> {
         end: Alignment.bottomRight,
       )),
       child: Scaffold(
-        appBar: MyAppBar(titleText: 'titleText'),
-        backgroundColor: Colors.transparent,
-        body: pages[_currentIndex],
-        bottomNavigationBar: SizedBox(
-          height: h * 0.1,
-          child: BottomNavigationBar(
-            iconSize: w * 0.065,
-            backgroundColor: myColors.dark,
-            type: BottomNavigationBarType.fixed,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
+          appBar: MyAppBar(titleText: 'titleText'),
+          backgroundColor: Colors.transparent,
+          body: pages[_currentIndex],
+          bottomNavigationBar: CustomNavigationBar(
             currentIndex: _currentIndex,
-            onTap: onTabTapped,
-            items: [
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/images/seen.svg'),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/images/bs.svg'),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/call_us.png',
-                  width: 25,
-                ),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Image.asset('assets/images/sections.png'),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/ads.png',
-                  width: 30,
-                ),
-                label: '',
-              ),
+            onTabTapped: (int index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+          )),
+    );
+  }
+}
+
+class CustomNavigationBar extends StatefulWidget {
+  CustomNavigationBar(
+      {Key? key, required this.currentIndex, required this.onTabTapped})
+      : super(key: key);
+  Function(int index) onTabTapped;
+  int currentIndex;
+  @override
+  _CustomNavigationBarState createState() => _CustomNavigationBarState();
+}
+
+class _CustomNavigationBarState extends State<CustomNavigationBar> {
+  @override
+  Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
+
+    return SizedBox(
+      height: h * 0.11,
+      child: Container(
+        color: myColors.dark,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 14.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              buildNavBarItem(
+                  iconPath: 'assets/images/seen.svg',
+                  iconWidth: w * 0.095,
+                  index: 0,
+                  isSvg: true),
+              buildNavBarItem(
+                  iconPath: 'assets/images/bs.svg',
+                  iconWidth: w * 0.075,
+                  index: 1,
+                  isSvg: true),
+              buildNavBarItem(
+                  iconPath: 'assets/images/call_us.png',
+                  iconWidth: w * 0.095,
+                  index: 2,
+                  isSvg: false),
+              buildNavBarItem(
+                  iconPath: 'assets/images/sections.png',
+                  iconWidth: w * 0.095,
+                  index: 3,
+                  isSvg: false),
+              buildNavBarItem(
+                  iconPath: 'assets/images/ads.png',
+                  iconWidth: w * 0.095,
+                  index: 4,
+                  isSvg: false),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildNavBarItem({
+    required String iconPath,
+    required double iconWidth,
+    required int index,
+    required bool isSvg,
+  }) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => widget.onTabTapped(index),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: isSvg
+              ? SvgPicture.asset(
+                  iconPath,
+                  width: iconWidth,
+                  color: index == 0
+                      ? null
+                      : widget.currentIndex == index
+                          ? Colors.white
+                          : Colors.grey,
+                )
+              : ImageIcon(
+                  AssetImage(
+                    iconPath,
+                  ),
+                  color:
+                      widget.currentIndex == index ? Colors.white : Colors.grey,
+                ),
         ),
       ),
     );
