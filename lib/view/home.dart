@@ -87,11 +87,7 @@ class _MainScreenState extends State<MainScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: MediaQuery.of(context).size.width * 0.09,
-                    color: Colors.white,
-                  ),
+                  HomeAdd(),
                 ],
               ),
               SectionWidget()
@@ -99,6 +95,21 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class HomeAdd extends StatelessWidget {
+  const HomeAdd({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: MediaQuery.of(context).size.width * 0.09,
+      color: Colors.white,
     );
   }
 }
@@ -178,13 +189,12 @@ class BannerItem extends StatelessWidget {
                   ),
                   ElevatedButton(
                       onPressed: () {},
-                      child: Text('عرض الان'),
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
+                      child: Text('عرض الان',
+                          style: TextStyle(color: Colors.black)),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
                       )),
                 ],

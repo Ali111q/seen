@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:seen/controlller/home_controller.dart';
 import 'package:seen/controlller/user_controller.dart';
 import 'package:seen/jj.dart';
+import 'package:seen/layout/Episode.dart';
 
 import 'layout/login.dart';
 import 'layout/main_layout.dart';
@@ -25,11 +26,12 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/home',
+      initialRoute: '/episode',
       routes: {
         '/login': (context) => Login(),
         '/register': (context) => RegisterScreen(),
         '/home': (context) => MainLayout(),
+        '/episode': (context) => EpisodeScreen()
         // '/': (context) => jj()
       },
     );
