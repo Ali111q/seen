@@ -5,6 +5,7 @@ import 'package:seen/controlller/home_controller.dart';
 import 'package:seen/model/ad.dart';
 import 'package:seen/model/episode.dart';
 import 'package:seen/model/tag.dart';
+import 'package:seen/view/launch_screen.dart';
 import '../utils/colors.dart' as myColors;
 
 class MainScreen extends StatefulWidget {
@@ -55,10 +56,10 @@ class _MainScreenState extends State<MainScreen> {
     List<Ad?> ads = Provider.of<HomeController>(context).ads;
     List<Episode?> banner = Provider.of<HomeController>(context).banner;
     List<Tag?> tags = Provider.of<HomeController>(context).tags;
-
+  
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: CustomScrollView(
+      body: banner.isEmpty? LaunchScreen():  CustomScrollView(
         controller: _scrollController,
         slivers: [
           SliverAppBar(
@@ -76,11 +77,12 @@ class _MainScreenState extends State<MainScreen> {
                     )
                   : Swiper(
                       itemBuilder: (context, index) {
-                        return BannerItem(Offset: _Offset);
+                        return  BannerItem(Offset: _Offset, banner: banner[index]!,);
                       },
-                      itemCount: 2,
-                      autoplay: true,
+                      itemCount: banner.length,
+                      autoplay:  banner.length == 1? false: true,
                       duration: 500,
+                      loop:banner.length == 1? false: true,
                     )),
           SliverList(
             delegate: SliverChildListDelegate([
@@ -90,7 +92,9 @@ class _MainScreenState extends State<MainScreen> {
                   HomeAdd(),
                 ],
               ),
-              SectionWidget()
+...              tags.map((e) {
+                return SectionWidget(tag:  e!,);
+              })
             ]),
           ),
         ],
@@ -117,11 +121,11 @@ class HomeAdd extends StatelessWidget {
 class BannerItem extends StatelessWidget {
   const BannerItem({
     super.key,
-    required double Offset,
+    required double Offset, required this.banner,
   }) : _Offset = Offset;
 
   final double _Offset;
-
+final Episode banner;
   @override
   Widget build(BuildContext context) {
     return FlexibleSpaceBar(
@@ -129,7 +133,7 @@ class BannerItem extends StatelessWidget {
         children: [
           Center(
             child: Image.network(
-              'https://thumbs.dreamstime.com/b/aspect-ratio-beach-background-summer-concept-187699731.jpg',
+              banner.thumbnail,
               fit: BoxFit.cover,
             ),
           ),
@@ -161,7 +165,7 @@ class BannerItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Us',
+                    banner.local_name!,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 60,
@@ -170,7 +174,7 @@ class BannerItem extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ...['name', 'صخي'].map((e) => Text(
+                      ...banner.tags.map((e) => Text(
                             ' $e .',
                             style: TextStyle(
                               color: Colors.grey,
@@ -184,7 +188,7 @@ class BannerItem extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    'الحلقة ١ الموسم ١',
+                    'الحلقة ${banner.episode_num} الموسم ${banner.season_num}',
                     style: TextStyle(color: Colors.white),
                   ),
                   ElevatedButton(
@@ -205,11 +209,24 @@ class BannerItem extends StatelessWidget {
   }
 }
 
-class SectionWidget extends StatelessWidget {
+class SectionWidget extends StatefulWidget {
   const SectionWidget({
-    super.key,
+    super.key, required this.tag,
   });
+  final Tag tag;
+  
 
+  @override
+  State<SectionWidget> createState() => _SectionWidgetState();
+}
+
+class _SectionWidgetState extends State<SectionWidget> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<HomeController>(context, listen: false).getEpisode(widget.tag.id);
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -219,7 +236,7 @@ class SectionWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'برامج seen',
+                widget.tag.local_name,
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
             )),
@@ -227,16 +244,14 @@ class SectionWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           reverse: true,
           child: Row(children: [
-            ...List.generate(
-                20,
-                (index) => Container(
+            ...widget.tag.shows!.map(
+              
+                (e) => Container(
                       margin: EdgeInsets.all(6),
                       width: MediaQuery.of(context).size.width * 0.4,
                       height: MediaQuery.of(context).size.width * 0.6,
                       decoration: BoxDecoration(
-                          color: index % 2 == 1
-                              ? Colors.white
-                              : Color.fromARGB(255, 85, 255, 0),
+                         image: DecorationImage(image: NetworkImage(e!.image),fit: BoxFit.cover),
                           boxShadow: [
                             BoxShadow(
                                 offset: Offset(-1, 1),
@@ -244,6 +259,22 @@ class SectionWidget extends StatelessWidget {
                                 blurRadius: 3,
                                 spreadRadius: 3)
                           ]),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(),
+                                Container(),
+                                Text(e.name, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold ,shadows: [
+                                  Shadow(
+                                    blurRadius: 6,
+                                    color: Colors.white.withOpacity(0.4)
+                                  )
+                                ]),)
+                              ],
+                            ),
+                          ),
                     ))
           ]),
         ),

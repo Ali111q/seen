@@ -80,7 +80,8 @@ class _EpisodeScreenState extends State<EpisodeScreen>
                         ),
                       ),
                     )
-                  : BannerItem(Offset: _Offset),
+                  :Container()
+                  //  BannerItem(Offset: _Offset),
             ),
             SliverList(
                 delegate: SliverChildListDelegate([

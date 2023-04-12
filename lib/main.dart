@@ -26,12 +26,12 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/episode',
+      initialRoute: '/home',
       routes: {
         '/login': (context) => Login(),
         '/register': (context) => RegisterScreen(),
         '/home': (context) => MainLayout(),
-        '/episode': (context) => EpisodeScreen()
+        '/episode': (context) => EpisodeScreen(),
         // '/': (context) => jj()
       },
     );
