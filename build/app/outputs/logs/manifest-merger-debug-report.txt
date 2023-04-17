@@ -32,6 +32,8 @@ MERGED from C:\Users\MK\Documents\GitHub\seen\android\app\src\main\AndroidManife
 MERGED from [:shared_preferences_android] C:\Users\MK\Documents\GitHub\seen\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:image_picker_android] C:\Users\MK\Documents\GitHub\seen\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-21:12
 MERGED from [:flutter_plugin_android_lifecycle] C:\Users\MK\Documents\GitHub\seen\build\flutter_plugin_android_lifecycle\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:sqflite] C:\Users\MK\Documents\GitHub\seen\build\sqflite\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:path_provider_android] C:\Users\MK\Documents\GitHub\seen\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:multi_image_picker] C:\Users\MK\Documents\GitHub\seen\build\multi_image_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:video_player_android] C:\Users\MK\Documents\GitHub\seen\build\video_player_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:wakelock] C:\Users\MK\Documents\GitHub\seen\build\wakelock\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
@@ -115,6 +117,10 @@ MERGED from [:image_picker_android] C:\Users\MK\Documents\GitHub\seen\build\imag
 MERGED from [:image_picker_android] C:\Users\MK\Documents\GitHub\seen\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_plugin_android_lifecycle] C:\Users\MK\Documents\GitHub\seen\build\flutter_plugin_android_lifecycle\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_plugin_android_lifecycle] C:\Users\MK\Documents\GitHub\seen\build\flutter_plugin_android_lifecycle\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:sqflite] C:\Users\MK\Documents\GitHub\seen\build\sqflite\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:sqflite] C:\Users\MK\Documents\GitHub\seen\build\sqflite\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:path_provider_android] C:\Users\MK\Documents\GitHub\seen\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:path_provider_android] C:\Users\MK\Documents\GitHub\seen\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:multi_image_picker] C:\Users\MK\Documents\GitHub\seen\build\multi_image_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:multi_image_picker] C:\Users\MK\Documents\GitHub\seen\build\multi_image_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:video_player_android] C:\Users\MK\Documents\GitHub\seen\build\video_player_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -40,6 +41,9 @@ class _HomeState extends State<MainLayout> {
     // TODO: implement initState
     super.initState();
     Provider.of<SettingController>(context, listen: false).getSetting();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
   }
 
   @override

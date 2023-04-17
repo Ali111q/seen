@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
@@ -14,17 +17,25 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
   @override
   void initState() {
     super.initState();
-    _videoPlayerController = VideoPlayerController.network(
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    _videoPlayerController = VideoPlayerController.asset(
         'https://seen-dorto.s3.amazonaws.com/episode/1681682453seenvideo.m3u8');
     _chewieController = ChewieController(
-      videoPlayerController: _videoPlayerController!,
-      autoPlay: true,
-      looping: true,
-    );
+        videoPlayerController: _videoPlayerController!,
+        autoPlay: true,
+        looping: true,
+        aspectRatio: 4 / 2);
   }
 
   @override
   void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     _videoPlayerController?.dispose();
     _chewieController?.dispose();
     super.dispose();
