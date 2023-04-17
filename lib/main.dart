@@ -35,7 +35,7 @@ class Home extends StatelessWidget {
         '/register': (context) => RegisterScreen(),
         '/home': (context) => MainLayout(),
         '/episode': (context) => EpisodeScreen(),
-        // '/': (context) => jj()
+        '/video-player': (context) => jj()
       },
     );
   }

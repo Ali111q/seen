@@ -128,6 +128,7 @@ class HomeAdd extends StatelessWidget {
       color: Colors.white,
       child: Swiper(
         itemCount: ads!.length,
+        loop: ads!.length != 1,
         itemBuilder: (context, index) => Image.network(
           ads![index]!.file,
           fit: BoxFit.cover,
@@ -212,7 +213,9 @@ class BannerItem extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/video-player');
+                      },
                       child: Text('عرض الان',
                           style: TextStyle(color: Colors.black)),
                       style: ElevatedButton.styleFrom(
@@ -265,45 +268,51 @@ class _SectionWidgetState extends State<SectionWidget> {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           reverse: true,
-          child: Row(children: [
-            ...widget.tag.shows!.map((e) => Container(
-                  margin: EdgeInsets.all(6),
+          child: widget.tag.shows!.isEmpty
+              ? Container(
                   width: MediaQuery.of(context).size.width * 0.4,
                   height: MediaQuery.of(context).size.width * 0.6,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(e!.image), fit: BoxFit.cover),
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(-1, 1),
-                            color: Colors.black,
-                            blurRadius: 3,
-                            spreadRadius: 3)
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(),
-                        Container(),
-                        Text(
-                          e.name,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              shadows: [
-                                Shadow(
-                                    blurRadius: 6,
-                                    color: Colors.white.withOpacity(0.4))
-                              ]),
-                        )
-                      ],
-                    ),
-                  ),
-                ))
-          ]),
+                  child: Center(child: CircularProgressIndicator()))
+              : Row(children: [
+                  ...widget.tag.shows!.map((e) => Container(
+                        margin: EdgeInsets.all(6),
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        height: MediaQuery.of(context).size.width * 0.6,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(e!.image),
+                                fit: BoxFit.cover),
+                            boxShadow: [
+                              BoxShadow(
+                                  offset: Offset(-1, 1),
+                                  color: Colors.black,
+                                  blurRadius: 3,
+                                  spreadRadius: 3)
+                            ]),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(),
+                              Container(),
+                              Text(
+                                e.name,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    shadows: [
+                                      Shadow(
+                                          blurRadius: 6,
+                                          color: Colors.white.withOpacity(0.4))
+                                    ]),
+                              )
+                            ],
+                          ),
+                        ),
+                      ))
+                ]),
         ),
         Container(
           height: 30,

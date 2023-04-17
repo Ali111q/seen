@@ -43,6 +43,9 @@ class HomeController extends ChangeNotifier {
   }
 
   Future<void> getEpisode(id) async {
+    for (var element in tags) {
+      element!.clearShow();
+    }
     episode = null;
     http.Response _res =
         await http.get(Uri.parse(getEpisodeUrl(id)), headers: header);
@@ -50,15 +53,12 @@ class HomeController extends ChangeNotifier {
       var json = jsonDecode(_res.body);
       if (json['success']) {
         for (var element in json['data']['data']) {
-          if (tags.firstWhere((element) => element!.id == id)!.shows != null) {
-            tags.firstWhere((element) => element!.id == id)!.clearShow();
-            tags
-                .firstWhere((element) => element!.id == id)!
-                .addShow(Show.fromJson(element));
-          }
+          tags
+              .firstWhere((element) => element!.id == id)!
+              .addShow(Show.fromJson(element));
+          notifyListeners();
         }
       }
     }
-    notifyListeners();
   }
 }

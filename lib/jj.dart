@@ -9,10 +9,7 @@ class jj extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: VideoPlayerWidget(
-        videoUrl:
-            'https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8',
-      ),
+      body: VideoPlayerWidget(),
     );
   }
 }
