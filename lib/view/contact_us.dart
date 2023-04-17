@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
+import 'package:seen/controlller/setting_controller.dart';
+import 'package:seen/model/setting.dart';
 
 class ContactUs extends StatelessWidget {
   const ContactUs({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Setting? setting = Provider.of<SettingController>(context).setting;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -69,18 +73,57 @@ class ContactUs extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [Text('data'), Text('data')],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [Text('data'), Text('data')],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [Text('data'), Text('data')],
-                      )
+                      setting!.asia == null
+                          ? Container()
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  'Asia',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                ),
+                                Text(
+                                  setting.asia!,
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                )
+                              ],
+                            ),
+                      setting.zain == null
+                          ? Container()
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  'Zain',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                ),
+                                Text(
+                                  setting.zain!,
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                )
+                              ],
+                            ),
+                      setting.korek == null
+                          ? Container()
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  'Korek',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                ),
+                                Text(
+                                  setting.korek!,
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                )
+                              ],
+                            )
                     ],
                   ),
                 ),
@@ -98,7 +141,7 @@ class ContactUs extends StatelessWidget {
             height: MediaQuery.of(context).size.width * 0.2,
             child: Center(
               child: Text(
-                'seen.A.D@gmail.com',
+                setting.email!,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 26,

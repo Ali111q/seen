@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -56,64 +57,82 @@ class _MainScreenState extends State<MainScreen> {
     List<Ad?> ads = Provider.of<HomeController>(context).ads;
     List<Episode?> banner = Provider.of<HomeController>(context).banner;
     List<Tag?> tags = Provider.of<HomeController>(context).tags;
-  
+
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: banner.isEmpty? LaunchScreen():  CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          SliverAppBar(
-              expandedHeight: MediaQuery.of(context).size.height * 0.6,
-              backgroundColor: Colors.transparent,
-              flexibleSpace: _showAlternativeWidget
-                  ? Container(
-                      color: Colors.transparent,
-                      child: Center(
-                        child: Text(
-                          'Home',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+      body: banner.isEmpty
+          ? LaunchScreen()
+          : CustomScrollView(
+              controller: _scrollController,
+              slivers: [
+                SliverAppBar(
+                    expandedHeight: MediaQuery.of(context).size.height * 0.6,
+                    backgroundColor: Colors.transparent,
+                    flexibleSpace: _showAlternativeWidget
+                        ? Container(
+                            color: Colors.transparent,
+                            child: Center(
+                              child: Text(
+                                'Home',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            ),
+                          )
+                        : Swiper(
+                            itemBuilder: (context, index) {
+                              return BannerItem(
+                                Offset: _Offset,
+                                banner: banner[index]!,
+                              );
+                            },
+                            itemCount: banner.length,
+                            autoplay: banner.length == 1 ? false : true,
+                            duration: 500,
+                            loop: banner.length == 1 ? false : true,
+                          )),
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        HomeAdd(
+                          ads: ads,
                         ),
-                      ),
-                    )
-                  : Swiper(
-                      itemBuilder: (context, index) {
-                        return  BannerItem(Offset: _Offset, banner: banner[index]!,);
-                      },
-                      itemCount: banner.length,
-                      autoplay:  banner.length == 1? false: true,
-                      duration: 500,
-                      loop:banner.length == 1? false: true,
-                    )),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  HomeAdd(),
-                ],
-              ),
-...              tags.map((e) {
-                return SectionWidget(tag:  e!,);
-              })
-            ]),
-          ),
-        ],
-      ),
+                      ],
+                    ),
+                    ...tags.map((e) {
+                      return SectionWidget(
+                        tag: e!,
+                      );
+                    })
+                  ]),
+                ),
+              ],
+            ),
     );
   }
 }
 
 class HomeAdd extends StatelessWidget {
-  const HomeAdd({
+  HomeAdd({
+    this.ads,
     super.key,
   });
-
+  List<Ad?>? ads;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.width * 0.09,
       color: Colors.white,
+      child: Swiper(
+        itemCount: ads!.length,
+        itemBuilder: (context, index) => Image.network(
+          ads![index]!.file,
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }
@@ -121,11 +140,12 @@ class HomeAdd extends StatelessWidget {
 class BannerItem extends StatelessWidget {
   const BannerItem({
     super.key,
-    required double Offset, required this.banner,
+    required double Offset,
+    required this.banner,
   }) : _Offset = Offset;
 
   final double _Offset;
-final Episode banner;
+  final Episode banner;
   @override
   Widget build(BuildContext context) {
     return FlexibleSpaceBar(
@@ -211,10 +231,10 @@ final Episode banner;
 
 class SectionWidget extends StatefulWidget {
   const SectionWidget({
-    super.key, required this.tag,
+    super.key,
+    required this.tag,
   });
   final Tag tag;
-  
 
   @override
   State<SectionWidget> createState() => _SectionWidgetState();
@@ -225,8 +245,10 @@ class _SectionWidgetState extends State<SectionWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<HomeController>(context, listen: false).getEpisode(widget.tag.id);
+    Provider.of<HomeController>(context, listen: false)
+        .getEpisode(widget.tag.id);
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -244,38 +266,43 @@ class _SectionWidgetState extends State<SectionWidget> {
           scrollDirection: Axis.horizontal,
           reverse: true,
           child: Row(children: [
-            ...widget.tag.shows!.map(
-              
-                (e) => Container(
-                      margin: EdgeInsets.all(6),
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      height: MediaQuery.of(context).size.width * 0.6,
-                      decoration: BoxDecoration(
-                         image: DecorationImage(image: NetworkImage(e!.image),fit: BoxFit.cover),
-                          boxShadow: [
-                            BoxShadow(
-                                offset: Offset(-1, 1),
-                                color: Colors.black,
-                                blurRadius: 3,
-                                spreadRadius: 3)
-                          ]),
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(),
-                                Container(),
-                                Text(e.name, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold ,shadows: [
-                                  Shadow(
+            ...widget.tag.shows!.map((e) => Container(
+                  margin: EdgeInsets.all(6),
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  height: MediaQuery.of(context).size.width * 0.6,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(e!.image), fit: BoxFit.cover),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(-1, 1),
+                            color: Colors.black,
+                            blurRadius: 3,
+                            spreadRadius: 3)
+                      ]),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(),
+                        Container(),
+                        Text(
+                          e.name,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              shadows: [
+                                Shadow(
                                     blurRadius: 6,
-                                    color: Colors.white.withOpacity(0.4)
-                                  )
-                                ]),)
-                              ],
-                            ),
-                          ),
-                    ))
+                                    color: Colors.white.withOpacity(0.4))
+                              ]),
+                        )
+                      ],
+                    ),
+                  ),
+                ))
           ]),
         ),
         Container(

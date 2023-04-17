@@ -17,7 +17,7 @@ class SettingController extends ChangeNotifier {
       var json = jsonDecode(_res.body);
       if (json['success']) {
         setting = Setting.fromJson(json['data']);
-        if (int.parse(setting!.min_version) <= version) {
+        if (double.parse(setting!.min_version) <= version) {
           isUpdated = false;
         }
       }

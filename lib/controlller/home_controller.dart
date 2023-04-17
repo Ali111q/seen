@@ -22,16 +22,18 @@ class HomeController extends ChangeNotifier {
 
     if (res.statusCode == 200) {
       banner.clear();
-      tags.clear();
       ads.clear();
       var json = jsonDecode(res.body);
       if (json['success']) {
         json['data']['banner'].forEach((e) {
           banner.add(Episode.fromJson(e));
         });
-        json['data']['categories'].forEach((e) {
-          tags.add(Tag.fromJson(e));
-        });
+        if (tags.isEmpty) {
+          json['data']['categories'].forEach((e) {
+            tags.add(Tag.fromJson(e));
+          });
+        }
+
         json['data']['ads'].forEach((e) {
           ads.add(Ad.fromJson(e));
         });
@@ -44,17 +46,19 @@ class HomeController extends ChangeNotifier {
     episode = null;
     http.Response _res =
         await http.get(Uri.parse(getEpisodeUrl(id)), headers: header);
-if (_res.statusCode == 200) {
-  var json = jsonDecode(_res.body);
-  if (json['success']) {
-    print(json['data']);
-for (var element in json['data']['data']) {
-    tags.firstWhere((element) => element!.id == id)!.addShow(Show.fromJson(element));
-  
-}
-
-  }
-}
-
+    if (_res.statusCode == 200) {
+      var json = jsonDecode(_res.body);
+      if (json['success']) {
+        for (var element in json['data']['data']) {
+          if (tags.firstWhere((element) => element!.id == id)!.shows != null) {
+            tags.firstWhere((element) => element!.id == id)!.clearShow();
+            tags
+                .firstWhere((element) => element!.id == id)!
+                .addShow(Show.fromJson(element));
+          }
+        }
+      }
+    }
+    notifyListeners();
   }
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:seen/controlller/setting_controller.dart';
 import 'package:seen/helper/appbar.dart';
 import 'package:seen/view/ads_page.dart';
 import 'package:seen/view/contact_us.dart';
@@ -31,6 +33,13 @@ class _HomeState extends State<MainLayout> {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<SettingController>(context, listen: false).getSetting();
   }
 
   @override

@@ -5,6 +5,7 @@ import 'package:seen/controlller/user_controller.dart';
 import 'package:seen/jj.dart';
 import 'package:seen/layout/Episode.dart';
 
+import 'controlller/setting_controller.dart';
 import 'layout/login.dart';
 import 'layout/main_layout.dart';
 import 'layout/register.dart';
@@ -14,6 +15,8 @@ void main(List<String> args) {
     providers: [
       ChangeNotifierProvider<HomeController>(create: (_) => HomeController()),
       ChangeNotifierProvider<UserController>(create: (_) => UserController()),
+      ChangeNotifierProvider<SettingController>(
+          create: (_) => SettingController())
     ],
     child: Home(),
   ));
