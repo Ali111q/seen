@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		H3sKyQpSpWjsxkzAXSF5vrUtMUg=
+		Xs0986A0vD1UUaTEJi/aVz9DR8M=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -18,11 +18,15 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		I05I6qRMmcwHiIpQAd20J5eLY00=
+		wdF8gcCmstzjHrrKR34hMRLUFPg=
 		</data>
 		<key>flutter_assets/assets/font/font.ttf</key>
 		<data>
 		386hRFEqw5jyonHaLOwKMlMYnsA=
+		</data>
+		<key>flutter_assets/assets/images/1680995688seenvideo_0_250%20(5).m3u8</key>
+		<data>
+		2RwRHLQP00ASBiMpvRDozR7fN0c=
 		</data>
 		<key>flutter_assets/assets/images/ads.png</key>
 		<data>
@@ -59,6 +63,10 @@
 		<key>flutter_assets/assets/images/gmail.svg</key>
 		<data>
 		8QyTJ7nArhmivNY2x33OA3F3QUM=
+		</data>
+		<key>flutter_assets/assets/images/m3u8</key>
+		<data>
+		c20TL0QQzuQZBI8YReKo3AZrxnk=
 		</data>
 		<key>flutter_assets/assets/images/marker.svg</key>
 		<data>
@@ -108,6 +116,10 @@
 		<data>
 		wxftcrJwxgyZjqLmejzsFiWxnlw=
 		</data>
+		<key>flutter_assets/assets/images/youtube.svg</key>
+		<data>
+		da3LFVGtKXdn8MUVFeFVkwdQ5sQ=
+		</data>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
 		/CUoTuPQqqdexfyOT9lpJhV+2MQ=
@@ -118,7 +130,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		iN74PSaWuGZTdA0l2E/NHRfkB+U=
+		KUrY/NBMIn60wBVbKiUhxE1+reA=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -143,7 +155,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			spcu9LEoGV6ec0MwZYgXDkx71dIZAWacnRQ76dEzG/c=
+			Zga6haUvOnQiVYWHMNkQDzUOuqJRr+769JRmDmZQ6SM=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -157,7 +169,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			GVKsdWXqLX6znq8GKkPJdfK1U4xQRZKuSsCLlIlB9Pg=
+			ugrknvZQKwBySKQASCsasVM3YbkUfFuOC4GEM6SyVGA=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/font/font.ttf</key>
@@ -165,6 +177,13 @@
 			<key>hash2</key>
 			<data>
 			EYGlNdUkNjdmxWZzuwDHAoHs/xmjxpCw/pPv6Wy3ZGo=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/1680995688seenvideo_0_250%20(5).m3u8</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			MPJpS+YpS9G6D8s0xnJyDBeC+G2IjUbhwvU5lbJGp+U=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/ads.png</key>
@@ -228,6 +247,13 @@
 			<key>hash2</key>
 			<data>
 			l4x4UhQzFmSN/kX0lOgDfCnd90bbXjNw8XIQzMUjGNQ=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/m3u8</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			50JY469EYvLQbw+cjSd7m0QSzp/081DgKG2r1erk+sA=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/marker.svg</key>
@@ -314,6 +340,13 @@
 			qKieANwGIYCNV7zd6QBVBBHkYToJVctYKPHr6SQLx3w=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/images/youtube.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			pPkbkyu4YsB14up7SsP+wLUgjWKgvNTwJ1vvlBeQEVU=
+			</data>
+		</dict>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<dict>
 			<key>hash2</key>
@@ -332,7 +365,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			NP/56PZ23Z4Dxy/3kkXqvGwD5FvdVxfjAVNtMy6Y+bE=
+			i8dmNYTlH93tQY9T1BDQn4eDPDrk2uQFZxQOqvjwYTE=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

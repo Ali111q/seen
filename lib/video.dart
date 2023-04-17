@@ -15,7 +15,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
   void initState() {
     super.initState();
     _videoPlayerController = VideoPlayerController.network(
-        'https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8');
+        'https://seen-dorto.s3.amazonaws.com/episode/1681682453seenvideo.m3u8');
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController!,
       autoPlay: true,
