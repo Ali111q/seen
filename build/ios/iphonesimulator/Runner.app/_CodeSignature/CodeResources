@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		S5DAGzpJfnmGeiW4YppXEQMNKuU=
+		7jE6q1A8/V9gRlQsMGENoDNZdL8=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		RrksQ7HepSB2fzKHa7o8ozdE+Us=
+		dM89bWxBobJbJvGZ6WNDyznCcME=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
@@ -178,7 +178,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		KUrY/NBMIn60wBVbKiUhxE1+reA=
+		C8UwcdWRrq9JCOi8I0OJbFZ5ihc=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -198,7 +198,7 @@
 		</data>
 		<key>Frameworks/BSGridCollectionViewLayout.framework/BSGridCollectionViewLayout</key>
 		<data>
-		QeEy9NtKHB5NlR1sxSDhmbVLMdQ=
+		EfiHD9tAk5zfU126ZfcxFZCWsO8=
 		</data>
 		<key>Frameworks/BSGridCollectionViewLayout.framework/Info.plist</key>
 		<data>
@@ -210,7 +210,7 @@
 		</data>
 		<key>Frameworks/BSImagePicker.framework/BSImagePicker</key>
 		<data>
-		e3VOWE38eoBW/xwujZggQXDrFAk=
+		QDEBRTW8pg6jNMQj2RuhSN/s3/s=
 		</data>
 		<key>Frameworks/BSImagePicker.framework/BSImagePicker.bundle/Info.plist</key>
 		<data>
@@ -250,7 +250,7 @@
 		</data>
 		<key>Frameworks/BSImageView.framework/BSImageView</key>
 		<data>
-		2iL9VjuzxBdj4wj0IkmdkHZukfI=
+		GFtdRNI4SRGFDzNGDKZ1JH19Zmo=
 		</data>
 		<key>Frameworks/BSImageView.framework/Info.plist</key>
 		<data>
@@ -262,7 +262,7 @@
 		</data>
 		<key>Frameworks/FMDB.framework/FMDB</key>
 		<data>
-		Li3YeUgSltRL8STCEAUMV4bdX0E=
+		hWaDxIsnKL7F0PHEcNJFMVL4t5c=
 		</data>
 		<key>Frameworks/FMDB.framework/Info.plist</key>
 		<data>
@@ -366,7 +366,7 @@
 		</data>
 		<key>Frameworks/image_picker_ios.framework/image_picker_ios</key>
 		<data>
-		ZKDj/kJJiZK19bX4q8aM20bU7A0=
+		8mZGLb1QMHW1bfKCG/zSW5ewwGw=
 		</data>
 		<key>Frameworks/multi_image_picker.framework/Info.plist</key>
 		<data>
@@ -378,7 +378,7 @@
 		</data>
 		<key>Frameworks/multi_image_picker.framework/multi_image_picker</key>
 		<data>
-		zlTAdGPMNjgjTA/9IP0HHUxxjgY=
+		bNI+x+d1nhdeLNGY0JTvqx4o/FA=
 		</data>
 		<key>Frameworks/path_provider_foundation.framework/Info.plist</key>
 		<data>
@@ -390,7 +390,7 @@
 		</data>
 		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation</key>
 		<data>
-		CB0xFnGN1WmSM5yXFNhXK7FPSvY=
+		7Xtz5tDOX+XxbizXJFQ2Dalj67U=
 		</data>
 		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>
 		<data>
@@ -402,7 +402,7 @@
 		</data>
 		<key>Frameworks/shared_preferences_foundation.framework/shared_preferences_foundation</key>
 		<data>
-		RQzqXF+qzkzyqRc0/XiGniEme+g=
+		6Aq+I9pw9CGu04lYeYAzeXO2Ykg=
 		</data>
 		<key>Frameworks/sqflite.framework/Info.plist</key>
 		<data>
@@ -414,7 +414,7 @@
 		</data>
 		<key>Frameworks/sqflite.framework/sqflite</key>
 		<data>
-		t2RqDzwgBY5Q5GVsuXc9fbCK5j8=
+		py2BdmgEF7XRz316qCPoJxbIK+8=
 		</data>
 		<key>Frameworks/video_player_avfoundation.framework/Info.plist</key>
 		<data>
@@ -426,7 +426,7 @@
 		</data>
 		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation</key>
 		<data>
-		Wt9RUZzpFtEGJoin2G+4/XoKiB0=
+		lzs2x+AGe/aaXuMyyS1Xzrvm6fY=
 		</data>
 		<key>Frameworks/wakelock.framework/Info.plist</key>
 		<data>
@@ -438,11 +438,11 @@
 		</data>
 		<key>Frameworks/wakelock.framework/wakelock</key>
 		<data>
-		ijL98Yx6xA4TB9fmb5UmfzSflDQ=
+		P86kuHOaSsKXeEf4pMbV1FxI3nM=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		adkt/nBGb1lvYjlbm7m7dywn7yI=
+		LqPfAzSf/3vKTAbbZK3/v0Khtac=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -525,7 +525,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			MZQUJN0Ir0w4qYLQvWBxyqHk9bgn8xCTRukaKIXk6hA=
+			/93U/uiLEOP4+8k9ESq6zBI+dWOMaPqSkq3fQ1JA3MY=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -539,7 +539,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qd3RMPWUmmMtrRdXA6vVnWB0sURUz7IoHpnp4HSQRqA=
+			+FXSFPKrp+9C1neS1gFoeMy/r3jcxECABCW8GjHvdoc=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
@@ -756,7 +756,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			i8dmNYTlH93tQY9T1BDQn4eDPDrk2uQFZxQOqvjwYTE=
+			22dLkhAXbQtEShYO8lOf2WMnde+MINTxFBD2A6Gk6Yc=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -791,7 +791,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qy0K4DGCVHd/v1icJVOw5DVxUHn4PamPcIjIWZN9jrA=
+			t6g8SOiSENSU7zJg9o1+A2kScLKBXbletNSSa68p9Dc=
 			</data>
 		</dict>
 		<key>Frameworks/BSGridCollectionViewLayout.framework/Info.plist</key>
@@ -812,7 +812,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			DEYKnCwgw7XU3iF1OWmUlU5bS2SpL9nUCAxVgvB0Q7s=
+			8KGR4WrvfiN8olEk0KzVY+pXEvT55v93SqMUq+yflL0=
 			</data>
 		</dict>
 		<key>Frameworks/BSImagePicker.framework/BSImagePicker.bundle/Info.plist</key>
@@ -882,7 +882,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			MqLLYhUF6JW2tdFB+zJA1defQ9omu9OeJ4g7t8WLod8=
+			9wKTxFeXQNsc/E1VnuDgmv4gopepUXouKZXrAWSUpEo=
 			</data>
 		</dict>
 		<key>Frameworks/BSImageView.framework/Info.plist</key>
@@ -903,7 +903,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			mz7giD+nelK+JCiZQegQ5+9YE1yY+fzXnuwOHtr+kTo=
+			KvJEed4zQsi9KHkR5zAGCCErnbm2p/ckug5qQISLquI=
 			</data>
 		</dict>
 		<key>Frameworks/FMDB.framework/Info.plist</key>
@@ -1085,7 +1085,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Kl8Cr4Beqhcx5vXtMooVhcbyaQe1QXK+p4aZqG4JY4I=
+			kbrdvtkQPH1/jmUnzo1bwJLLm2IvnoI+HpOBTaV0KKg=
 			</data>
 		</dict>
 		<key>Frameworks/multi_image_picker.framework/Info.plist</key>
@@ -1106,7 +1106,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			b29wVcxn6wsxVXQ1y7pguYu1ZbPoLzH36JDmZLS8zIs=
+			Q2LO9mMxyBHS8yrrwLDePQMewYeUWapPlBJtbLNy8p0=
 			</data>
 		</dict>
 		<key>Frameworks/path_provider_foundation.framework/Info.plist</key>
@@ -1127,7 +1127,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			RCWAVPH641K8CAzNXeAyKSZbSH1Bba5q/Z8wOMuysCU=
+			/pf4bJVoEc1JOzDYN0qKJDQdyu2Jk081uCuFAxVU2GM=
 			</data>
 		</dict>
 		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>
@@ -1148,7 +1148,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6sVPgGCzMy+lp7ChHb5ZrsRMMmcXByx/35jSUVeKMhY=
+			kVrQH62hV6V8nak7tpzO9u+k+B2m/kiN/ew3Xuh91lY=
 			</data>
 		</dict>
 		<key>Frameworks/sqflite.framework/Info.plist</key>
@@ -1169,7 +1169,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			jX3iLa0TBHj1iPU/5F5Hx+yjNH65deiVJIpTM2nOLO0=
+			rHcDOgSAPgPNiRPdYoSR3zorGx1DPhz73SoydmiFtng=
 			</data>
 		</dict>
 		<key>Frameworks/video_player_avfoundation.framework/Info.plist</key>
@@ -1190,7 +1190,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4BjsBaCZlrj3LLwcl+6TUhUU/vSH647Rv5NiM9UYjxo=
+			dgNUYgwkFhrReNtB7I+uWk1T9y0jlcj2XuWBPCh2ul8=
 			</data>
 		</dict>
 		<key>Frameworks/wakelock.framework/Info.plist</key>
@@ -1211,7 +1211,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			r4iw+1HIrobgIW7YFN1nR3+s2sIO8mQ8lUx6nHqxRRM=
+			y9nK05GUQdQxGoIJ5/DMOUiWslwHCa7hULuQkTRXHdA=
 			</data>
 		</dict>
 	</dict>

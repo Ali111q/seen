@@ -9,7 +9,9 @@ class jj extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: VideoPlayerWidget(),
+      body: VideoPlayerWidget(
+        context: context,
+      ),
     );
   }
 }

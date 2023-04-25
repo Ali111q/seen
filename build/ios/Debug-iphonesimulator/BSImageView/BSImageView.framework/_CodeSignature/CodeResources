@@ -18,11 +18,11 @@
 		</data>
 		<key>Modules/BSImageView.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		/f1CQFd/yEaHJi8qLmMBjfgm03U=
+		dDIdep4A5qpPuzEtFkpxH3xvWHM=
 		</data>
 		<key>Modules/BSImageView.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		Rkc2Wb88z6H4vM3Nyyb81x5chTU=
+		jigvUagIt2kR18BKAdcn8gUn2LI=
 		</data>
 		<key>Modules/BSImageView.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -81,22 +81,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			/f1CQFd/yEaHJi8qLmMBjfgm03U=
+			dDIdep4A5qpPuzEtFkpxH3xvWHM=
 			</data>
 			<key>hash2</key>
 			<data>
-			V1cJktJUME3bOGxS7Ixx9xwrEzTuYQfANV11wSpzoXU=
+			xFPGa1aKs1UMAPcqCtM9cnWAt3oER1DHRaFlklNaAaY=
 			</data>
 		</dict>
 		<key>Modules/BSImageView.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Rkc2Wb88z6H4vM3Nyyb81x5chTU=
+			jigvUagIt2kR18BKAdcn8gUn2LI=
 			</data>
 			<key>hash2</key>
 			<data>
-			a3sgI06s+A/slrmSgSMj9I5qnTf49rlaeZDw5HLbq7A=
+			lSbsuVRUxO2KWfAb50vZLNgozKWyLY7ELDWuTwOTBh4=
 			</data>
 		</dict>
 		<key>Modules/BSImageView.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
