@@ -3,6 +3,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controlller/home_controller.dart';
+import 'package:seen/jj.dart';
 import 'package:seen/model/ad.dart';
 import 'package:seen/model/episode.dart';
 import 'package:seen/model/tag.dart';
@@ -153,10 +154,9 @@ class BannerItem extends StatelessWidget {
       background: Stack(
         children: [
           Center(
-            child: Image.network(
-              banner.thumbnail,
-              fit: BoxFit.cover,
-            ),
+            child: Image.network(banner.thumbnail,
+                fit: BoxFit.fitHeight,
+                width: MediaQuery.of(context).size.width),
           ),
           Container(
             height: MediaQuery.of(context).size.height *
@@ -189,7 +189,7 @@ class BannerItem extends StatelessWidget {
                     banner.local_name!,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 60,
+                      fontSize: 40,
                     ),
                   ),
                   Row(
@@ -214,7 +214,12 @@ class BannerItem extends StatelessWidget {
                   ),
                   ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed('/video-player');
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return jj(
+                            link: banner.url_480,
+                          );
+                        }));
                       },
                       child: Text('عرض الان',
                           style: TextStyle(color: Colors.black)),

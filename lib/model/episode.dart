@@ -26,7 +26,7 @@ class Episode {
   factory Episode.fromJson(Map<String, dynamic> json) {
     return Episode(
       id: json['id'],
-      thumbnail: json['thumbnail'],
+      thumbnail: json['season_image'],
       episode_num: json['episode_num'],
       tags: json['tags'],
       season_num: json['season_num'],
