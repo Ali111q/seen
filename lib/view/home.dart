@@ -217,7 +217,11 @@ class BannerItem extends StatelessWidget {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
                           return jj(
-                            link: banner.url_480,
+                            link: [
+                              banner.url_480,
+                              banner.url_720,
+                              banner.url_1080
+                            ],
                           );
                         }));
                       },

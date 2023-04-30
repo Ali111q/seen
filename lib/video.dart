@@ -8,8 +8,7 @@ import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   final BuildContext context;
-  final link;
-
+  final List link;
   const VideoPlayerWidget(
       {super.key, required this.context, required this.link});
   @override
@@ -19,49 +18,23 @@ class VideoPlayerWidget extends StatefulWidget {
 class _ChewieDemoState extends State<VideoPlayerWidget> {
   bool showControls = false;
   bool _isDragging = false;
-
+  bool isPlay = false;
   VideoPlayerController? _videoPlayerController;
   ChewieController? _chewieController;
-  List qualities = [
-    ListTile(
-      textColor: Colors.white,
-      title: Text('480'),
-    ),
-    ListTile(
-      textColor: Colors.white,
-      title: Text('720'),
-    ),
-    ListTile(
-      textColor: Colors.white,
-      title: Text('1080'),
-    )
-  ];
-  List speeds = [
-    ListTile(
-      textColor: Colors.white,
-      title: Text('0.50'),
-    ),
-    ListTile(
-      textColor: Colors.white,
-      title: Text('1.0'),
-    ),
-    ListTile(
-      textColor: Colors.white,
-      title: Text('1.5'),
-    ),
-    ListTile(
-      textColor: Colors.white,
-      title: Text('2.0'),
-    )
-  ];
+  bool isLoading = false;
+
   @override
   void initState() {
     super.initState();
+    setState(() {
+      isLoading = true;
+    });
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-    _videoPlayerController = VideoPlayerController.network(widget.link);
+    _videoPlayerController = VideoPlayerController.network(widget.link[0]);
+
     _chewieController = ChewieController(
         videoPlayerController: _videoPlayerController!,
         autoPlay: true,
@@ -69,6 +42,11 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
         showControls: false,
         aspectRatio: MediaQuery.of(widget.context).size.height /
             MediaQuery.of(widget.context).size.width);
+    _videoPlayerController!.addListener(() {
+      final position = _videoPlayerController!.value.position;
+
+      setState(() {});
+    });
     setState(() {});
   }
 
@@ -85,6 +63,93 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    List qualities = [
+      ListTile(
+        textColor: Colors.white,
+        title: Text('480'),
+        onTap: () async {
+          _videoPlayerController =
+              VideoPlayerController.network(widget.link[0]);
+
+          setState(() {
+            _chewieController = ChewieController(
+                videoPlayerController: _videoPlayerController!,
+                autoPlay: true,
+                looping: true,
+                showControls: false,
+                aspectRatio: MediaQuery.of(widget.context).size.height /
+                    MediaQuery.of(widget.context).size.width);
+          });
+          Navigator.of(context).pop();
+        },
+      ),
+      ListTile(
+        textColor: Colors.white,
+        title: Text('720'),
+        onTap: () async {
+          Duration? time = await _videoPlayerController!.position;
+          _videoPlayerController!.dispose();
+          _videoPlayerController =
+              VideoPlayerController.network(widget.link[1]);
+          if (_videoPlayerController!.value.isPlaying) {
+            _chewieController!.pause();
+          }
+          _chewieController!.dispose();
+          var _newChewieController = ChewieController(
+              videoPlayerController: _videoPlayerController!,
+              autoPlay: true,
+              looping: true,
+              showControls: false,
+              aspectRatio: MediaQuery.of(context).size.height /
+                  MediaQuery.of(context).size.width);
+
+          setState(() {
+            _chewieController = _newChewieController;
+          });
+          _chewieController!.seekTo(time!);
+          Navigator.of(context).pop();
+        },
+      ),
+      ListTile(
+        textColor: Colors.white,
+        title: Text('1080'),
+        onTap: () async {
+          _videoPlayerController!.dispose();
+
+          _videoPlayerController =
+              VideoPlayerController.network(widget.link[0]);
+          await _videoPlayerController!.initialize();
+          setState(() {
+            _chewieController = ChewieController(
+                videoPlayerController: _videoPlayerController!,
+                autoPlay: true,
+                looping: true,
+                showControls: false,
+                aspectRatio: MediaQuery.of(widget.context).size.height /
+                    MediaQuery.of(widget.context).size.width);
+          });
+          Navigator.of(context).pop();
+        },
+      )
+    ];
+    List speeds = [
+      ListTile(
+        textColor: Colors.white,
+        title: Text('0.50'),
+      ),
+      ListTile(
+        textColor: Colors.white,
+        title: Text('1.0'),
+      ),
+      ListTile(
+        textColor: Colors.white,
+        title: Text('1.5'),
+      ),
+      ListTile(
+        textColor: Colors.white,
+        title: Text('2.0'),
+      )
+    ];
     return Container(
       child: GestureDetector(
         onTap: showControlsFunction,
@@ -162,6 +227,82 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                             ),
                           ),
                         ],
+                      ),
+                      Spacer(),
+                      Center(
+                        child: _isDragging
+                            ? Text('data')
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                    child: IconButton(
+                                      onPressed: () async {
+                                        _videoPlayerController!.seekTo(
+                                            (await _videoPlayerController!
+                                                    .position)! -
+                                                const Duration(seconds: 5));
+                                        setState(() {});
+                                      },
+                                      icon: Icon(Icons.replay_5_sharp),
+                                      iconSize: 60,
+                                      color: Colors.white.withOpacity(0.6),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 20,
+                                  ),
+                                  GestureDetector(
+                                    onTap: showControls
+                                        ? () {
+                                            setState(() {
+                                              isPlay = !isPlay;
+                                            });
+                                            if (isPlay) {
+                                              _videoPlayerController!.pause();
+                                            } else {
+                                              _videoPlayerController!.play();
+                                            }
+                                          }
+                                        : null,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey.withOpacity(0.6),
+                                          shape: BoxShape.circle),
+                                      child: isPlay
+                                          ? Icon(
+                                              Icons.play_arrow,
+                                              size: 80,
+                                              color:
+                                                  Colors.black.withOpacity(0.6),
+                                            )
+                                          : Icon(
+                                              Icons.pause_sharp,
+                                              size: 80,
+                                              color:
+                                                  Colors.black.withOpacity(0.6),
+                                            ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 20,
+                                  ),
+                                  GestureDetector(
+                                    child: IconButton(
+                                      onPressed: () async {
+                                        _videoPlayerController!.seekTo(
+                                            (await _videoPlayerController!
+                                                    .position)! +
+                                                const Duration(seconds: 5));
+                                        setState(() {});
+                                      },
+                                      icon: Icon(Icons.forward_5_rounded),
+                                      iconSize: 60,
+                                      color: Colors.white.withOpacity(0.6),
+                                    ),
+                                  ),
+                                ],
+                              ),
                       ),
                       Spacer(),
                       _buildProgressBar()
