@@ -46,6 +46,7 @@ dependencies:
   go_router: ^6.5.5
   card_swiper: ^2.0.4
   cached_network_image: ^3.2.3
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:

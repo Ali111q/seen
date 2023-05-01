@@ -7,3 +7,8 @@ const String settingUrl = '${url}/setting';
 String getEpisodeUrl(id) {
   return '${url}/shows/$id';
 }
+const String reelsCatUrl = '${url}/reels-category';
+String getReelByIdUrl(id){
+  return'${url}/reels?category_id=$id';
+}
+const String addInVideoUrl = '${url}/episode-ad';

@@ -9,6 +9,7 @@ import 'package:seen/helper/appbar.dart';
 import 'package:seen/view/ads_page.dart';
 import 'package:seen/view/contact_us.dart';
 import 'package:seen/view/sections_page.dart';
+import '../controlller/user_controller.dart';
 import '../utils/colors.dart' as myColors;
 import '../view/home.dart';
 import '../view/reels_page.dart';
@@ -21,10 +22,11 @@ class MainLayout extends StatefulWidget {
 }
 
 class _HomeState extends State<MainLayout> {
+  
   List pages = [
     MainScreen(),
     ReelsPage(),
-    const ContactUs(),
+     ContactUs(),
     SectionsPage(),
     AdsPage()
   ];
@@ -40,6 +42,7 @@ class _HomeState extends State<MainLayout> {
   void initState() {
     // TODO: implement initState
     super.initState();
+     Provider.of<UserController>(context, listen: false).getUserFromShared();
     Provider.of<SettingController>(context, listen: false).getSetting();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -59,7 +62,7 @@ class _HomeState extends State<MainLayout> {
         end: Alignment.bottomRight,
       )),
       child: Scaffold(
-          appBar: MyAppBar(titleText: 'titleText'),
+          appBar: MyAppBar(context, titleText: 'titleText'),
           backgroundColor: Colors.transparent,
           body: pages[_currentIndex],
           bottomNavigationBar: CustomNavigationBar(

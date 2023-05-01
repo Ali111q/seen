@@ -14,6 +14,7 @@ class HomeController extends ChangeNotifier {
   List<Episode?> banner = [];
   List<Tag?> tags = [];
   List<Ad?> ads = [];
+  Ad? adInVideo;
   List? episode;
   Map<String, String> header = {'lang': window.locale.languageCode};
   Future<void> getHome() async {
@@ -61,4 +62,21 @@ class HomeController extends ChangeNotifier {
       }
     }
   }
+
+  
+  Future<void> getAdInVideo() async {
+    for (var element in tags) {
+      element!.clearShow();
+    }
+    episode = null;
+    http.Response _res =
+        await http.get(Uri.parse(addInVideoUrl), headers: header);
+    if (_res.statusCode == 200) {
+      var json = jsonDecode(_res.body);
+      if (json['success']) {
+      adInVideo = Ad.fromJson(json['data']);
+      }
+    }
+  }
+  
 }

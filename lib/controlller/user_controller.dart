@@ -11,6 +11,7 @@ class UserController extends ChangeNotifier {
   User? user;
   bool isLogin = false;
   getUserFromShared() {
+    _service.initialize();
     user = _service.getUser();
     isLogin = user != null;
     notifyListeners();

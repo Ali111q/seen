@@ -7,8 +7,8 @@ import '../utils/colors.dart' as myColors;
 import '../view/home.dart';
 
 class EpisodeScreen extends StatefulWidget {
-  const EpisodeScreen({super.key});
-
+  const EpisodeScreen(this.id, {super.key});
+final int id;
   @override
   State<EpisodeScreen> createState() => _EpisodeScreenState();
 }
@@ -104,7 +104,7 @@ class _EpisodeScreenState extends State<EpisodeScreen>
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  HomeAdd(),
+                  // HomeAdd(),
                 ],
               ),
               TabBar(

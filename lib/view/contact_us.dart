@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controlller/setting_controller.dart';
 import 'package:seen/model/setting.dart';
 
-class ContactUs extends StatelessWidget {
+class ContactUs extends StatefulWidget {
   const ContactUs({super.key});
 
+  @override
+  State<ContactUs> createState() => _ContactUsState();
+}
+
+class _ContactUsState extends State<ContactUs> {
   @override
   Widget build(BuildContext context) {
     Setting? setting = Provider.of<SettingController>(context).setting;
@@ -27,20 +33,26 @@ class ContactUs extends StatelessWidget {
                       ),
                       fit: BoxFit.fill)),
               width: MediaQuery.of(context).size.width * 0.9,
-              height: MediaQuery.of(context).size.width * 0.6,
+              // height: MediaQuery.of(context).size.width * 0.6,
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.width * 0.6,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text('data'),
-                    Text('data'),
-                    Text('data'),
-                    Text('data'),
-                    Text('data'),
-                  ],
+                // height: MediaQuery.of(context).size.width * 0.6,
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text('اجعل حالة اعلانك', style: TextStyle(color: Colors.white, fontFamily: 'font', fontSize: 30),),
+                                          Text('على وضع', style: TextStyle(color: Colors.white, fontFamily: 'font', fontSize: 22),),
+                
+                      SvgPicture.asset('assets/images/seen.svg',width: 100,),
+                                         Text('اضمن انتشارك', style: TextStyle(color: Colors.white, fontFamily: 'font', fontSize: 30),),
+                
+                                          Text('تواصل معنا من خلال الارقام المثيتة ادناه او البريد الالكتروني', style: TextStyle(color: Colors.white, fontFamily: 'font', fontSize: 18),),
+                
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -141,7 +153,7 @@ class ContactUs extends StatelessWidget {
             height: MediaQuery.of(context).size.width * 0.2,
             child: Center(
               child: Text(
-                setting.email!,
+                'setting.email!',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 26,

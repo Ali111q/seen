@@ -9,6 +9,9 @@ class SharedService {
   }
 
   User? getUser() {
+    if (shared.get('name') ==null) {
+      return null;
+    }
     return User(
         name: shared.get('name') as String,
         token: shared.get('token') as String,

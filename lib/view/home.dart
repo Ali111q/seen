@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controlller/home_controller.dart';
 import 'package:seen/jj.dart';
+import 'package:seen/layout/Episode.dart';
 import 'package:seen/model/ad.dart';
 import 'package:seen/model/episode.dart';
 import 'package:seen/model/tag.dart';
@@ -94,6 +95,7 @@ class _MainScreenState extends State<MainScreen> {
                           )),
                 SliverList(
                   delegate: SliverChildListDelegate([
+                  Container(height: 30,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -180,7 +182,7 @@ class BannerItem extends StatelessWidget {
               right: MediaQuery.of(context).size.width * 0.2,
               left: MediaQuery.of(context).size.width * 0.2,
               top: MediaQuery.of(context).size.height *
-                  0.4 *
+                  0.35 *
                   ((400 - _Offset) / 400),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -283,44 +285,48 @@ class _SectionWidgetState extends State<SectionWidget> {
                   height: MediaQuery.of(context).size.width * 0.6,
                   child: Center(child: CircularProgressIndicator()))
               : Row(children: [
-                  ...widget.tag.shows!.map((e) => Container(
-                        margin: EdgeInsets.all(6),
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.width * 0.6,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(e!.image),
-                                fit: BoxFit.cover),
-                            boxShadow: [
-                              BoxShadow(
-                                  offset: Offset(-1, 1),
-                                  color: Colors.black,
-                                  blurRadius: 3,
-                                  spreadRadius: 3)
-                            ]),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(),
-                              Container(),
-                              Text(
-                                e.name,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    shadows: [
-                                      Shadow(
-                                          blurRadius: 6,
-                                          color: Colors.white.withOpacity(0.4))
-                                    ]),
-                              )
-                            ],
+                  ...widget.tag.shows!.map((e) => GestureDetector(
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder:(context) => EpisodeScreen(e.id),));                    },
+                    child: Container(
+                          margin: EdgeInsets.all(6),
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          height: MediaQuery.of(context).size.width * 0.6,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(e!.image),
+                                  fit: BoxFit.cover),
+                              boxShadow: [
+                                BoxShadow(
+                                    offset: Offset(-1, 1),
+                                    color: Colors.black,
+                                    blurRadius: 3,
+                                    spreadRadius: 3)
+                              ]),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(),
+                                Container(),
+                                Text(
+                                  e.name,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      shadows: [
+                                        Shadow(
+                                            blurRadius: 6,
+                                            color: Colors.white.withOpacity(0.4))
+                                      ]),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ))
+                  ))
                 ]),
         ),
         Container(
