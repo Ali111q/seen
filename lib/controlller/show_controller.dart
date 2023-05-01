@@ -39,7 +39,10 @@ class ShowController extends ChangeNotifier {
     if (_res.statusCode == 200) {
       var json = jsonDecode(_res.body);
       if (json['success']) {
-        episode.add([]);
+        if (episode.isEmpty) {
+          episode.add([]);
+        }
+
         for (var element in json['data']['data']) {
           episode[index].add(Episode.fromJson(element));
         }
