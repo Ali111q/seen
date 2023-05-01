@@ -22,3 +22,5 @@ String getShowUrl(id, {episode}) {
 String getSeasonUrl(id) {
   return '${url}/episode_by_season_id?id=$id';
 }
+
+const String getCatsUrl = '${url}/categories';

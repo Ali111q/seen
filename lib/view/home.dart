@@ -246,12 +246,9 @@ class BannerItem extends StatelessWidget {
 }
 
 class SectionWidget extends StatefulWidget {
-  const SectionWidget({
-    super.key,
-    required this.tag,
-  });
+  const SectionWidget({super.key, required this.tag, this.section});
   final Tag tag;
-
+  final String? section;
   @override
   State<SectionWidget> createState() => _SectionWidgetState();
 }
@@ -262,7 +259,7 @@ class _SectionWidgetState extends State<SectionWidget> {
     // TODO: implement initState
     super.initState();
     Provider.of<HomeController>(context, listen: false)
-        .getEpisode(widget.tag.id);
+        .getEpisode(widget.tag.id, sections: widget.section);
   }
 
   @override

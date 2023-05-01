@@ -5,6 +5,7 @@ import 'package:seen/controlller/show_controller.dart';
 import 'package:seen/model/episode.dart';
 import 'package:seen/model/season.dart';
 import 'package:seen/model/show.dart';
+import 'package:seen/view/launch_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../controlller/home_controller.dart';
@@ -20,6 +21,7 @@ class EpisodeScreen extends StatefulWidget {
 
 class _EpisodeScreenState extends State<EpisodeScreen>
     with SingleTickerProviderStateMixin {
+  int times = 0;
   late ScrollController _scrollController;
   bool _showAlternativeWidget = false;
   double _Offset = 1;
@@ -39,7 +41,13 @@ class _EpisodeScreenState extends State<EpisodeScreen>
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
     _tabController = TabController(length: 2, vsync: this);
-    Provider.of<ShowController>(context, listen: false).getShow(widget.id);
+    Provider.of<ShowController>(context, listen: false)
+        .getShow(widget.id)
+        .then((value) {
+      List<Season>? show =
+          Provider.of<ShowController>(context, listen: false).seasons;
+      print(show);
+    });
   }
 
   @override
@@ -82,90 +90,100 @@ class _EpisodeScreenState extends State<EpisodeScreen>
       )),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: CustomScrollView(
-          controller: _scrollController,
-          slivers: [
-            SliverAppBar(
-              expandedHeight: MediaQuery.of(context).size.height * 0.53,
-              backgroundColor: Colors.transparent,
-              flexibleSpace: _showAlternativeWidget
-                  ? Container(
-                      color: Colors.transparent,
-                      child: Center(
-                        child: Text(
-                          'Home',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+        body: banner == null
+            ? LaunchScreen()
+            : CustomScrollView(
+                controller: _scrollController,
+                slivers: [
+                  SliverAppBar(
+                    expandedHeight: MediaQuery.of(context).size.height * 0.53,
+                    backgroundColor: Colors.transparent,
+                    flexibleSpace: _showAlternativeWidget
+                        ? Container(
+                            color: Colors.transparent,
+                            child: Center(
+                              child: Text(
+                                'Home',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            ),
+                          )
+                        : BannerItem(
+                            Offset: _Offset,
+                            banner: banner!,
+                          ),
+                  ),
+                  SliverList(
+                      delegate: SliverChildListDelegate([
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          // print(show!.trailer);
+                          launchURL(show!.trailer!);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              'مشاهدة الاعلان',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            SvgPicture.asset('assets/images/youtube.svg')
+                          ],
                         ),
                       ),
-                    )
-                  : BannerItem(
-                      Offset: _Offset,
-                      banner: banner!,
                     ),
-            ),
-            SliverList(
-                delegate: SliverChildListDelegate([
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () {
-                    // print(show!.trailer);
-                    launchURL(show!.trailer!);
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'مشاهدة الاعلان',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      SvgPicture.asset('assets/images/youtube.svg')
-                    ],
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // HomeAdd(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // HomeAdd(),
+                      ],
+                    ),
+                    TabBar(
+                      indicatorColor: Colors.white,
+                      onTap: (value) {
+                        setState(() {
+                          index = value;
+                        });
+                        Provider.of<ShowController>(context, listen: false)
+                            .getSeason(season[index].id, index);
+                      },
+                      controller: _tabController,
+                      tabs: [
+                        ...season!.map((e) => Tab(
+                              text: e.local_name,
+                            ))
+                      ],
+                    ),
+                    Builder(builder: (context) {
+                      try {
+                        return EpisodeContainer(
+                          index: index,
+                        );
+                      } catch (e) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    })
+                  ])),
                 ],
               ),
-              TabBar(
-                indicatorColor: Colors.white,
-                onTap: (value) {
-                  setState(() {
-                    index = value;
-                  });
-                },
-                controller: _tabController,
-                tabs: [
-                  ...season.map((e) => Tab(
-                        text: e.local_name,
-                      )),
-                ],
-              ),
-              Builder(builder: (context) {
-                return EpisodeContainer(
-                  id: season[index].id,
-                  index: index,
-                );
-              })
-            ])),
-          ],
-        ),
       ),
     );
   }
 }
 
 class EpisodeWidget extends StatelessWidget {
-  const EpisodeWidget({
-    super.key,
-  });
-
+  const EpisodeWidget({super.key, required this.episode, required this.thumb});
+  final Episode episode;
+  final String thumb;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -187,14 +205,14 @@ class EpisodeWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'الحلقة 1',
+                      'الحلقة ${episode.episode_num}',
                       style: TextStyle(color: Colors.white),
                     ),
                     Container(
                       width: 5,
                     ),
                     Text(
-                      'Us',
+                      episode.local_name!,
                       style: TextStyle(color: Colors.white),
                     )
                   ],
@@ -205,31 +223,22 @@ class EpisodeWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      'data',
-                      style: TextStyle(color: Color(0xff707070)),
-                    ),
-                    Container(
-                      width: 10,
-                    ),
-                    Text(
-                      'data',
-                      style: TextStyle(color: Color(0xff707070)),
-                    ),
-                    Container(
-                      width: 10,
-                    ),
-                    Text(
-                      'data',
-                      style: TextStyle(color: Color(0xff707070)),
-                    ),
+                    ...episode.tags.map(
+                      (e) => Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text(
+                          e,
+                          style: TextStyle(color: Color(0xff707070)),
+                        ),
+                      ),
+                    )
                   ],
                 ),
                 Container(
                   height: 15,
                 ),
                 Text(
-                  ' iuew fioew jdfoiew jdoi ejwiufh weuifh ieodioejw iufdh weiudh wn edhjwe d ujweduiwediuew',
+                  episode.local_description!,
                   textAlign: TextAlign.end,
                   style: TextStyle(color: Colors.white),
                 )
@@ -239,8 +248,7 @@ class EpisodeWidget extends StatelessWidget {
           Container(
             margin: EdgeInsets.fromLTRB(5, 10, 5, 10),
             width: MediaQuery.of(context).size.width * 0.16,
-            child: Image.network(
-                'https://thumbs.dreamstime.com/b/aspect-ratio-beach-background-summer-concept-187699731.jpg'),
+            child: Image.network(thumb),
           ),
         ],
       ),
@@ -249,9 +257,13 @@ class EpisodeWidget extends StatelessWidget {
 }
 
 class EpisodeContainer extends StatefulWidget {
-  const EpisodeContainer({super.key, required this.id, required this.index});
-  final int id;
+  const EpisodeContainer({
+    super.key,
+    required this.index,
+  });
+
   final int index;
+
   @override
   State<EpisodeContainer> createState() => _EpisodeContainerState();
 }
@@ -259,26 +271,38 @@ class EpisodeContainer extends StatefulWidget {
 class _EpisodeContainerState extends State<EpisodeContainer> {
   @override
   void initState() {
+    print('dpfkljsdlkas');
+    print(widget.index);
+    print('dpfkljsdlkas');
+
     // TODO: implement initState
     super.initState();
-    Provider.of<ShowController>(context, listen: false)
-        .getSeason(widget.id, widget.index);
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Season> season = Provider.of<ShowController>(
+      context,
+    ).seasons;
+    Provider.of<ShowController>(context, listen: false)
+        .getSeason(season[widget.index].id, widget.index);
     List<Episode>? show =
         Provider.of<ShowController>(context).episode[widget.index];
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          ...show.map((e) {
-            return EpisodeWidget();
-          })
-        ],
-      ),
+      child: show == null
+          ? LaunchScreen()
+          : Column(
+              children: [
+                ...show!.map((e) {
+                  return EpisodeWidget(
+                    episode: e,
+                    thumb: season[widget.index].image,
+                  );
+                })
+              ],
+            ),
     );
   }
 }
