@@ -43,14 +43,38 @@ class _ContactUsState extends State<ContactUs> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('اجعل حالة اعلانك', style: TextStyle(color: Colors.white, fontFamily: 'font', fontSize: 30),),
-                                          Text('على وضع', style: TextStyle(color: Colors.white, fontFamily: 'font', fontSize: 22),),
-                
-                      SvgPicture.asset('assets/images/seen.svg',width: 100,),
-                                         Text('اضمن انتشارك', style: TextStyle(color: Colors.white, fontFamily: 'font', fontSize: 30),),
-                
-                                          Text('تواصل معنا من خلال الارقام المثيتة ادناه او البريد الالكتروني', style: TextStyle(color: Colors.white, fontFamily: 'font', fontSize: 18),),
-                
+                      Text(
+                        'اجعل حالة اعلانك',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'font',
+                            fontSize: 30),
+                      ),
+                      Text(
+                        'على وضع',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'font',
+                            fontSize: 22),
+                      ),
+                      SvgPicture.asset(
+                        'assets/images/seen.svg',
+                        width: 100,
+                      ),
+                      Text(
+                        'اضمن انتشارك',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'font',
+                            fontSize: 30),
+                      ),
+                      Text(
+                        'تواصل معنا من خلال الارقام المثيتة ادناه او البريد الالكتروني',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'font',
+                            fontSize: 18),
+                      ),
                     ],
                   ),
                 ),
@@ -153,7 +177,7 @@ class _ContactUsState extends State<ContactUs> {
             height: MediaQuery.of(context).size.width * 0.2,
             child: Center(
               child: Text(
-                'setting.email!',
+                setting.email!,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 26,

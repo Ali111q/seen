@@ -95,7 +95,9 @@ class _MainScreenState extends State<MainScreen> {
                           )),
                 SliverList(
                   delegate: SliverChildListDelegate([
-                  Container(height: 30,),
+                    Container(
+                      height: 30,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -286,15 +288,18 @@ class _SectionWidgetState extends State<SectionWidget> {
                   child: Center(child: CircularProgressIndicator()))
               : Row(children: [
                   ...widget.tag.shows!.map((e) => GestureDetector(
-                    onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder:(context) => EpisodeScreen(e.id),));                    },
-                    child: Container(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => EpisodeScreen(e.id),
+                          ));
+                        },
+                        child: Container(
                           margin: EdgeInsets.all(6),
                           width: MediaQuery.of(context).size.width * 0.4,
                           height: MediaQuery.of(context).size.width * 0.6,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage(e!.image),
+                                  image: NetworkImage(e!.image!),
                                   fit: BoxFit.cover),
                               boxShadow: [
                                 BoxShadow(
@@ -319,14 +324,15 @@ class _SectionWidgetState extends State<SectionWidget> {
                                       shadows: [
                                         Shadow(
                                             blurRadius: 6,
-                                            color: Colors.white.withOpacity(0.4))
+                                            color:
+                                                Colors.white.withOpacity(0.4))
                                       ]),
                                 )
                               ],
                             ),
                           ),
                         ),
-                  ))
+                      ))
                 ]),
         ),
         Container(

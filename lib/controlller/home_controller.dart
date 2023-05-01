@@ -63,7 +63,6 @@ class HomeController extends ChangeNotifier {
     }
   }
 
-  
   Future<void> getAdInVideo() async {
     for (var element in tags) {
       element!.clearShow();
@@ -74,9 +73,8 @@ class HomeController extends ChangeNotifier {
     if (_res.statusCode == 200) {
       var json = jsonDecode(_res.body);
       if (json['success']) {
-      adInVideo = Ad.fromJson(json['data']);
+        adInVideo = Ad.fromJson(json['data']);
       }
     }
   }
-  
 }

@@ -12,23 +12,27 @@ class ProfileScreen extends StatelessWidget {
     User user2 = Provider.of<UserController>(context).user!;
     return Scaffold(
       backgroundColor: Colors.transparent,
-      extendBody: true,extendBodyBehindAppBar: true,
-      appBar: AppBar(backgroundColor: Colors.transparent,elevation: 0,),
+      extendBody: true,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: Stack(
         children: [
-          _buildBackgroundImage(),
+          _buildBackgroundImage(user2),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Center(   
+              Center(
                 child: Container(
                   width: 150.0,
                   height: 150.0,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: NetworkImage('https://seen-dorto.s3.amazonaws.com/thumbnail/1682878656seenthumbnail.jpg'),
+                      image: NetworkImage(user2.image),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -45,7 +49,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               SizedBox(height: 10.0),
               Text(
-                'johndoe@example.com',
+                user2.email,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18.0,
@@ -57,7 +61,6 @@ class ProfileScreen extends StatelessWidget {
                 onPressed: () {
                   // Logout functionality here
                 },
-                
                 child: Text(
                   'Logout',
                   style: TextStyle(
@@ -72,7 +75,7 @@ class ProfileScreen extends StatelessWidget {
               //     // Edit profile functionality here
               //     Navigator.of(context).push(MaterialPageRoute(builder: (context)=>EditProfile()));
               //   },
-                
+
               //   child: Text(
               //     'Edit Profile',
               //     style: TextStyle(
@@ -88,11 +91,11 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBackgroundImage() {
+  Widget _buildBackgroundImage(user2) {
     return Stack(
       children: [
         Image.network(
-          'https://seen-dorto.s3.amazonaws.com/thumbnail/1682878656seenthumbnail.jpg',
+          user2.image,
           width: double.infinity,
           height: double.infinity,
           fit: BoxFit.cover,
