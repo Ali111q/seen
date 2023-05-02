@@ -1,16 +1,16 @@
 class Episode {
-  Episode({
-    required this.id,
-    required this.thumbnail,
-    required this.episode_num,
-    this.local_name,
-    required this.url_480,
-    required this.url_720,
-    required this.url_1080,
-    this.local_description,
-    required this.tags,
-    required this.season_num,
-  });
+  Episode(
+      {required this.id,
+      required this.thumbnail,
+      required this.episode_num,
+      this.local_name,
+      required this.url_480,
+      required this.url_720,
+      required this.url_1080,
+      this.local_description,
+      required this.tags,
+      required this.season_num,
+      this.season_local_description});
   final int id;
   final String thumbnail;
   final String episode_num;
@@ -22,6 +22,7 @@ class Episode {
   final String? local_description;
   final List tags;
   final String season_num;
+  final String? season_local_description;
 
   factory Episode.fromJson(Map<String, dynamic> json) {
     return Episode(

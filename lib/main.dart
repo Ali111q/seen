@@ -8,6 +8,7 @@ import 'package:seen/controlller/user_controller.dart';
 import 'package:seen/jj.dart';
 import 'package:seen/layout/Episode.dart';
 import 'package:seen/layout/profile.dart';
+import 'package:seen/reel_test.dart';
 
 import 'controlller/setting_controller.dart';
 import 'controlller/show_controller.dart';
@@ -43,14 +44,15 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/launch',
+      initialRoute: '/test',
       routes: {
         '/login': (context) => Login(),
         '/register': (context) => RegisterScreen(),
         '/home': (context) => MainLayout(),
 
         '/launch': (context) => VideoSplashScreen(),
-        '/profile': (context) => ProfileScreen()
+        '/profile': (context) => ProfileScreen(),
+        '/test': (context) => ReelsScroll()
         // '/video-player': (context) => jj()
       },
     );

@@ -7,6 +7,7 @@ import 'package:seen/model/season.dart';
 import 'package:seen/model/show.dart';
 import 'package:seen/view/launch_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../controlller/home_controller.dart';
 import '../utils/colors.dart' as myColors;
@@ -24,14 +25,15 @@ class _EpisodeScreenState extends State<EpisodeScreen>
   int times = 0;
   late ScrollController _scrollController;
   bool _showAlternativeWidget = false;
+  bool _animation = false;
+
   double _Offset = 1;
   int index = 0;
-  launchURL(url) async {
-    const url = 'url';
-    if (await canLaunch(url)) {
-      await launch(url);
+  launchURL(String url) async {
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
     } else {
-      throw 'Could not launch $url';
+      print(url);
     }
   }
 
@@ -40,13 +42,14 @@ class _EpisodeScreenState extends State<EpisodeScreen>
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
-    _tabController = TabController(length: 2, vsync: this);
     Provider.of<ShowController>(context, listen: false)
         .getShow(widget.id)
         .then((value) {
       List<Season>? show =
           Provider.of<ShowController>(context, listen: false).seasons;
-      print(show);
+      Provider.of<ShowController>(context, listen: false).getSeason(
+        show[index].id,
+      );
     });
   }
 
@@ -103,7 +106,7 @@ class _EpisodeScreenState extends State<EpisodeScreen>
                             color: Colors.transparent,
                             child: Center(
                               child: Text(
-                                'Home',
+                                show!.name,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20),
                               ),
@@ -145,33 +148,47 @@ class _EpisodeScreenState extends State<EpisodeScreen>
                         // HomeAdd(),
                       ],
                     ),
-                    TabBar(
-                      indicatorColor: Colors.white,
-                      onTap: (value) {
-                        setState(() {
-                          index = value;
-                        });
-                        Provider.of<ShowController>(context, listen: false)
-                            .getSeason(season[index].id, index);
-                      },
-                      controller: _tabController,
-                      tabs: [
-                        ...season!.map((e) => Tab(
+                    DefaultTabController(
+                      length: season.length,
+                      child: TabBar(
+                        physics: AlwaysScrollableScrollPhysics(),
+                        isScrollable: true,
+                        indicatorColor: Colors.white,
+                        onTap: (value) async {
+                          setState(() {
+                            _animation = true;
+                          });
+                          if (season[index].episods.isEmpty) {
+                            Provider.of<ShowController>(context, listen: false)
+                                .getSeason(season[index].id);
+                          }
+                          await Future.delayed(
+                              const Duration(milliseconds: 100));
+                          setState(() {
+                            index = value;
+                            _animation = false;
+                          });
+                        },
+                        tabs: [
+                          ...season.map(
+                            (e) => Tab(
                               text: e.local_name,
-                            ))
-                      ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                    Builder(builder: (context) {
-                      try {
-                        return EpisodeContainer(
-                          index: index,
-                        );
-                      } catch (e) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    })
+                    AnimatedOpacity(
+                        opacity: _animation ? 0 : 1,
+                        duration: Duration(milliseconds: 100),
+                        child: Provider.of<ShowController>(context)
+                                .seasons[index]
+                                .episods
+                                .isEmpty
+                            ? LaunchScreen()
+                            : EpisodeContainer(
+                                index: index,
+                              ))
                   ])),
                 ],
               ),
@@ -238,7 +255,7 @@ class EpisodeWidget extends StatelessWidget {
                   height: 15,
                 ),
                 Text(
-                  episode.local_description!,
+                  episode.id.toString(),
                   textAlign: TextAlign.end,
                   style: TextStyle(color: Colors.white),
                 )
@@ -271,23 +288,15 @@ class EpisodeContainer extends StatefulWidget {
 class _EpisodeContainerState extends State<EpisodeContainer> {
   @override
   void initState() {
-    print('dpfkljsdlkas');
-    print(widget.index);
-    print('dpfkljsdlkas');
-
     // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Season> season = Provider.of<ShowController>(
-      context,
-    ).seasons;
-    Provider.of<ShowController>(context, listen: false)
-        .getSeason(season[widget.index].id, widget.index);
+    List<Season> season = Provider.of<ShowController>(context).seasons;
     List<Episode>? show =
-        Provider.of<ShowController>(context).episode[widget.index];
+        Provider.of<ShowController>(context).seasons[widget.index].episods;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -295,7 +304,7 @@ class _EpisodeContainerState extends State<EpisodeContainer> {
           ? LaunchScreen()
           : Column(
               children: [
-                ...show!.map((e) {
+                ...show.map((e) {
                   return EpisodeWidget(
                     episode: e,
                     thumb: season[widget.index].image,

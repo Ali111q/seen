@@ -10,18 +10,20 @@ import 'package:seen/utils/constant.dart';
 class ShowController extends ChangeNotifier {
   Episode? banner;
   List<Season> seasons = [];
-  List<List<Episode>?> episode = [];
+
   Show? show;
   Future<void> getShow(id, {episode}) async {
+    seasons = [];
+    banner = null;
+    episode = null;
+    notifyListeners();
+
     http.Response _res =
         await http.get(Uri.parse(getShowUrl(id, episode: episode)));
+
     if (_res.statusCode == 200) {
       var json = jsonDecode(_res.body);
       if (json['success']) {
-        seasons = [];
-        banner = null;
-        episode = null;
-        notifyListeners();
         banner = Episode.fromJson(json['data']['first_episode']);
         show = Show.fromJson(json['data']['shows']);
 
@@ -35,22 +37,16 @@ class ShowController extends ChangeNotifier {
     }
   }
 
-  Future<void> getSeason(id, index) async {
+  Future<void> getSeason(id) async {
     http.Response _res = await http.get(Uri.parse(getSeasonUrl(id)));
     if (_res.statusCode == 200) {
       var json = jsonDecode(_res.body);
       if (json['success']) {
-        if (episode.isEmpty && episode.length >= index) {
-          episode.add([]);
-          episode[index] = [];
-          for (var element in json['data']['data']) {
-            episode[index]!.add(Episode.fromJson(element));
-          }
-        } else {
-          episode[index] = [];
-          for (var element in json['data']['data']) {
-            episode[index]!.add(Episode.fromJson(element));
-          }
+        seasons.firstWhere((e) => e!.id == id).clearEpisodes();
+        for (var element in json['data']['data']) {
+          seasons
+              .firstWhere((e) => e!.id == id)
+              .addEpisode(Episode.fromJson(element));
         }
       }
       notifyListeners();

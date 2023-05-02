@@ -27,6 +27,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
   bool isLoading = false;
   String dragValue = '';
   Duration _bufferedDuration = Duration.zero;
+  double _total_duration = 0.0;
   bool showAd = false;
 
   @override
@@ -59,9 +60,9 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
       setState(() {
         showAd = _videoPlayerController!.value.position.inSeconds < 40 &&
             _videoPlayerController!.value.position.inSeconds > 20;
+        _total_duration =
+            _videoPlayerController!.value.duration.inMilliseconds.toDouble();
       });
-      
-     
     });
     setState(() {});
     Provider.of<HomeController>(context, listen: false).getAdInVideo();
@@ -379,21 +380,26 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                 ),
               ),
             ),
-           ad==null? Container(): AnimatedPositioned(
-              duration: Duration(milliseconds: 1000),
-              left: showAd ? 60 : -800,
-              bottom: 60,
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Container(
-                  margin: EdgeInsets.only(left: 20),
-                  width: MediaQuery.of(context).size.width * 0.22,
-                  height: MediaQuery.of(context).size.width * 0.026,
-                  color: Colors.white,
-                  child: Image.network(ad!.file, fit: BoxFit.cover,),
-                ),
-              ),
-            ),
+            ad == null
+                ? Container()
+                : AnimatedPositioned(
+                    duration: Duration(milliseconds: 1000),
+                    left: showAd ? 60 : -800,
+                    bottom: 60,
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Container(
+                        margin: EdgeInsets.only(left: 20),
+                        width: MediaQuery.of(context).size.width * 0.22,
+                        height: MediaQuery.of(context).size.width * 0.026,
+                        color: Colors.white,
+                        child: Image.network(
+                          ad!.file,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
           ],
         ),
       ),
@@ -461,7 +467,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
       child: Slider(
         value: _videoPlayerController!.value.position.inMilliseconds.toDouble(),
         min: 0.0,
-        max: _videoPlayerController!.value.duration.inMilliseconds.toDouble(),
+        max: _total_duration,
         onChanged: (value) {
           setState(() {
             _isDragging = true;
@@ -481,8 +487,8 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
           );
         },
         secondaryTrackValue:
-            _bufferedDuration.inMilliseconds.toDouble() > 127140.0
-                ? 127140.0
+            _bufferedDuration.inMilliseconds.toDouble() > _total_duration
+                ? _total_duration
                 : _bufferedDuration.inMilliseconds.toDouble(),
         activeColor: Colors.white,
         inactiveColor: Colors.grey.withOpacity(0.5),
