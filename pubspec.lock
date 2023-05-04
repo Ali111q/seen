@@ -174,6 +174,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
+  flutter_gif:
+    dependency: "direct main"
+    description:
+      name: flutter_gif
+      sha256: b13d7e484e40685e9236ffbaddf012c2448a2e2c1ac48bed345184dd7bc87f88
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
+  flutter_gifimage:
+    dependency: "direct main"
+    description:
+      name: flutter_gifimage
+      sha256: "2c1b59e0b96d64ee0e073b70a376d6651d369b87880cdd1bf29f8466d5b0ad46"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   flutter_lints:
     dependency: "direct dev"
     description:

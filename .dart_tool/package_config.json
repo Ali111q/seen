@@ -134,6 +134,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_gif",
+      "rootUri": "file:///C:/Users/MK/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_gif-0.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "flutter_gifimage",
+      "rootUri": "file:///C:/Users/MK/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_gifimage-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///C:/Users/MK/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-2.0.1",
       "packageUri": "lib/",
@@ -632,7 +644,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-05-02T15:02:52.006920Z",
+  "generated": "2023-05-04T19:56:17.035086Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

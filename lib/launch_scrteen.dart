@@ -1,37 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gif/flutter_gif.dart';
+import 'package:provider/provider.dart';
+import 'package:seen/controlller/user_controller.dart';
 import 'package:video_player/video_player.dart';
-
-
 
 class VideoSplashScreen extends StatefulWidget {
   @override
   _VideoSplashScreenState createState() => _VideoSplashScreenState();
 }
 
-class _VideoSplashScreenState extends State<VideoSplashScreen> {
-  late VideoPlayerController _controller;
-
+class _VideoSplashScreenState extends State<VideoSplashScreen>
+    with SingleTickerProviderStateMixin {
+  late FlutterGifController controller;
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset(
-      'assets/images/Final.mp4',
-    )..initialize().then((_) {
-        setState(() {
-          _controller.play();
-        });
-      });
 
-    // Add a listener to the controller to navigate to the new screen when the video is finished playing
-    _controller.addListener(() {
-      if (_controller.value.isInitialized &&
-          !_controller.value.isPlaying &&
-          _controller.value.duration == _controller.value.position) {
-        Navigator.of(context).pushReplacementNamed(
-        '/home'
-        );
-      }
-    });
+    Provider.of<UserController>(context, listen: false).getUserFromShared();
+    controller = FlutterGifController(vsync: this);
+
+    _push();
+  }
+
+  _push() async {
+    await Future.delayed(Duration(seconds: 2));
+    Navigator.of(context).pushReplacementNamed('/home');
   }
 
   @override
@@ -44,9 +37,12 @@ class _VideoSplashScreenState extends State<VideoSplashScreen> {
             child: FittedBox(
               fit: BoxFit.cover,
               child: SizedBox(
-                width: _controller.value.size?.width ?? 0,
-                height: _controller.value.size?.height ?? 0,
-                child: VideoPlayer(_controller),
+                child: GifImage(
+                  controller: controller,
+                  image: AssetImage("assets/images/int.gif"),
+                  width: 200,
+                  height: 200,
+                ),
               ),
             ),
           ),
@@ -57,7 +53,6 @@ class _VideoSplashScreenState extends State<VideoSplashScreen> {
 
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
   }
 }

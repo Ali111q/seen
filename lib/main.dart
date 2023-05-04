@@ -44,7 +44,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/test',
+      initialRoute: '/launch',
       routes: {
         '/login': (context) => Login(),
         '/register': (context) => RegisterScreen(),

@@ -193,7 +193,7 @@ class BannerItem extends StatelessWidget {
                     banner.local_name!,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 40,
+                      fontSize: 30,
                     ),
                   ),
                   Row(

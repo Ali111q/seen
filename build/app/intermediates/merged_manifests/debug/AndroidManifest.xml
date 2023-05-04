@@ -13,29 +13,13 @@
          to allow setting breakpoints, to provide hot reload, etc.
     -->
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <queries>
-
-        <!-- If your app checks for SMS support -->
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-
-            <data android:scheme="https" />
-        </intent>
-        <!-- If your app checks for call support -->
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-
-            <data android:scheme="tel" />
-        </intent>
-    </queries>
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name="android.app.Application"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="seen" >
         <activity

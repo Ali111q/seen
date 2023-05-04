@@ -4,12 +4,12 @@ import '../model/user.dart';
 
 class SharedService {
   late SharedPreferences shared;
-  void initialize() async {
+  Future<void> initialize() async {
     shared = await SharedPreferences.getInstance();
   }
 
   User? getUser() {
-    if (shared.get('name') ==null) {
+    if (shared.get('name') == null) {
       return null;
     }
     return User(

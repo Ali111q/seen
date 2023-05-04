@@ -10,8 +10,8 @@ class UserController extends ChangeNotifier {
   SharedService _service = SharedService();
   User? user;
   bool isLogin = false;
-  getUserFromShared() {
-    _service.initialize();
+  getUserFromShared() async {
+    await _service.initialize();
     user = _service.getUser();
     isLogin = user != null;
     notifyListeners();
