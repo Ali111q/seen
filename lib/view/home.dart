@@ -20,13 +20,20 @@ class _MainScreenState extends State<MainScreen> {
   late ScrollController _scrollController;
   bool _showAlternativeWidget = false;
   double _Offset = 1;
-
+  bool isLoading= false;
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
-    Provider.of<HomeController>(context, listen: false).getHome();
+    setState(() {
+      isLoading  = true;
+    });
+    Provider.of<HomeController>(context, listen: false).getHome().then((value) {
+       setState(() {
+      isLoading  = false;
+    });
+    });
   }
 
   @override
@@ -59,10 +66,23 @@ class _MainScreenState extends State<MainScreen> {
     List<Ad?> ads = Provider.of<HomeController>(context).ads;
     List<Episode?> banner = Provider.of<HomeController>(context).banner;
     List<Tag?> tags = Provider.of<HomeController>(context).tags;
-
+  bool isError = Provider.of<HomeController>(context).homeError;
+  print(isError);
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: banner.isEmpty
+      body:isError? Center(child: IconButton(onPressed: (){
+        setState(() {
+          isLoading = true;
+        });
+Provider.of<HomeController>(context, listen: false).getHome().then((value) {
+     setState(() {
+          isLoading = true;
+        });
+});
+      }, icon: Center(child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        child: Icon(Icons.refresh_rounded ,color: Colors.white, )),),iconSize:  60,)) : 
+       isLoading
           ? LaunchScreen()
           : CustomScrollView(
               controller: _scrollController,
@@ -101,7 +121,7 @@ class _MainScreenState extends State<MainScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        HomeAdd(
+                     ads.isEmpty? Container():   HomeAdd(
                           ads: ads,
                         ),
                       ],
@@ -279,10 +299,7 @@ class _SectionWidgetState extends State<SectionWidget> {
           scrollDirection: Axis.horizontal,
           reverse: true,
           child: widget.tag.shows!.isEmpty
-              ? Container(
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  height: MediaQuery.of(context).size.width * 0.6,
-                  child: Center(child: CircularProgressIndicator()))
+              ? LaunchScreen()
               : Row(children: [
                   ...widget.tag.shows!.map((e) => GestureDetector(
                         onTap: () {

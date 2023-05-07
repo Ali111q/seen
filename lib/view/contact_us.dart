@@ -176,7 +176,7 @@ class _ContactUsState extends State<ContactUs> {
             width: MediaQuery.of(context).size.width * 0.9,
             height: MediaQuery.of(context).size.width * 0.2,
             child: Center(
-              child: Text(
+              child:setting.email==null? Container():  Text(
                 setting.email!,
                 style: TextStyle(
                   color: Colors.white,

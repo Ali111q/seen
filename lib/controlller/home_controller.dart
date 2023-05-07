@@ -11,6 +11,7 @@ import '../utils/constant.dart';
 import '../model/tag.dart';
 
 class HomeController extends ChangeNotifier {
+  bool homeError = false;
   List<Episode?> banner = [];
   List<Tag?> tags = [];
   List<Ad?> ads = [];
@@ -23,7 +24,10 @@ class HomeController extends ChangeNotifier {
     print(res.statusCode);
 
     if (res.statusCode == 200) {
-      banner.clear();
+      try {
+        homeError = false ;
+        notifyListeners();
+          banner.clear();
       ads.clear();
       var json = jsonDecode(res.body);
       if (json['success']) {
@@ -39,9 +43,22 @@ class HomeController extends ChangeNotifier {
         json['data']['ads'].forEach((e) {
           ads.add(Ad.fromJson(e));
         });
+        notifyListeners();
+        return;
+        
       }
-      notifyListeners();
+       homeError = true;
+    notifyListeners();
+    return;
+      } catch (e) {
+            homeError = true;
+    notifyListeners();
+    return; 
+      }
+    
+      
     }
+   
   }
 
   Future<void> getEpisode(id, {sections}) async {

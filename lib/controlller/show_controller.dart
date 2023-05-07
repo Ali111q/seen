@@ -10,7 +10,7 @@ import 'package:seen/utils/constant.dart';
 class ShowController extends ChangeNotifier {
   Episode? banner;
   List<Season> seasons = [];
-
+  int selectedEpisode = 0;
   Show? show;
   Future<void> getShow(id, {episode}) async {
     seasons = [];
@@ -26,13 +26,16 @@ class ShowController extends ChangeNotifier {
       if (json['success']) {
         banner = Episode.fromJson(json['data']['first_episode']);
         show = Show.fromJson(json['data']['shows']);
-
+        
         for (var element in json['data']['shows']['season']) {
           seasons.add(Season.fromJson(element));
 
           notifyListeners();
         }
       }
+      if ( banner != null) {
+          selectedEpisode = banner!.id;
+        }
       notifyListeners();
     }
   }
@@ -42,11 +45,12 @@ class ShowController extends ChangeNotifier {
     if (_res.statusCode == 200) {
       var json = jsonDecode(_res.body);
       if (json['success']) {
-        seasons.firstWhere((e) => e!.id == id).clearEpisodes();
+        seasons.firstWhere((e) => e.id == id).clearEpisodes();
         for (var element in json['data']['data']) {
           seasons
               .firstWhere((e) => e!.id == id)
               .addEpisode(Episode.fromJson(element));
+              notifyListeners();
         }
       }
       notifyListeners();

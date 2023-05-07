@@ -57,7 +57,7 @@ class _EpisodeScreenState extends State<EpisodeScreen>
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _tabController.dispose();
+
   }
 
   void _scrollListener() {
@@ -77,7 +77,7 @@ class _EpisodeScreenState extends State<EpisodeScreen>
     }
   }
 
-  late TabController _tabController;
+
 
   @override
   Widget build(BuildContext context) {
@@ -185,8 +185,11 @@ class _EpisodeScreenState extends State<EpisodeScreen>
                                 .seasons[index]
                                 .episods
                                 .isEmpty
-                            ? LaunchScreen()
+                            ? SizedBox(
+                              height: 300,
+                              child: LaunchScreen())
                             : EpisodeContainer(
+                              showId: widget.id,
                                 index: index,
                               ))
                   ])),
@@ -198,76 +201,85 @@ class _EpisodeScreenState extends State<EpisodeScreen>
 }
 
 class EpisodeWidget extends StatelessWidget {
-  const EpisodeWidget({super.key, required this.episode, required this.thumb});
+  final int showId;
+  const EpisodeWidget({super.key, required this.episode, required this.thumb, required this.showId});
   final Episode episode;
   final String thumb;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width * 0.7,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Container(
-                  height: 15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'الحلقة ${episode.episode_num}',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Container(
-                      width: 5,
-                    ),
-                    Text(
-                      episode.local_name!,
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
-                ),
-                Container(
-                  height: 15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ...episode.tags.map(
-                      (e) => Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                          e,
-                          style: TextStyle(color: Color(0xff707070)),
-                        ),
+    return InkWell(
+      onTap: () {
+        Provider.of<ShowController>(context, listen: false).getShow( showId, episode: episode.id);
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        width: MediaQuery.of(context).size.width * 0.9,
+        color: Provider.of<ShowController>(context).selectedEpisode == episode.id ?Colors.grey.withOpacity(0.2):Colors.transparent,
+        child: Row(
+          
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'الحلقة ${episode.episode_num}',
+                        style: TextStyle(color: Colors.white),
                       ),
-                    )
-                  ],
-                ),
-                Container(
-                  height: 15,
-                ),
-                Text(
-                  episode.id.toString(),
-                  textAlign: TextAlign.end,
-                  style: TextStyle(color: Colors.white),
-                )
-              ],
+                      Container(
+                        width: 5,
+                      ),
+                      Text(
+                        episode.local_name!,
+                        style: TextStyle(color: Colors.white),
+                      )
+                    ],
+                  ),
+                  Container(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ...episode.tags.map(
+                        (e) => Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            e,
+                            style: TextStyle(color: Color(0xff707070)),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Container(
+                    height: 15,
+                  ),
+                  Text(
+                    episode.local_description!,
+                    textAlign: TextAlign.end,
+                    style: TextStyle(color: Colors.white),
+                  )
+                ],
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(5, 10, 5, 10),
-            width: MediaQuery.of(context).size.width * 0.16,
-            child: Image.network(thumb),
-          ),
-        ],
+            Container(
+              margin: EdgeInsets.fromLTRB(5, 10, 5, 10),
+              width: MediaQuery.of(context).size.width * 0.16,
+              child: Image.network(thumb),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -276,9 +288,9 @@ class EpisodeWidget extends StatelessWidget {
 class EpisodeContainer extends StatefulWidget {
   const EpisodeContainer({
     super.key,
-    required this.index,
+    required this.index, required this.showId,
   });
-
+final int showId; 
   final int index;
 
   @override
@@ -306,6 +318,7 @@ class _EpisodeContainerState extends State<EpisodeContainer> {
               children: [
                 ...show.map((e) {
                   return EpisodeWidget(
+                    showId: widget.showId,
                     episode: e,
                     thumb: season[widget.index].image,
                   );

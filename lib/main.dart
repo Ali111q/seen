@@ -5,8 +5,6 @@ import 'package:seen/controlller/ads_controller.dart';
 import 'package:seen/controlller/home_controller.dart';
 import 'package:seen/controlller/reels_controller.dart';
 import 'package:seen/controlller/user_controller.dart';
-import 'package:seen/jj.dart';
-import 'package:seen/layout/Episode.dart';
 import 'package:seen/layout/profile.dart';
 import 'package:seen/reel_test.dart';
 
@@ -49,7 +47,6 @@ class Home extends StatelessWidget {
         '/login': (context) => Login(),
         '/register': (context) => RegisterScreen(),
         '/home': (context) => MainLayout(),
-
         '/launch': (context) => VideoSplashScreen(),
         '/profile': (context) => ProfileScreen(),
         '/test': (context) => ReelsScroll()

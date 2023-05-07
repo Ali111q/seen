@@ -58,8 +58,8 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
       });
       final position = _videoPlayerController!.value.position;
       setState(() {
-        showAd = _videoPlayerController!.value.position.inSeconds < 40 &&
-            _videoPlayerController!.value.position.inSeconds > 20;
+        showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
+            _videoPlayerController!.value.position.inSeconds > 10;
         _total_duration =
             _videoPlayerController!.value.duration.inMilliseconds.toDouble();
       });
@@ -96,10 +96,26 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                 autoPlay: true,
                 looping: true,
                 showControls: false,
-                aspectRatio: MediaQuery.of(widget.context).size.height /
-                    MediaQuery.of(widget.context).size.width);
+                aspectRatio: MediaQuery.of(widget.context).size.width /
+                    MediaQuery.of(widget.context).size.height);
           });
+           _videoPlayerController!.addListener(() {
+      setState(() {
+        _bufferedDuration = _videoPlayerController!.value.buffered.fold(
+            Duration.zero,
+            (previousValue, element) =>
+                previousValue + (element.end - element.start));
+      });
+      final position = _videoPlayerController!.value.position;
+      setState(() {
+        showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
+            _videoPlayerController!.value.position.inSeconds > 10;
+        _total_duration =
+            _videoPlayerController!.value.duration.inMilliseconds.toDouble();
+      });
+    });
           Navigator.of(context).pop();
+
         },
       ),
       ListTile(
@@ -119,13 +135,28 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
               autoPlay: true,
               looping: true,
               showControls: false,
-              aspectRatio: MediaQuery.of(context).size.height /
-                  MediaQuery.of(context).size.width);
+         aspectRatio: MediaQuery.of(widget.context).size.width /
+                    MediaQuery.of(widget.context).size.height);
 
           setState(() {
             _chewieController = _newChewieController;
           });
           _chewieController!.seekTo(time!);
+           _videoPlayerController!.addListener(() {
+      setState(() {
+        _bufferedDuration = _videoPlayerController!.value.buffered.fold(
+            Duration.zero,
+            (previousValue, element) =>
+                previousValue + (element.end - element.start));
+      });
+      final position = _videoPlayerController!.value.position;
+      setState(() {
+        showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
+            _videoPlayerController!.value.position.inSeconds > 10;
+        _total_duration =
+            _videoPlayerController!.value.duration.inMilliseconds.toDouble();
+      });
+    });
           Navigator.of(context).pop();
         },
       ),
@@ -144,9 +175,24 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                 autoPlay: true,
                 looping: true,
                 showControls: false,
-                aspectRatio: MediaQuery.of(widget.context).size.height /
-                    MediaQuery.of(widget.context).size.width);
+                 aspectRatio: MediaQuery.of(widget.context).size.width /
+                    MediaQuery.of(widget.context).size.height);
           });
+           _videoPlayerController!.addListener(() {
+      setState(() {
+        _bufferedDuration = _videoPlayerController!.value.buffered.fold(
+            Duration.zero,
+            (previousValue, element) =>
+                previousValue + (element.end - element.start));
+      });
+      final position = _videoPlayerController!.value.position;
+      setState(() {
+        showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
+            _videoPlayerController!.value.position.inSeconds > 10;
+        _total_duration =
+            _videoPlayerController!.value.duration.inMilliseconds.toDouble();
+      });
+    });
           Navigator.of(context).pop();
         },
       )
@@ -220,21 +266,21 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                                               builder: (context) {
                                                 return ListView(
                                                   children: [
-                                                    // ExpansionTile(
-                                                    //   title: Text(
-                                                    //     'quality',
-                                                    //     style: TextStyle(
-                                                    //         color:
-                                                    //             Colors.white),
-                                                    //   ),
-                                                    //   textColor: Colors.white,
-                                                    //   collapsedIconColor:
-                                                    //       Colors.white,
-                                                    //   children: [
-                                                    //     ...qualities
-                                                    //         .map((e) => e)
-                                                    //   ],
-                                                    // ),
+                                                    ExpansionTile(
+                                                      title: Text(
+                                                        'quality',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                      textColor: Colors.white,
+                                                      collapsedIconColor:
+                                                          Colors.white,
+                                                      children: [
+                                                        ...qualities
+                                                            .map((e) => e)
+                                                      ],
+                                                    ),
                                                     ExpansionTile(
                                                       title: Text(
                                                         'show speed',
@@ -427,12 +473,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        // LinearProgressIndicator(
-        //   value: _videoPlayerController!.value.buffered.isNotEmpty
-        //       ? _videoPlayerController!.value.buffered.last.end.inMilliseconds /
-        //           _videoPlayerController!.value.duration.inMilliseconds
-        //       : 0.0,
-        // ),
+
         Row(
           children: [
             SizedBox(width: 12.0),

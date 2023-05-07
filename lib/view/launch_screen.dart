@@ -28,19 +28,10 @@ class _OpacityAnimationState extends State<LaunchScreen>
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: AnimatedBuilder(
-        animation: _animation,
-        builder: (context, child) {
-          return Opacity(
-            opacity: _animation.value,
-            child: SvgPicture.asset('assets/images/seen.svg', width: MediaQuery.of(context).size.width*0.7,),
-          );
-        },
-        child: Container(
-          color: Colors.blue,
-          width: 200,
-          height: 200,
-        ),
+      child: SizedBox(
+    
+
+        child: Image.asset('assets/images/loading.gif', fit: BoxFit.fitWidth,),
       ),
     );
   }
