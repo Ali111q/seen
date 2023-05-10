@@ -22,11 +22,10 @@ class MainLayout extends StatefulWidget {
 }
 
 class _HomeState extends State<MainLayout> {
-  
   List pages = [
     MainScreen(),
     ReelsPage(),
-     ContactUs(),
+    ContactUs(),
     SectionsPage(),
     AdsPage()
   ];
@@ -42,7 +41,7 @@ class _HomeState extends State<MainLayout> {
   void initState() {
     // TODO: implement initState
     super.initState();
-     Provider.of<UserController>(context, listen: false).getUserFromShared();
+    Provider.of<UserController>(context, listen: false).getUserFromShared();
     Provider.of<SettingController>(context, listen: false).getSetting();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,

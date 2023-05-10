@@ -22,4 +22,15 @@ class AdsController extends ChangeNotifier {
       }
     }
   }
+
+  Future<void> initialize(int e) async {
+    // TODO: implement initialize
+    await ads[e].intilize();
+    notifyListeners();
+  }
+
+  Future<void> dispos(int index) async {
+    await ads[index].dispos();
+    notifyListeners();
+  }
 }

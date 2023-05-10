@@ -49,7 +49,7 @@ class Home extends StatelessWidget {
         '/home': (context) => MainLayout(),
         '/launch': (context) => VideoSplashScreen(),
         '/profile': (context) => ProfileScreen(),
-        '/test': (context) => ReelsScroll()
+
         // '/video-player': (context) => jj()
       },
     );
