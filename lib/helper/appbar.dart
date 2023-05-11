@@ -12,6 +12,7 @@ class MyAppBar extends AppBar {
 
   MyAppBar(context, {required this.titleText})
       : super(
+            iconTheme: IconThemeData(color: Colors.white),
             backgroundColor: Colors.transparent,
             elevation: 0,
             title: Row(
@@ -23,7 +24,12 @@ class MyAppBar extends AppBar {
                           null) {
                         Navigator.of(context).pushNamed('/login');
                       } else {
-                        Navigator.of(context).pushNamed('/profile');
+                        Navigator.of(context)
+                            .pushNamed('/profile')
+                            .then((value) {
+                          Provider.of<UserController>(context, listen: false)
+                              .getUserFromShared();
+                        });
                       }
                     },
                     child: SvgPicture.asset('assets/images/person.svg')),

@@ -25,4 +25,8 @@ class SharedService {
     shared.setString('email', user.email);
     shared.setString('image', user.image);
   }
+
+  Future<void> clear() async {
+    shared.clear();
+  }
 }

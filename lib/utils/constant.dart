@@ -24,3 +24,9 @@ String getSeasonUrl(id) {
 }
 
 const String getCatsUrl = '${url}/categories';
+String CommentsUrl(id) => '${url}/reels-comment?reel_id=$id';
+String viewUrl(id) => '${url}/view?reel_id=$id';
+const String logoutUrl = '${url}/logout';
+const String commentUrl = '${url}/comment';
+String likeUrl(id) => '${url}/like?reel_id=$id';
+const String loginCheckUrl = '${url}/check-login';

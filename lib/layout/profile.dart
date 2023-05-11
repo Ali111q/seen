@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controlller/user_controller.dart';
-import 'package:seen/layout/edit_profile.dart';
+
 import 'package:seen/model/user.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -60,6 +60,11 @@ class ProfileScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(primary: Colors.white),
                 onPressed: () {
                   // Logout functionality here
+                  Provider.of<UserController>(context, listen: false)
+                      .logout()
+                      .then((value) async {
+                    Navigator.of(context).pop();
+                  });
                 },
                 child: Text(
                   'Logout',

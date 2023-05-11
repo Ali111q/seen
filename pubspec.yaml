@@ -51,6 +51,7 @@ dependencies:
   flutter_gif: ^0.0.4
   flutter_gifimage: ^1.0.1
   flutter_to_airplay: ^2.0.4
+  like_button: ^2.0.5
 
 dev_dependencies:
   flutter_test:

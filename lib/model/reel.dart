@@ -1,5 +1,7 @@
 import 'package:video_player/video_player.dart';
 
+import 'ad.dart';
+
 class Reel {
   final int id;
   final String image;
@@ -29,17 +31,19 @@ class ReelVideo {
   final int views_count;
   final int comments_count;
   final int likes_count;
-late  VideoPlayerController controller;
+  final Ad? ad;
+  final String thumbnail;
+  final bool isLiked;
   ReelVideo(
       {required this.id,
       required this.title,
       required this.url,
       required this.views_count,
       required this.comments_count,
-      required this.likes_count}){
-        print('ksdl fjiosd hjfiolsd fhsd');
-         controller = VideoPlayerController.network(url);
-      }
+      required this.likes_count,
+      required this.thumbnail,
+      required this.isLiked,
+      this.ad});
 
   factory ReelVideo.fromJson(Map<String, dynamic> json) {
     return ReelVideo(
@@ -48,6 +52,28 @@ late  VideoPlayerController controller;
         url: json['url'],
         views_count: json['views_count'],
         comments_count: json['comments_count'],
-        likes_count: json['likes_count']);
+        likes_count: json['likes_count'],
+        thumbnail: json['thumbnail'],
+        ad: Ad.fromJson(json['ads']),
+        isLiked: json['isLiked']);
+  }
+}
+
+class Comment {
+  int id;
+  String comment;
+  String userName;
+  String image;
+  Comment(
+      {required this.comment,
+      required this.id,
+      required this.image,
+      required this.userName});
+  factory Comment.fromJson(Map<String, dynamic> json) {
+    return Comment(
+        comment: json['comment'],
+        id: json['id'],
+        image: json['users']['image'],
+        userName: json['users']['name']);
   }
 }

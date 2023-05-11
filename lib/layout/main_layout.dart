@@ -27,10 +27,10 @@ class _HomeState extends State<MainLayout> {
     ReelsPage(),
     ContactUs(),
     SectionsPage(),
-    AdsPage()
+    AdsPage(),
   ];
   int _currentIndex = 0;
-
+  Widget _currentPage = MainScreen();
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
@@ -41,7 +41,14 @@ class _HomeState extends State<MainLayout> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<UserController>(context, listen: false).getUserFromShared();
+    Provider.of<UserController>(context, listen: false)
+        .checkLogin()
+        .then((value) {
+      if (value) {
+        Provider.of<UserController>(context, listen: false).getUserFromShared();
+      }
+    });
+
     Provider.of<SettingController>(context, listen: false).getSetting();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -63,12 +70,13 @@ class _HomeState extends State<MainLayout> {
       child: Scaffold(
           appBar: MyAppBar(context, titleText: 'titleText'),
           backgroundColor: Colors.transparent,
-          body: pages[_currentIndex],
+          body: _currentPage,
           bottomNavigationBar: CustomNavigationBar(
             currentIndex: _currentIndex,
             onTabTapped: (int index) {
               setState(() {
                 _currentIndex = index;
+                _currentPage = pages[index];
               });
             },
           )),

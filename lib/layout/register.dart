@@ -63,6 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: 30,
               ),
               MyTextField(
+                pass: false,
                 w: w,
                 controller: email,
                 hint: 'البريد الالكتروني',
@@ -71,6 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: 30,
               ),
               MyTextField(
+                pass: false,
                 w: w,
                 controller: name,
                 hint: 'الاسم',
@@ -79,6 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: 30,
               ),
               MyTextField(
+                pass: true,
                 w: w,
                 controller: password,
                 hint: 'كلمة السر',
@@ -88,7 +91,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  print('object');
                   Provider.of<UserController>(context, listen: false)
                       .register(email.text, name.text, password.text);
                 },
@@ -124,11 +126,13 @@ class MyTextField extends StatelessWidget {
       {super.key,
       required this.w,
       required this.controller,
-      required this.hint});
+      required this.hint,
+      required this.pass});
 
   final double w;
   final TextEditingController controller;
   final String hint;
+  final bool pass;
 
   @override
   Widget build(BuildContext context) {
@@ -149,6 +153,7 @@ class MyTextField extends StatelessWidget {
       child: TextField(
         textAlign: TextAlign.right,
         controller: controller,
+        obscureText: pass,
         style: TextStyle(color: myColors.grey, fontSize: w * 0.05),
         decoration: InputDecoration(
           hintText: hint,

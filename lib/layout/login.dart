@@ -53,114 +53,122 @@ class _LoginState extends State<Login> {
             ),
             centerTitle: true,
           ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              InputLogin(
-                w: w,
-                controller: email,
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              InputLogin(
-                w: w,
-                controller: password,
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              GestureDetector(
-                onTap: () {
-                  print('object');
-                  Provider.of<UserController>(context, listen: false)
-                      .login(email.text, password.text);
-                },
-                child: ProfileButton(
+          body: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                InputLogin(
+                  pass: false,
                   w: w,
-                  color: myColors.liteBlue,
-                  child: LoginWidget(),
+                  controller: email,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, right: 40),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/register');
-                      },
-                      child: Text(
-                        'انشاء حساب',
+                SizedBox(
+                  height: 25,
+                ),
+                InputLogin(
+                  pass: true,
+                  w: w,
+                  controller: password,
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    print('object');
+                    Provider.of<UserController>(context, listen: false)
+                        .login(email.text, password.text)
+                        .then((value) {
+                      Navigator.of(context).pop();
+                    });
+                  },
+                  child: ProfileButton(
+                    w: w,
+                    color: myColors.liteBlue,
+                    child: LoginWidget(),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, right: 40),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushReplacementNamed('/register');
+                        },
+                        child: Text(
+                          'انشاء حساب',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 12.0, right: 40),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'تسجيل بواسطة',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.w600),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 12.0, right: 40),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'تسجيل بواسطة',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
-              ),
-              ProfileButton(
-                  w: w,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Gmail',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 27,
-                              fontWeight: FontWeight.w600)),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      SvgPicture.asset('assets/images/gmail.svg')
                     ],
-                  )),
-              SizedBox(
-                height: 30,
-              ),
-              ProfileButton(
-                  w: w,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('facebook',
-                          style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 27,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'font')),
-                      SizedBox(
-                        width: 15,
-                      ),
-                    ],
-                  )),
-              Padding(
-                padding: const EdgeInsets.only(top: 22.0, right: 40),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [],
+                  ),
                 ),
-              ),
-            ],
+                ProfileButton(
+                    w: w,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Gmail',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 27,
+                                fontWeight: FontWeight.w600)),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        SvgPicture.asset('assets/images/gmail.svg')
+                      ],
+                    )),
+                SizedBox(
+                  height: 30,
+                ),
+                ProfileButton(
+                    w: w,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('facebook',
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 27,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'font')),
+                        SizedBox(
+                          width: 15,
+                        ),
+                      ],
+                    )),
+                Padding(
+                  padding: const EdgeInsets.only(top: 22.0, right: 40),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [],
+                  ),
+                ),
+              ],
+            ),
           ),
         ));
   }
@@ -204,12 +212,12 @@ class LoginWidget extends StatelessWidget {
 }
 
 class InputLogin extends StatelessWidget {
-  const InputLogin({
-    required this.controller,
-    super.key,
-    required this.w,
-  });
-
+  const InputLogin(
+      {required this.controller,
+      super.key,
+      required this.w,
+      required this.pass});
+  final bool pass;
   final double w;
   final TextEditingController controller;
 
@@ -233,6 +241,7 @@ class InputLogin extends StatelessWidget {
             ],
           ),
           child: TextField(
+            obscureText: pass,
             controller: controller,
             style: TextStyle(color: myColors.grey, fontSize: w * 0.05),
             decoration: InputDecoration(

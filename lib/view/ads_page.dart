@@ -1,12 +1,14 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controlller/ads_controller.dart';
-import 'package:seen/reel_test.dart';
+
 import 'package:seen/view/launch_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
+import '../content_screen.dart';
 import '../model/ad.dart';
 
 // class AdsPage extends StatefulWidget {
@@ -53,29 +55,28 @@ class _AdWidgetState extends State<AdWidget> {
       setState(() {
         isPlaying = event;
       });
-        print(event);
-
+      print('event');
     });
     widget.ad.position.listen((event) {
-
-     setState(() {
-       progressNotifier.value = event;
-     });
+      setState(() {
+        progressNotifier.value = event;
+      });
     });
-    widget.ad.isInitialized.listen((event) { 
+    widget.ad.isInitialized.listen((event) {
       setState(() {
         isInitialized = event;
       });
-        print(event);
-
+      print('event');
     });
   }
-@override
+
+  @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     widget.ad.dispos();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -107,7 +108,7 @@ class _AdWidgetState extends State<AdWidget> {
         GestureDetector(
           onTap: () {
             if (isInitialized) {
-            isPlaying ? widget.ad.pause() : widget.ad.play();
+              isPlaying ? widget.ad.pause() : widget.ad.play();
             }
           },
           child: Container(
@@ -116,8 +117,17 @@ class _AdWidgetState extends State<AdWidget> {
             height: MediaQuery.of(context).size.width * 0.6,
             child: Stack(
               children: [
-              if (isInitialized) VideoPlayer(widget.ad.controller) else Image.network(widget.ad.thumbnail!),
-                if(isInitialized) Positioned(child:VideoProgressIndicator(widget.ad.controller, allowScrubbing: false,),),
+                if (isInitialized)
+                  VideoPlayer(widget.ad.controller)
+                else
+                  Image.network(widget.ad.thumbnail!),
+                if (isInitialized)
+                  Positioned(
+                    child: VideoProgressIndicator(
+                      widget.ad.controller,
+                      allowScrubbing: false,
+                    ),
+                  ),
                 isPlaying
                     ? Container()
                     : Center(
@@ -134,17 +144,23 @@ class _AdWidgetState extends State<AdWidget> {
           padding: const EdgeInsets.all(10.0),
           child: Row(
             children: [
-             if(widget.ad.website != null || widget.ad.instagram != null) GestureDetector( onTap: (){
-              launchUrl(Uri.parse(widget.ad.website??widget.ad.instagram??''));
-             }, child: SvgPicture.asset('assets/images/website.svg')),
+              if (widget.ad.website != null || widget.ad.instagram != null)
+                GestureDetector(
+                    onTap: () {
+                      launchUrl(Uri.parse(
+                          widget.ad.website ?? widget.ad.instagram ?? ''));
+                    },
+                    child: SvgPicture.asset('assets/images/website.svg')),
               Container(
                 width: 20,
               ),
-            if(widget.ad.lat != null&& widget.ad.lng != null)  GestureDetector(
-              onTap: (){
-                launchUrl(Uri.parse('https://www.google.com/maps/search/?api=1&query=${widget.ad.lat},${widget.ad.lng}'));
-              },
-              child: SvgPicture.asset('assets/images/marker.svg')),
+              if (widget.ad.lat != null && widget.ad.lng != null)
+                GestureDetector(
+                    onTap: () {
+                      launchUrl(Uri.parse(
+                          'https://www.google.com/maps/search/?api=1&query=${widget.ad.lat},${widget.ad.lng}'));
+                    },
+                    child: SvgPicture.asset('assets/images/marker.svg')),
               Spacer(),
               Text(
                 widget.ad.local_sub_title,
@@ -178,38 +194,25 @@ class _AdsPageState extends State<AdsPage> {
     List<Ad> ads = Provider.of<AdsController>(context).ads;
     return ads.isEmpty
         ? LaunchScreen()
-        : adsPage(
-            items: [
-              ...ads.map((e) => AdWidget(
-                    ad: e,
-                  ))
-            ],
-            models: ads,
+        : Container(
+            child: Swiper(
+              itemBuilder: (BuildContext context, int index) {
+                return ContentScreen(
+                  src: ads[index].file,
+                  ad: ads[index],
+                );
+              },
+              itemCount: ads.length,
+              scrollDirection: Axis.vertical,
+            ),
           );
   }
 }
 
-class adsPage extends ReelsScroll {
-  adsPage({required super.items, required this.models});
-  List<Ad> models;
-  @override
-  void initState() {
-    // TODO: implement initState
-    if (models[super.index].file_type == 'video') {
-      models[super.index].intilize();
-    }
-  }
 
-  @override
-  Future<void> dispose(int index, context) async {
-    if (models[super.index].file_type == 'video') {
-      await Provider.of<AdsController>(context).dispos(index);
-    }
-  }
+  // @override
+  // Future<void> initialize(int e, context) async {
+  //   // TODO: implement initialize
+  //   await Provider.of<AdsController>(context).initialize(e);
+  // }
 
-  @override
-  Future<void> initialize(int e, context) async {
-    // TODO: implement initialize
-    await Provider.of<AdsController>(context).initialize(e);
-  }
-}

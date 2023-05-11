@@ -6,7 +6,6 @@ import 'package:seen/controlller/home_controller.dart';
 import 'package:seen/controlller/reels_controller.dart';
 import 'package:seen/controlller/user_controller.dart';
 import 'package:seen/layout/profile.dart';
-import 'package:seen/reel_test.dart';
 
 import 'controlller/setting_controller.dart';
 import 'controlller/show_controller.dart';
@@ -43,6 +42,7 @@ class Home extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/launch',
+      theme: ThemeData(useMaterial3: true),
       routes: {
         '/login': (context) => Login(),
         '/register': (context) => RegisterScreen(),

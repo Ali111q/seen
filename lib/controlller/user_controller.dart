@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -10,7 +11,7 @@ class UserController extends ChangeNotifier {
   SharedService _service = SharedService();
   User? user;
   bool isLogin = false;
-  getUserFromShared() async {
+  Future<void> getUserFromShared() async {
     await _service.initialize();
     user = _service.getUser();
     isLogin = user != null;
@@ -58,6 +59,66 @@ class UserController extends ChangeNotifier {
         _service.saveUser(user!);
       }
     }
+    notifyListeners();
+  }
+
+  Future<bool> checkLogin() async {
+    if (user != null) {
+      _service.initialize();
+      http.Response _res = await http.get(Uri.parse(loginCheckUrl), headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${user!.token}'
+      });
+      print(_res.body);
+
+      if (_res.statusCode == 200) {
+        print(_res.statusCode);
+
+        var json = await jsonDecode(_res.body);
+
+        if (json['success']) {
+          return true;
+        }
+        _service.clear();
+        notifyListeners();
+        return false;
+      }
+      if (_res.statusCode == 500) {
+        return true;
+      }
+      _service.clear();
+      notifyListeners();
+      return false;
+    }
+
+    notifyListeners();
+    return false;
+  }
+
+  Future<void> logout() async {
+    print('object');
+    if (user != null) {
+      _service.initialize();
+      http.Response _res = await http.get(Uri.parse(logoutUrl), headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${user!.token}'
+      });
+      print(_res.body);
+      if (_res.statusCode == 200) {
+        var json = await jsonDecode(_res.body);
+
+        print(json);
+        if (json['success']) {
+          _service.clear();
+          notifyListeners();
+        }
+        _service.clear();
+        notifyListeners();
+      }
+      _service.clear();
+      notifyListeners();
+    }
+    _service.clear();
     notifyListeners();
   }
 }
