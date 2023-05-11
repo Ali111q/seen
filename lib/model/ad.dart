@@ -30,6 +30,7 @@ class Ad {
       required this.local_sub_title}) {
     position = positionController.stream;
     isPlaying = isPlayingController.stream;
+    isInitialized = isInitializedController.stream;
   }
 
   factory Ad.fromJson(Map<String, dynamic> json) {
@@ -52,8 +53,10 @@ class Ad {
       controller = VideoPlayerController.network(file);
       await controller.initialize();
       controller.addListener(() {
+        
         positionController
             .add(controller.value.position.inMilliseconds.toDouble());
+            isInitializedController.add(controller.value.isInitialized);
       });
       controller.play();
     }
@@ -65,12 +68,7 @@ class Ad {
     }
   }
 
-  bool isInitialized() {
-    if (file_type == 'video') {
-      return controller.value.isInitialized;
-    }
-    return false;
-  }
+ 
 
   void play() {
     if (file_type == 'video') {
@@ -96,4 +94,6 @@ class Ad {
   Stream<double> position = Stream.empty();
   StreamController<bool> isPlayingController = StreamController();
   Stream<bool> isPlaying = Stream.empty();
+  StreamController<bool> isInitializedController = StreamController();
+  Stream <bool> isInitialized = Stream.empty(); 
 }

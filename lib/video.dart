@@ -473,7 +473,6 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-
         Row(
           children: [
             SizedBox(width: 12.0),

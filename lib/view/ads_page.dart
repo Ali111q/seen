@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:seen/controlller/ads_controller.dart';
 import 'package:seen/reel_test.dart';
 import 'package:seen/view/launch_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
 import '../model/ad.dart';
@@ -40,8 +41,10 @@ class AdWidget extends StatefulWidget {
 }
 
 class _AdWidgetState extends State<AdWidget> {
-  bool isPlaying = true;
+  ValueNotifier<double> progressNotifier = ValueNotifier<double>(0.0);
 
+  bool isPlaying = true;
+  bool isInitialized = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -50,9 +53,29 @@ class _AdWidgetState extends State<AdWidget> {
       setState(() {
         isPlaying = event;
       });
+        print(event);
+
+    });
+    widget.ad.position.listen((event) {
+
+     setState(() {
+       progressNotifier.value = event;
+     });
+    });
+    widget.ad.isInitialized.listen((event) { 
+      setState(() {
+        isInitialized = event;
+      });
+        print(event);
+
     });
   }
-
+@override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    widget.ad.dispos();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -83,7 +106,9 @@ class _AdWidgetState extends State<AdWidget> {
         ),
         GestureDetector(
           onTap: () {
+            if (isInitialized) {
             isPlaying ? widget.ad.pause() : widget.ad.play();
+            }
           },
           child: Container(
             color: Colors.black,
@@ -91,7 +116,8 @@ class _AdWidgetState extends State<AdWidget> {
             height: MediaQuery.of(context).size.width * 0.6,
             child: Stack(
               children: [
-                VideoPlayer(widget.ad.controller),
+              if (isInitialized) VideoPlayer(widget.ad.controller) else Image.network(widget.ad.thumbnail!),
+                if(isInitialized) Positioned(child:VideoProgressIndicator(widget.ad.controller, allowScrubbing: false,),),
                 isPlaying
                     ? Container()
                     : Center(
@@ -108,14 +134,20 @@ class _AdWidgetState extends State<AdWidget> {
           padding: const EdgeInsets.all(10.0),
           child: Row(
             children: [
-              SvgPicture.asset('assets/images/website.svg'),
+             if(widget.ad.website != null || widget.ad.instagram != null) GestureDetector( onTap: (){
+              launchUrl(Uri.parse(widget.ad.website??widget.ad.instagram??''));
+             }, child: SvgPicture.asset('assets/images/website.svg')),
               Container(
                 width: 20,
               ),
-              SvgPicture.asset('assets/images/marker.svg'),
+            if(widget.ad.lat != null&& widget.ad.lng != null)  GestureDetector(
+              onTap: (){
+                launchUrl(Uri.parse('https://www.google.com/maps/search/?api=1&query=${widget.ad.lat},${widget.ad.lng}'));
+              },
+              child: SvgPicture.asset('assets/images/marker.svg')),
               Spacer(),
               Text(
-                'تس،ق بآمان',
+                widget.ad.local_sub_title,
                 style: TextStyle(color: Colors.white, fontSize: 26),
               )
             ],
