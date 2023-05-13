@@ -206,6 +206,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.9"
+  flutter_shimmer:
+    dependency: "direct main"
+    description:
+      name: flutter_shimmer
+      sha256: bf621e55378183883ac495f62123a9e3f3e29664e1c992413a1caeedbf7d4140
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -401,13 +409,13 @@ packages:
     source: hosted
     version: "1.0.1"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
-      sha256: c7edf82217d4b2952b2129a61d3ad60f1075b9299e629e149a8d2e39c2e6aad4
+      sha256: "3087813781ab814e4157b172f1a11c46be20179fcc9bea043e0fba36bc0acaa2"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.14"
+    version: "2.0.15"
   path_provider_android:
     dependency: transitive
     description:

@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controlller/home_controller.dart';
+import 'package:seen/helper/image_checker.dart';
 import 'package:seen/jj.dart';
 import 'package:seen/layout/Episode.dart';
 import 'package:seen/model/ad.dart';
@@ -154,10 +154,7 @@ class HomeAdd extends StatelessWidget {
       child: Swiper(
         itemCount: ads!.length,
         loop: ads!.length != 1,
-        itemBuilder: (context, index) => Image.network(
-          ads![index]!.file,
-          fit: BoxFit.cover,
-        ),
+        itemBuilder: (context, index) => NetworkImageChecker(imageUrl: ads![index]!.file,),
       ),
     );
   }
@@ -178,9 +175,8 @@ class BannerItem extends StatelessWidget {
       background: Stack(
         children: [
           Center(
-            child: Image.network(banner.thumbnail,
-                fit: BoxFit.fitHeight,
-                width: MediaQuery.of(context).size.width),
+            child: NetworkImageChecker(imageUrl: banner.thumbnail,
+              ),
           ),
           Container(
             height: MediaQuery.of(context).size.height *
@@ -304,7 +300,7 @@ class _SectionWidgetState extends State<SectionWidget> {
                   ...widget.tag.shows!.map((e) => GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => EpisodeScreen(e.id),
+                            builder: (context) => EpisodeScreen(e!.id),
                           ));
                         },
                         child: Container(
@@ -312,9 +308,7 @@ class _SectionWidgetState extends State<SectionWidget> {
                           width: MediaQuery.of(context).size.width * 0.367,
                           height: MediaQuery.of(context).size.width * 0.5,
                           decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(e!.image!),
-                                  fit: BoxFit.cover),
+                            
                               boxShadow: [
                                 BoxShadow(
                                     offset: Offset(-1, 1),
@@ -322,28 +316,33 @@ class _SectionWidgetState extends State<SectionWidget> {
                                     blurRadius: 3,
                                     spreadRadius: 3)
                               ]),
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(),
-                                Container(),
-                                Text(
-                                  e.name,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      shadows: [
-                                        Shadow(
-                                            blurRadius: 6,
-                                            color:
-                                                Colors.white.withOpacity(0.4))
-                                      ]),
-                                )
-                              ],
-                            ),
+                          child: Stack(
+                            children: [
+                              SizedBox.expand(child: NetworkImageChecker(imageUrl: e!.image!)),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(),
+                                    Container(),
+                                    Text(
+                                      e!.name,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          shadows: [
+                                            Shadow(
+                                                blurRadius: 6,
+                                                color:
+                                                    Colors.white.withOpacity(0.4))
+                                          ]),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ))

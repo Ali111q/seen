@@ -42,7 +42,10 @@ class Home extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/launch',
-      theme: ThemeData(useMaterial3: true),
+      theme: ThemeData(
+        useMaterial3: true,
+        fontFamily: 'font',
+      ),
       routes: {
         '/login': (context) => Login(),
         '/register': (context) => RegisterScreen(),

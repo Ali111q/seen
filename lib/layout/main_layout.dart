@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controlller/setting_controller.dart';
 import 'package:seen/helper/appbar.dart';
+import 'package:seen/helper/loading.dart';
 import 'package:seen/view/ads_page.dart';
 import 'package:seen/view/contact_us.dart';
 import 'package:seen/view/sections_page.dart';

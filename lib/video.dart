@@ -28,7 +28,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
   String dragValue = '';
   Duration _bufferedDuration = Duration.zero;
   double _total_duration = 0.0;
-  bool showAd = false;
+  int showAd = 0;
 
   @override
   void initState() {
@@ -59,7 +59,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
       final position = _videoPlayerController!.value.position;
       setState(() {
         showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
-            _videoPlayerController!.value.position.inSeconds > 10;
+            _videoPlayerController!.value.position.inSeconds > 10 && showAd == 0? 1:0;
         _total_duration =
             _videoPlayerController!.value.duration.inMilliseconds.toDouble();
       });
@@ -109,7 +109,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
       final position = _videoPlayerController!.value.position;
       setState(() {
         showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
-            _videoPlayerController!.value.position.inSeconds > 10;
+            _videoPlayerController!.value.position.inSeconds > 10 && showAd == 0? 1:0;
         _total_duration =
             _videoPlayerController!.value.duration.inMilliseconds.toDouble();
       });
@@ -152,7 +152,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
       final position = _videoPlayerController!.value.position;
       setState(() {
         showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
-            _videoPlayerController!.value.position.inSeconds > 10;
+            _videoPlayerController!.value.position.inSeconds > 10 && showAd == 0? 1:0;
         _total_duration =
             _videoPlayerController!.value.duration.inMilliseconds.toDouble();
       });
@@ -188,7 +188,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
       final position = _videoPlayerController!.value.position;
       setState(() {
         showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
-            _videoPlayerController!.value.position.inSeconds > 10;
+            _videoPlayerController!.value.position.inSeconds > 10 && showAd == 0? 1:0;
         _total_duration =
             _videoPlayerController!.value.duration.inMilliseconds.toDouble();
       });
@@ -430,18 +430,25 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                 ? Container()
                 : AnimatedPositioned(
                     duration: Duration(milliseconds: 1000),
-                    left: showAd ? 60 : -800,
+                    left: showAd == 1 ? 60 : -800,
                     bottom: 60,
                     child: Align(
                       alignment: Alignment.bottomLeft,
-                      child: Container(
-                        margin: EdgeInsets.only(left: 20),
-                        width: MediaQuery.of(context).size.width * 0.22,
-                        height: MediaQuery.of(context).size.width * 0.026,
-                        color: Colors.white,
-                        child: Image.network(
-                          ad!.file,
-                          fit: BoxFit.cover,
+                      child: GestureDetector(
+                        onHorizontalDragEnd: (e){
+                          setState(() {
+                            showAd = 2;
+                          });
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(left: 20),
+                          width: MediaQuery.of(context).size.width * 0.22,
+                          height: MediaQuery.of(context).size.width * 0.026,
+                          color: Colors.white,
+                          child: Image.network(
+                            ad!.file,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),

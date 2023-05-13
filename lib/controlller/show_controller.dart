@@ -8,6 +8,7 @@ import 'package:seen/model/show.dart';
 import 'package:seen/utils/constant.dart';
 
 class ShowController extends ChangeNotifier {
+  List<Show> searchList = [];
   Episode? banner;
   List<Season> seasons = [];
   int selectedEpisode = 0;
@@ -56,4 +57,24 @@ class ShowController extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+Future<void> search(String? search)async{
+  searchList.clear();
+  notifyListeners();
+    http.Response _res = await http.get(Uri.parse(searchUrl(search)));
+  if (_res.statusCode == 200) {
+  searchList.clear();
+  notifyListeners();
+
+    var json = await jsonDecode(_res.body);
+    if (json['success']) {
+      print(json);
+      for (var element in json['data']['data']) {
+        searchList.add(Show.fromJson(element));
+      }
+    }
+    notifyListeners();
+  }
+}
+
 }
