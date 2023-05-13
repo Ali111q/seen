@@ -1,15 +1,11 @@
 [
     {
-        "merged": "C:\\Users\\ali\\.gradle\\daemon\\7.5\\com.dorto.seen.app-merged_res-27:\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\ali\\.gradle\\daemon\\7.5\\com.dorto.seen.app-main-21:\\mipmap-xxxhdpi\\ic_launcher.png"
+        "merged": "com.dorto.seen.app-merged_res-27:/drawable_launch_background.xml.flat",
+        "source": "com.dorto.seen.app-main-21:/drawable/launch_background.xml"
     },
     {
-        "merged": "C:\\Users\\ali\\.gradle\\daemon\\7.5\\com.dorto.seen.app-merged_res-27:\\drawable_launch_background.xml.flat",
-        "source": "C:\\Users\\ali\\.gradle\\daemon\\7.5\\com.dorto.seen.app-main-21:\\drawable\\launch_background.xml"
-    },
-    {
-        "merged": "C:\\Users\\ali\\.gradle\\daemon\\7.5\\com.dorto.seen.app-merged_res-27:\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\ali\\.gradle\\daemon\\7.5\\com.dorto.seen.app-main-21:\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "com.dorto.seen.app-merged_res-27:/drawable-v21_launch_background.xml.flat",
+        "source": "com.dorto.seen.app-main-21:/drawable-v21/launch_background.xml"
     },
     {
         "merged": "com.dorto.seen.app-merged_res-27:/mipmap-mdpi_ic_launcher_adaptive_back.png.flat",
@@ -32,10 +28,6 @@
         "source": "com.dorto.seen.app-main-21:/mipmap-mdpi/ic_launcher_adaptive_fore.png"
     },
     {
-        "merged": "C:\\Users\\ali\\.gradle\\daemon\\7.5\\com.dorto.seen.app-merged_res-27:\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\ali\\.gradle\\daemon\\7.5\\com.dorto.seen.app-main-21:\\mipmap-xhdpi\\ic_launcher.png"
-    },
-    {
         "merged": "com.dorto.seen.app-merged_res-27:/mipmap-hdpi_ic_launcher.png.flat",
         "source": "com.dorto.seen.app-main-21:/mipmap-hdpi/ic_launcher.png"
     },
@@ -52,20 +44,8 @@
         "source": "com.dorto.seen.app-main-21:/mipmap-xxxhdpi/ic_launcher_adaptive_fore.png"
     },
     {
-        "merged": "C:\\Users\\ali\\.gradle\\daemon\\7.5\\com.dorto.seen.app-merged_res-27:\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\ali\\.gradle\\daemon\\7.5\\com.dorto.seen.app-main-21:\\mipmap-xxhdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "C:\\Users\\ali\\.gradle\\daemon\\7.5\\com.dorto.seen.app-merged_res-27:\\drawable-v21_launch_background.xml.flat",
-        "source": "C:\\Users\\ali\\.gradle\\daemon\\7.5\\com.dorto.seen.app-main-21:\\drawable-v21\\launch_background.xml"
-    },
-    {
         "merged": "com.dorto.seen.app-merged_res-27:/mipmap-xhdpi_ic_launcher_adaptive_fore.png.flat",
         "source": "com.dorto.seen.app-main-21:/mipmap-xhdpi/ic_launcher_adaptive_fore.png"
-    },
-    {
-        "merged": "C:\\Users\\ali\\.gradle\\daemon\\7.5\\com.dorto.seen.app-merged_res-27:\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\ali\\.gradle\\daemon\\7.5\\com.dorto.seen.app-main-21:\\mipmap-hdpi\\ic_launcher.png"
     },
     {
         "merged": "com.dorto.seen.app-merged_res-27:/mipmap-hdpi_ic_launcher_adaptive_fore.png.flat",

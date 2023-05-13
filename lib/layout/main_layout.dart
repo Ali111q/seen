@@ -102,7 +102,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     final w = MediaQuery.of(context).size.width;
 
     return SizedBox(
-      height: h * 0.11,
+      height: h * 0.08,
       child: Container(
         color: myColors.dark,
         child: Padding(
@@ -112,30 +112,30 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               buildNavBarItem(
-                  iconPath: 'assets/images/seen.svg',
-                  iconWidth: w * 0.095,
-                  index: 0,
-                  isSvg: true),
+                  iconPath: 'assets/images/ads.png',
+                  iconWidth: w * 0.1,
+                  index: 4,
+                  isSvg: false),
+              buildNavBarItem(
+                  iconPath: 'assets/images/sections.png',
+                  iconWidth: w * 0.1,
+                  index: 3,
+                  isSvg: false),
+              buildNavBarItem(
+                  iconPath: 'assets/images/call_us.png',
+                  iconWidth: w * 0.1,
+                  index: 2,
+                  isSvg: false),
               buildNavBarItem(
                   iconPath: 'assets/images/bs.svg',
                   iconWidth: w * 0.075,
                   index: 1,
                   isSvg: true),
               buildNavBarItem(
-                  iconPath: 'assets/images/call_us.png',
-                  iconWidth: w * 0.095,
-                  index: 2,
-                  isSvg: false),
-              buildNavBarItem(
-                  iconPath: 'assets/images/sections.png',
-                  iconWidth: w * 0.095,
-                  index: 3,
-                  isSvg: false),
-              buildNavBarItem(
-                  iconPath: 'assets/images/ads.png',
-                  iconWidth: w * 0.095,
-                  index: 4,
-                  isSvg: false),
+                  iconPath: 'assets/images/seen.svg',
+                  iconWidth: w * 0.12,
+                  index: 0,
+                  isSvg: true),
             ],
           ),
         ),
