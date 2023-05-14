@@ -41,10 +41,7 @@ class ReelsController extends ChangeNotifier {
       if (json['success']) {
         reelVideos = [];
         for (var element in json['data']['data']) {
-          print('iosajd iosadj oais ');
-          print(element['ads']);
           reelVideos.add(ReelVideo.fromJson(element));
-          print('object');
         }
         notifyListeners();
       }
@@ -58,10 +55,7 @@ class ReelsController extends ChangeNotifier {
       if (json['success']) {
         comments = [];
         for (var element in json['data']) {
-          print('iosajd iosadj oais ');
-          print(element['ads']);
           comments.add(Comment.fromJson(element));
-          print('object');
         }
         notifyListeners();
       }
@@ -78,7 +72,6 @@ class ReelsController extends ChangeNotifier {
   Future<void> postCommetn(id, String comment, User user) async {
     comments.add(Comment(
         comment: comment, id: 0, image: user.image, userName: user.name));
-    print(user.token);
     http.Response _res = await http.post(Uri.parse(commentUrl), body: {
       'comment': comment,
       'reel_id': id
@@ -86,7 +79,6 @@ class ReelsController extends ChangeNotifier {
       'Authorization': 'Bearer ${user.token}',
       "Accept": 'application/json'
     });
-    print(_res.body);
     if (_res.statusCode == 200) {
       var json = jsonDecode(_res.body);
       if (json['success']) {}
@@ -103,7 +95,6 @@ class ReelsController extends ChangeNotifier {
           'Authorization': 'Bearer ${token}',
           "Accept": 'application/json'
         });
-    print(_res.body);
 
     if (_res.statusCode == 200) {
       var json = jsonDecode(_res.body);

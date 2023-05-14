@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:dio/dio.dart';
+import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:seen/model/episode.dart';
 import 'package:http/http.dart' as http;
@@ -19,21 +21,70 @@ class HomeController extends ChangeNotifier {
   List? episode;
   List<Tag> catTags = [];
   Map<String, String> header = {'lang': window.locale.languageCode};
-  Future<void> getHome() async {
-    http.Response res = await http.get(Uri.parse(homeUrl), headers: header);
-    print(res.statusCode);
+  // Future<void> getHome() async {
+  //   http.Response res = await http.get(Uri.parse(homeUrl), headers: header);
+  //   print(res.statusCode);
 
+  //   if (res.statusCode == 200) {
+  //     try {
+  //       homeError = false ;
+  //       notifyListeners();
+  //         banner.clear();
+  //     ads.clear();
+  //     var json = jsonDecode(res.body);
+  //     if (json['success']) {
+  //       json['data']['banner'].forEach((e) {
+  //         banner.add(Episode.fromJson(e));
+  //       });
+  //       if (tags.isEmpty) {
+  //         json['data']['categories'].forEach((e) {
+  //           tags.add(Tag.fromJson(e));
+  //         });
+  //       }
+
+  //       json['data']['ads'].forEach((e) {
+  //         ads.add(Ad.fromJson(e));
+  //       });
+  //       notifyListeners();
+  //       return;
+
+  //     }
+  //      homeError = true;
+  //   notifyListeners();
+  //   return;
+  //     } catch (e) {
+  //           homeError = true;
+  //   notifyListeners();
+  //   return;
+  //     }
+
+  //   }
+
+  // }
+
+  Future<void> getHome() async {
+    Dio dio = Dio();
+    DioCacheManager cacheManager = DioCacheManager(CacheConfig());
+    Options options =
+        buildCacheOptions(const Duration(days: 5), forceRefresh: true);
+    dio.interceptors.add(cacheManager.interceptor);
+    Response res = await dio.get(
+      homeUrl,
+      options: options,
+    );
     if (res.statusCode == 200) {
-      try {
-        homeError = false ;
-        notifyListeners();
-          banner.clear();
-      ads.clear();
-      var json = jsonDecode(res.body);
+      print(res.data);
+
+      var json = res.data;
       if (json['success']) {
+        homeError = false;
+        banner.clear();
+        ads.clear();
+
         json['data']['banner'].forEach((e) {
           banner.add(Episode.fromJson(e));
         });
+
         if (tags.isEmpty) {
           json['data']['categories'].forEach((e) {
             tags.add(Tag.fromJson(e));
@@ -43,22 +94,13 @@ class HomeController extends ChangeNotifier {
         json['data']['ads'].forEach((e) {
           ads.add(Ad.fromJson(e));
         });
+
         notifyListeners();
         return;
-        
       }
-       homeError = true;
-    notifyListeners();
-    return;
-      } catch (e) {
-            homeError = true;
-    notifyListeners();
-    return; 
-      }
-    
-      
     }
-   
+
+    notifyListeners();
   }
 
   Future<void> getEpisode(id, {sections}) async {
@@ -66,25 +108,35 @@ class HomeController extends ChangeNotifier {
       element!.clearShow();
     }
     episode = null;
-    http.Response _res =
-        await http.get(Uri.parse(getEpisodeUrl(id)), headers: header);
-    if (_res.statusCode == 200) {
-      var json = jsonDecode(_res.body);
-      if (json['success']) {
-        for (var element in json['data']['data']) {
-          if (sections == null) {
-            tags
-                .firstWhere((element) => element!.id == id)!
-                .addShow(Show.fromJson(element));
-          } else {
-            catTags
-                .firstWhere((element) => element!.id == id)!
-                .addShow(Show.fromJson(element));
+
+    Dio dio = Dio();
+    DioCacheManager cacheManager = DioCacheManager(CacheConfig());
+    Options options =
+        buildCacheOptions(const Duration(days: 5), forceRefresh: true);
+    dio.interceptors.add(cacheManager.interceptor);
+    dio.options.headers = header;
+
+    try {
+      Response _res = await dio.get(getEpisodeUrl(id));
+
+      if (_res.statusCode == 200) {
+        var json = _res.data;
+        if (json['success']) {
+          for (var element in json['data']['data']) {
+            if (sections == null) {
+              tags
+                  .firstWhere((element) => element!.id == id)!
+                  .addShow(Show.fromJson(element));
+            } else {
+              catTags
+                  .firstWhere((element) => element!.id == id)!
+                  .addShow(Show.fromJson(element));
+            }
+            notifyListeners();
           }
-          notifyListeners();
         }
       }
-    }
+    } catch (e) {}
   }
 
   Future<void> getAdInVideo() async {
@@ -92,14 +144,24 @@ class HomeController extends ChangeNotifier {
       element!.clearShow();
     }
     episode = null;
-    http.Response _res =
-        await http.get(Uri.parse(addInVideoUrl), headers: header);
-    if (_res.statusCode == 200) {
-      var json = jsonDecode(_res.body);
-      if (json['success']) {
-        adInVideo = Ad.fromJson(json['data']);
+
+    Dio dio = Dio();
+    DioCacheManager cacheManager = DioCacheManager(CacheConfig());
+    Options options =
+        buildCacheOptions(const Duration(days: 5), forceRefresh: true);
+    dio.interceptors.add(cacheManager.interceptor);
+    dio.options.headers = header;
+
+    try {
+      Response _res = await dio.get(addInVideoUrl);
+
+      if (_res.statusCode == 200) {
+        var json = _res.data;
+        if (json['success']) {
+          adInVideo = Ad.fromJson(json['data']);
+        }
       }
-    }
+    } catch (e) {}
   }
 
   Future<void> getCats() async {

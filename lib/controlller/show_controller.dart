@@ -27,16 +27,16 @@ class ShowController extends ChangeNotifier {
       if (json['success']) {
         banner = Episode.fromJson(json['data']['first_episode']);
         show = Show.fromJson(json['data']['shows']);
-        
+
         for (var element in json['data']['shows']['season']) {
           seasons.add(Season.fromJson(element));
 
           notifyListeners();
         }
       }
-      if ( banner != null) {
-          selectedEpisode = banner!.id;
-        }
+      if (banner != null) {
+        selectedEpisode = banner!.id;
+      }
       notifyListeners();
     }
   }
@@ -51,30 +51,28 @@ class ShowController extends ChangeNotifier {
           seasons
               .firstWhere((e) => e!.id == id)
               .addEpisode(Episode.fromJson(element));
-              notifyListeners();
+          notifyListeners();
         }
       }
       notifyListeners();
     }
   }
 
-Future<void> search(String? search)async{
-  searchList.clear();
-  notifyListeners();
-    http.Response _res = await http.get(Uri.parse(searchUrl(search)));
-  if (_res.statusCode == 200) {
-  searchList.clear();
-  notifyListeners();
-
-    var json = await jsonDecode(_res.body);
-    if (json['success']) {
-      print(json);
-      for (var element in json['data']['data']) {
-        searchList.add(Show.fromJson(element));
-      }
-    }
+  Future<void> search(String? search) async {
+    searchList.clear();
     notifyListeners();
-  }
-}
+    http.Response _res = await http.get(Uri.parse(searchUrl(search)));
+    if (_res.statusCode == 200) {
+      searchList.clear();
+      notifyListeners();
 
+      var json = await jsonDecode(_res.body);
+      if (json['success']) {
+        for (var element in json['data']['data']) {
+          searchList.add(Show.fromJson(element));
+        }
+      }
+      notifyListeners();
+    }
+  }
 }

@@ -57,7 +57,6 @@ class _EpisodeScreenState extends State<EpisodeScreen>
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-
   }
 
   void _scrollListener() {
@@ -76,8 +75,6 @@ class _EpisodeScreenState extends State<EpisodeScreen>
       });
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -150,32 +147,36 @@ class _EpisodeScreenState extends State<EpisodeScreen>
                     ),
                     DefaultTabController(
                       length: season.length,
-                      child: TabBar(
-                        physics: AlwaysScrollableScrollPhysics(),
-                        isScrollable: true,
-                        indicatorColor: Colors.white,
-                        onTap: (value) async {
-                          setState(() {
-                            _animation = true;
-                          });
-                          if (season[index].episods.isEmpty) {
-                            Provider.of<ShowController>(context, listen: false)
-                                .getSeason(season[index].id);
-                          }
-                          await Future.delayed(
-                              const Duration(milliseconds: 100));
-                          setState(() {
-                            index = value;
-                            _animation = false;
-                          });
-                        },
-                        tabs: [
-                          ...season.map(
-                            (e) => Tab(
-                              text: e.local_name,
-                            ),
-                          )
-                        ],
+                      child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: TabBar(
+                          physics: AlwaysScrollableScrollPhysics(),
+                          isScrollable: true,
+                          indicatorColor: Colors.white,
+                          onTap: (value) async {
+                            setState(() {
+                              _animation = true;
+                            });
+                            if (season[index].episods.isEmpty) {
+                              Provider.of<ShowController>(context,
+                                      listen: false)
+                                  .getSeason(season[index].id);
+                            }
+                            await Future.delayed(
+                                const Duration(milliseconds: 100));
+                            setState(() {
+                              index = value;
+                              _animation = false;
+                            });
+                          },
+                          tabs: [
+                            ...season.map(
+                              (e) => Tab(
+                                text: e.local_name,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     AnimatedOpacity(
@@ -185,11 +186,9 @@ class _EpisodeScreenState extends State<EpisodeScreen>
                                 .seasons[index]
                                 .episods
                                 .isEmpty
-                            ? SizedBox(
-                              height: 300,
-                              child: LaunchScreen())
+                            ? SizedBox(height: 300, child: LaunchScreen())
                             : EpisodeContainer(
-                              showId: widget.id,
+                                showId: widget.id,
                                 index: index,
                               ))
                   ])),
@@ -202,21 +201,28 @@ class _EpisodeScreenState extends State<EpisodeScreen>
 
 class EpisodeWidget extends StatelessWidget {
   final int showId;
-  const EpisodeWidget({super.key, required this.episode, required this.thumb, required this.showId});
+  const EpisodeWidget(
+      {super.key,
+      required this.episode,
+      required this.thumb,
+      required this.showId});
   final Episode episode;
   final String thumb;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Provider.of<ShowController>(context, listen: false).getShow( showId, episode: episode.id);
+        Provider.of<ShowController>(context, listen: false)
+            .getShow(showId, episode: episode.id);
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10),
         width: MediaQuery.of(context).size.width * 0.9,
-        color: Provider.of<ShowController>(context).selectedEpisode == episode.id ?Colors.grey.withOpacity(0.2):Colors.transparent,
+        color:
+            Provider.of<ShowController>(context).selectedEpisode == episode.id
+                ? Colors.grey.withOpacity(0.2)
+                : Colors.transparent,
         child: Row(
-          
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -288,9 +294,10 @@ class EpisodeWidget extends StatelessWidget {
 class EpisodeContainer extends StatefulWidget {
   const EpisodeContainer({
     super.key,
-    required this.index, required this.showId,
+    required this.index,
+    required this.showId,
   });
-final int showId; 
+  final int showId;
   final int index;
 
   @override

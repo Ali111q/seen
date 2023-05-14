@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:seen/helper/loading.dart';
 
 class NetworkImageChecker extends StatefulWidget {
   final String imageUrl;
-  bool ImageLoaded = false;
+  bool imageLoaded = false;
   NetworkImageChecker({required this.imageUrl});
 
   @override
@@ -15,31 +15,37 @@ class _NetworkImageCheckerState extends State<NetworkImageChecker> {
   bool _isLoading = true;
   bool _isError = false;
 
-  void _checkImageStatus(ImageProvider provider) async {
-    final imageStream = provider.resolve(ImageConfiguration.empty);
-    imageStream.addListener(ImageStreamListener((imageInfo, _) {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-          widget.ImageLoaded =true;
-          _isError = false;
-        });
-      }
-    }, onError: (_, __) {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-          widget.ImageLoaded =false;
-          _isError = true;
-        });
-      }
-    }));
-  }
-
   @override
   void initState() {
     super.initState();
-    _checkImageStatus(NetworkImage(widget.imageUrl));
+    _checkImageStatus();
+  }
+
+  void _checkImageStatus() {
+    final imageStream = CachedNetworkImageProvider(widget.imageUrl)
+        .resolve(ImageConfiguration.empty);
+    imageStream.addListener(
+      ImageStreamListener(
+        (imageInfo, _) {
+          if (mounted) {
+            setState(() {
+              _isLoading = false;
+              widget.imageLoaded = true;
+              _isError = false;
+            });
+          }
+        },
+        onError: (_, __) {
+          if (mounted) {
+            setState(() {
+              _isLoading = false;
+              widget.imageLoaded = false;
+              _isError = true;
+            });
+          }
+        },
+      ),
+    );
   }
 
   @override
@@ -49,8 +55,10 @@ class _NetworkImageCheckerState extends State<NetworkImageChecker> {
     } else if (_isError) {
       return Loading();
     } else {
-      return CachedNetworkImage( imageUrl: widget.imageUrl, fit: BoxFit.fitHeight,);
+      return CachedNetworkImage(
+        imageUrl: widget.imageUrl,
+        fit: BoxFit.fitHeight,
+      );
     }
   }
 }
-

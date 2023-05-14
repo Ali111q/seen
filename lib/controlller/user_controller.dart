@@ -20,18 +20,14 @@ class UserController extends ChangeNotifier {
 
   Future<void> login(String email, String password) async {
     _service.initialize();
-    print(email);
     http.Response _res = await http.post(Uri.parse(loginUrl),
         body: {'email': email, 'password': password},
         headers: {'Accept': 'application/json'});
-    print(_res.statusCode);
-    print(_res.body);
     if (_res.statusCode == 200) {
       var json = await jsonDecode(_res.body);
       if (json['success']) {
         user = User.fromJson(json['data']);
         if (user != null) {
-          print(user!.toJson());
           _service.saveUser(user!);
         }
       }
@@ -49,13 +45,10 @@ class UserController extends ChangeNotifier {
     }, headers: {
       'Accept': 'application/json'
     });
-    print(_res.statusCode);
-    print(_res.body);
     if (_res.statusCode == 200) {
       var json = await jsonDecode(_res.body);
       if (json['success']) {
         user = User.fromJson(json['data']);
-        print(user!.email);
         _service.saveUser(user!);
       }
     }
@@ -69,11 +62,8 @@ class UserController extends ChangeNotifier {
         'Accept': 'application/json',
         'Authorization': 'Bearer ${user!.token}'
       });
-      print(_res.body);
 
       if (_res.statusCode == 200) {
-        print(_res.statusCode);
-
         var json = await jsonDecode(_res.body);
 
         if (json['success']) {
@@ -96,18 +86,15 @@ class UserController extends ChangeNotifier {
   }
 
   Future<void> logout() async {
-    print('object');
     if (user != null) {
       _service.initialize();
       http.Response _res = await http.get(Uri.parse(logoutUrl), headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer ${user!.token}'
       });
-      print(_res.body);
       if (_res.statusCode == 200) {
         var json = await jsonDecode(_res.body);
 
-        print(json);
         if (json['success']) {
           _service.clear();
           notifyListeners();

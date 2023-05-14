@@ -45,6 +45,7 @@ class Home extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         fontFamily: 'font',
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       routes: {
         '/login': (context) => Login(),
