@@ -55,6 +55,7 @@ dependencies:
   dio_http_cache: ^0.3.0
   dio: ^4.0.6
   cached_network_image: ^3.2.3
+  flutter_windowmanager: ^0.2.0
 
 dev_dependencies:
   flutter_test:

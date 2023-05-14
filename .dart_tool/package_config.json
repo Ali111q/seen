@@ -248,6 +248,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_windowmanager",
+      "rootUri": "file:///C:/Users/MK/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_windowmanager-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "glob",
       "rootUri": "file:///C:/Users/MK/AppData/Local/Pub/Cache/hosted/pub.dev/glob-2.1.1",
       "packageUri": "lib/",
@@ -782,7 +788,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-05-14T12:31:30.634856Z",
+  "generated": "2023-05-14T13:53:38.524548Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

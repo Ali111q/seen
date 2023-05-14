@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controlller/home_controller.dart';
 import 'package:seen/model/ad.dart';
@@ -36,6 +37,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
     setState(() {
       isLoading = true;
     });
+    FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
@@ -59,7 +61,10 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
       final position = _videoPlayerController!.value.position;
       setState(() {
         showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
-            _videoPlayerController!.value.position.inSeconds > 10 && showAd == 0? 1:0;
+                _videoPlayerController!.value.position.inSeconds > 10 &&
+                showAd == 0
+            ? 1
+            : 0;
         _total_duration =
             _videoPlayerController!.value.duration.inMilliseconds.toDouble();
       });
@@ -99,23 +104,26 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                 aspectRatio: MediaQuery.of(widget.context).size.width /
                     MediaQuery.of(widget.context).size.height);
           });
-           _videoPlayerController!.addListener(() {
-      setState(() {
-        _bufferedDuration = _videoPlayerController!.value.buffered.fold(
-            Duration.zero,
-            (previousValue, element) =>
-                previousValue + (element.end - element.start));
-      });
-      final position = _videoPlayerController!.value.position;
-      setState(() {
-        showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
-            _videoPlayerController!.value.position.inSeconds > 10 && showAd == 0? 1:0;
-        _total_duration =
-            _videoPlayerController!.value.duration.inMilliseconds.toDouble();
-      });
-    });
+          _videoPlayerController!.addListener(() {
+            setState(() {
+              _bufferedDuration = _videoPlayerController!.value.buffered.fold(
+                  Duration.zero,
+                  (previousValue, element) =>
+                      previousValue + (element.end - element.start));
+            });
+            final position = _videoPlayerController!.value.position;
+            setState(() {
+              showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
+                      _videoPlayerController!.value.position.inSeconds > 10 &&
+                      showAd == 0
+                  ? 1
+                  : 0;
+              _total_duration = _videoPlayerController!
+                  .value.duration.inMilliseconds
+                  .toDouble();
+            });
+          });
           Navigator.of(context).pop();
-
         },
       ),
       ListTile(
@@ -135,28 +143,32 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
               autoPlay: true,
               looping: true,
               showControls: false,
-         aspectRatio: MediaQuery.of(widget.context).size.width /
-                    MediaQuery.of(widget.context).size.height);
+              aspectRatio: MediaQuery.of(widget.context).size.width /
+                  MediaQuery.of(widget.context).size.height);
 
           setState(() {
             _chewieController = _newChewieController;
           });
           _chewieController!.seekTo(time!);
-           _videoPlayerController!.addListener(() {
-      setState(() {
-        _bufferedDuration = _videoPlayerController!.value.buffered.fold(
-            Duration.zero,
-            (previousValue, element) =>
-                previousValue + (element.end - element.start));
-      });
-      final position = _videoPlayerController!.value.position;
-      setState(() {
-        showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
-            _videoPlayerController!.value.position.inSeconds > 10 && showAd == 0? 1:0;
-        _total_duration =
-            _videoPlayerController!.value.duration.inMilliseconds.toDouble();
-      });
-    });
+          _videoPlayerController!.addListener(() {
+            setState(() {
+              _bufferedDuration = _videoPlayerController!.value.buffered.fold(
+                  Duration.zero,
+                  (previousValue, element) =>
+                      previousValue + (element.end - element.start));
+            });
+            final position = _videoPlayerController!.value.position;
+            setState(() {
+              showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
+                      _videoPlayerController!.value.position.inSeconds > 10 &&
+                      showAd == 0
+                  ? 1
+                  : 0;
+              _total_duration = _videoPlayerController!
+                  .value.duration.inMilliseconds
+                  .toDouble();
+            });
+          });
           Navigator.of(context).pop();
         },
       ),
@@ -175,24 +187,28 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                 autoPlay: true,
                 looping: true,
                 showControls: false,
-                 aspectRatio: MediaQuery.of(widget.context).size.width /
+                aspectRatio: MediaQuery.of(widget.context).size.width /
                     MediaQuery.of(widget.context).size.height);
           });
-           _videoPlayerController!.addListener(() {
-      setState(() {
-        _bufferedDuration = _videoPlayerController!.value.buffered.fold(
-            Duration.zero,
-            (previousValue, element) =>
-                previousValue + (element.end - element.start));
-      });
-      final position = _videoPlayerController!.value.position;
-      setState(() {
-        showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
-            _videoPlayerController!.value.position.inSeconds > 10 && showAd == 0? 1:0;
-        _total_duration =
-            _videoPlayerController!.value.duration.inMilliseconds.toDouble();
-      });
-    });
+          _videoPlayerController!.addListener(() {
+            setState(() {
+              _bufferedDuration = _videoPlayerController!.value.buffered.fold(
+                  Duration.zero,
+                  (previousValue, element) =>
+                      previousValue + (element.end - element.start));
+            });
+            final position = _videoPlayerController!.value.position;
+            setState(() {
+              showAd = _videoPlayerController!.value.position.inSeconds < 15 &&
+                      _videoPlayerController!.value.position.inSeconds > 10 &&
+                      showAd == 0
+                  ? 1
+                  : 0;
+              _total_duration = _videoPlayerController!
+                  .value.duration.inMilliseconds
+                  .toDouble();
+            });
+          });
           Navigator.of(context).pop();
         },
       )
@@ -435,7 +451,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                     child: Align(
                       alignment: Alignment.bottomLeft,
                       child: GestureDetector(
-                        onHorizontalDragEnd: (e){
+                        onHorizontalDragEnd: (e) {
                           setState(() {
                             showAd = 2;
                           });

@@ -39,6 +39,7 @@ MERGED from [:url_launcher_android] C:\Users\MK\Documents\GitHub\seen\build\url_
 MERGED from [:path_provider_android] C:\Users\MK\Documents\GitHub\seen\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:multi_image_picker] C:\Users\MK\Documents\GitHub\seen\build\multi_image_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:video_player_android] C:\Users\MK\Documents\GitHub\seen\build\video_player_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:flutter_windowmanager] C:\Users\MK\Documents\GitHub\seen\build\flutter_windowmanager\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:wakelock] C:\Users\MK\Documents\GitHub\seen\build\wakelock\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\MK\.gradle\caches\transforms-3\e971396b433397a47f7ff668f1da9f42\transformed\multidex-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.sangcomz:FishBun:0.11.2] C:\Users\MK\.gradle\caches\transforms-3\6b54f150cfee8f4ccfbbb06194c880bb\transformed\jetified-FishBun-0.11.2\AndroidManifest.xml:2:1-34:12
@@ -144,6 +145,8 @@ MERGED from [:multi_image_picker] C:\Users\MK\Documents\GitHub\seen\build\multi_
 MERGED from [:multi_image_picker] C:\Users\MK\Documents\GitHub\seen\build\multi_image_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:video_player_android] C:\Users\MK\Documents\GitHub\seen\build\video_player_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:video_player_android] C:\Users\MK\Documents\GitHub\seen\build\video_player_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:flutter_windowmanager] C:\Users\MK\Documents\GitHub\seen\build\flutter_windowmanager\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:flutter_windowmanager] C:\Users\MK\Documents\GitHub\seen\build\flutter_windowmanager\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:wakelock] C:\Users\MK\Documents\GitHub\seen\build\wakelock\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:wakelock] C:\Users\MK\Documents\GitHub\seen\build\wakelock\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\MK\.gradle\caches\transforms-3\e971396b433397a47f7ff668f1da9f42\transformed\multidex-2.0.0\AndroidManifest.xml:20:5-43
