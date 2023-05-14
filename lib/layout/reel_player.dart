@@ -47,23 +47,34 @@ class _ReelSlideNavigatorState extends State<ReelSlideNavigator> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
-        child: Container(
-          child: Stack(
-            children: [
-              //We need swiper for every content
-              Swiper(
-                itemBuilder: (BuildContext context, int index) {
-                  print('dssdfdsfsdfdsfsdf${reels.length}');
-                  return ContentScreen(
-                      src: reels[index].url,
-                      reel: reels[index],
-                      isLiked: reels[index].isLiked);
-                },
-                itemCount: reels.length,
-                scrollDirection: Axis.vertical,
+        child: Stack(
+          children: [
+            Container(
+              child: Stack(
+                children: [
+                  //We need swiper for every content
+                  Swiper(
+                    itemBuilder: (BuildContext context, int index) {
+                      print('dssdfdsfsdfdsfsdf${reels.length}');
+                      return ContentScreen(
+                          src: reels[index].url,
+                          reel: reels[index],
+                          isLiked: reels[index].isLiked);
+                    },
+                    itemCount: reels.length,
+                    scrollDirection: Axis.vertical,
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Positioned(
+                top: 20,
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(Icons.arrow_back_ios_new_sharp)))
+          ],
         ),
       ),
     );

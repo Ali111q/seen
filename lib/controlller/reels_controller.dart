@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:ui';
 
+import 'package:dio/dio.dart';
+import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:seen/model/reel.dart';
 import 'package:http/http.dart' as http;
@@ -16,49 +18,81 @@ class ReelsController extends ChangeNotifier {
   List<Comment> comments = [];
   Future<void> getReelsCat() async {
     Map<String, String> header = {'lang': window.locale.languageCode};
-    http.Response _res =
-        await http.get(Uri.parse(reelsCatUrl), headers: header);
-    if (_res.statusCode == 200) {
-      var json = jsonDecode(_res.body);
-      if (json['success']) {
-        reelsCat = [];
-        for (var element in json['data']['data']) {
-          reelsCat.add(Reel.fromJson(element));
-          notifyListeners();
+    Dio dio = Dio();
+    DioCacheManager cacheManager = DioCacheManager(CacheConfig());
+    Options options =
+        buildCacheOptions(const Duration(days: 5), forceRefresh: true);
+    dio.interceptors.add(cacheManager.interceptor);
+    try {
+      final response =
+          await dio.get(reelsCatUrl, options: Options(headers: header));
+
+      if (response.statusCode == 200) {
+        var json = response.data;
+        if (json['success']) {
+          reelsCat = [];
+          for (var element in json['data']['data']) {
+            reelsCat.add(Reel.fromJson(element));
+            notifyListeners();
+          }
         }
       }
+    } catch (e) {
+      // Handle any error that occurred during the request
     }
   }
 
   Future<void> getReelsById(id, {String? token}) async {
-    http.Response _res = await http.get(Uri.parse(getReelByIdUrl(id)),
-        headers: {
-          'Authorization': 'Bearer ${token}',
-          "Accept": 'application/json'
-        });
-    if (_res.statusCode == 200) {
-      var json = jsonDecode(_res.body);
-      if (json['success']) {
-        reelVideos = [];
-        for (var element in json['data']['data']) {
-          reelVideos.add(ReelVideo.fromJson(element));
+    Dio dio = Dio();
+    DioCacheManager cacheManager = DioCacheManager(CacheConfig());
+    Options options =
+        buildCacheOptions(const Duration(days: 5), forceRefresh: true);
+    dio.interceptors.add(cacheManager.interceptor);
+    try {
+      final response = await dio.get(
+        getReelByIdUrl(id),
+        options: Options(headers: {
+          'Authorization': 'Bearer $token',
+          'Accept': 'application/json',
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        var json = response.data;
+        if (json['success']) {
+          reelVideos = [];
+          for (var element in json['data']['data']) {
+            reelVideos.add(ReelVideo.fromJson(element));
+          }
+          notifyListeners();
         }
-        notifyListeners();
       }
+    } catch (e) {
+      // Handle any error that occurred during the request
     }
   }
 
   Future<void> getComments(id) async {
-    http.Response _res = await http.get(Uri.parse(CommentsUrl(id)));
-    if (_res.statusCode == 200) {
-      var json = jsonDecode(_res.body);
-      if (json['success']) {
-        comments = [];
-        for (var element in json['data']) {
-          comments.add(Comment.fromJson(element));
+    Dio dio = Dio();
+    DioCacheManager cacheManager = DioCacheManager(CacheConfig());
+    Options options =
+        buildCacheOptions(const Duration(days: 5), forceRefresh: true);
+    dio.interceptors.add(cacheManager.interceptor);
+    try {
+      final response = await dio.get(CommentsUrl(id));
+
+      if (response.statusCode == 200) {
+        var json = response.data;
+        if (json['success']) {
+          comments = [];
+          for (var element in json['data']) {
+            comments.add(Comment.fromJson(element));
+          }
+          notifyListeners();
         }
-        notifyListeners();
       }
+    } catch (e) {
+      // Handle any error that occurred during the request
     }
   }
 

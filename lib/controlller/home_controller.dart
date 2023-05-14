@@ -169,16 +169,27 @@ class HomeController extends ChangeNotifier {
       element!.clearShow();
     }
     episode = null;
-    http.Response _res = await http.get(Uri.parse(getCatsUrl), headers: header);
-    if (_res.statusCode == 200) {
-      var json = jsonDecode(_res.body);
-      if (json['success']) {
-        catTags = [];
-        for (var element in json['data']) {
-          catTags.add(Tag.fromJson(element));
+    Dio dio = Dio();
+    DioCacheManager cacheManager = DioCacheManager(CacheConfig());
+    Options options =
+        buildCacheOptions(const Duration(days: 5), forceRefresh: true);
+    dio.interceptors.add(cacheManager.interceptor);
+    try {
+      final response =
+          await dio.get(getCatsUrl, options: Options(headers: header));
+
+      if (response.statusCode == 200) {
+        var json = response.data;
+        if (json['success']) {
+          catTags = [];
+          for (var element in json['data']) {
+            catTags.add(Tag.fromJson(element));
+          }
+          notifyListeners();
         }
-        notifyListeners();
       }
+    } catch (e) {
+      // Handle any error that occurred during the request
     }
   }
 }

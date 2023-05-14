@@ -53,10 +53,9 @@ class Ad {
       controller = VideoPlayerController.network(file);
       await controller.initialize();
       controller.addListener(() {
-        
         positionController
             .add(controller.value.position.inMilliseconds.toDouble());
-            isInitializedController.add(controller.value.isInitialized);
+        isInitializedController.add(controller.value.isInitialized);
       });
       controller.play();
     }
@@ -67,8 +66,6 @@ class Ad {
       await controller.dispose();
     }
   }
-
- 
 
   void play() {
     if (file_type == 'video') {
@@ -95,5 +92,5 @@ class Ad {
   StreamController<bool> isPlayingController = StreamController();
   Stream<bool> isPlaying = Stream.empty();
   StreamController<bool> isInitializedController = StreamController();
-  Stream <bool> isInitialized = Stream.empty(); 
+  Stream<bool> isInitialized = Stream.empty();
 }

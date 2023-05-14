@@ -45,7 +45,19 @@ class Home extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         fontFamily: 'font',
-        iconTheme: IconThemeData(color: Colors.white),
+        appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor:
+                Colors.transparent, // Customize the status bar color
+            statusBarIconBrightness:
+                Brightness.light, // Customize the status bar icon color
+            systemNavigationBarColor:
+                Colors.black, // Customize the navigation bar color
+            systemNavigationBarIconBrightness:
+                Brightness.light, // Customize the navigation bar icon color
+          ),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       routes: {
         '/login': (context) => Login(),

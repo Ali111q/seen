@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:seen/helper/loading.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class NetworkImageChecker extends StatefulWidget {
   final String imageUrl;
   bool imageLoaded = false;
-  NetworkImageChecker({required this.imageUrl});
+  BoxFit? fit = BoxFit.contain;
+  double? width;
+  double? height;
+  NetworkImageChecker(
+      {required this.imageUrl, this.fit, this.height, this.width});
 
   @override
   _NetworkImageCheckerState createState() => _NetworkImageCheckerState();
@@ -22,8 +27,19 @@ class _NetworkImageCheckerState extends State<NetworkImageChecker> {
   }
 
   void _checkImageStatus() {
-    final imageStream = CachedNetworkImageProvider(widget.imageUrl)
-        .resolve(ImageConfiguration.empty);
+    final customCacheManager = CacheManager(
+      Config(
+        'customCacheKey',
+        stalePeriod: const Duration(days: 3),
+        maxNrOfCacheObjects: 100,
+      ),
+    );
+
+    final imageProvider = CachedNetworkImageProvider(
+      widget.imageUrl,
+      cacheManager: customCacheManager,
+    );
+    final imageStream = imageProvider.resolve(ImageConfiguration.empty);
     imageStream.addListener(
       ImageStreamListener(
         (imageInfo, _) {
@@ -57,7 +73,9 @@ class _NetworkImageCheckerState extends State<NetworkImageChecker> {
     } else {
       return CachedNetworkImage(
         imageUrl: widget.imageUrl,
-        fit: BoxFit.fitHeight,
+        fit: widget.fit,
+        width: widget.width,
+        height: widget.height,
       );
     }
   }

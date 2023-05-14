@@ -20,19 +20,19 @@ class _MainScreenState extends State<MainScreen> {
   late ScrollController _scrollController;
   bool _showAlternativeWidget = false;
   double _Offset = 1;
-  bool isLoading= false;
+  bool isLoading = false;
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
     setState(() {
-      isLoading  = true;
+      isLoading = true;
     });
     Provider.of<HomeController>(context, listen: false).getHome().then((value) {
-       setState(() {
-      isLoading  = false;
-    });
+      setState(() {
+        isLoading = false;
+      });
     });
   }
 
@@ -66,75 +66,91 @@ class _MainScreenState extends State<MainScreen> {
     List<Ad?> ads = Provider.of<HomeController>(context).ads;
     List<Episode?> banner = Provider.of<HomeController>(context).banner;
     List<Tag?> tags = Provider.of<HomeController>(context).tags;
-  bool isError = Provider.of<HomeController>(context).homeError;
-  print(isError);
+    bool isError = Provider.of<HomeController>(context).homeError;
+    print(isError);
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body:isError? Center(child: IconButton(onPressed: (){
-        setState(() {
-          isLoading = true;
-        });
-Provider.of<HomeController>(context, listen: false).getHome().then((value) {
-     setState(() {
-          isLoading = true;
-        });
-});
-      }, icon: Center(child: AnimatedContainer(
-        duration: Duration(milliseconds: 300),
-        child: Icon(Icons.refresh_rounded ,color: Colors.white, )),),iconSize:  60,)) : 
-       isLoading
-          ? LaunchScreen()
-          : CustomScrollView(
-              controller: _scrollController,
-              slivers: [
-                SliverAppBar(
-                    expandedHeight: MediaQuery.of(context).size.height * 0.6,
-                    backgroundColor: Colors.transparent,
-                    flexibleSpace: _showAlternativeWidget
-                        ? Container(
-                            color: Colors.transparent,
-                            child: Center(
-                              child: Text(
-                                'Home',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                            ),
-                          )
-                        : Swiper(
-                            itemBuilder: (context, index) {
-                              return BannerItem(
-                                Offset: _Offset,
-                                banner: banner[index]!,
-                              );
-                            },
-                            itemCount: banner.length,
-                            autoplay: banner.length == 1 ? false : true,
-                            duration: 500,
-                            loop: banner.length == 1 ? false : true,
-                          )),
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    Container(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                     ads.isEmpty? Container():   HomeAdd(
-                          ads: ads,
+      body: isError
+          ? Center(
+              child: IconButton(
+              onPressed: () {
+                setState(() {
+                  isLoading = true;
+                });
+                Provider.of<HomeController>(context, listen: false)
+                    .getHome()
+                    .then((value) {
+                  setState(() {
+                    isLoading = true;
+                  });
+                });
+              },
+              icon: Center(
+                child: AnimatedContainer(
+                    duration: Duration(milliseconds: 300),
+                    child: Icon(
+                      Icons.refresh_rounded,
+                      color: Colors.white,
+                    )),
+              ),
+              iconSize: 60,
+            ))
+          : isLoading
+              ? LaunchScreen()
+              : CustomScrollView(
+                  controller: _scrollController,
+                  slivers: [
+                    SliverAppBar(
+                        expandedHeight:
+                            MediaQuery.of(context).size.height * 0.6,
+                        backgroundColor: Colors.transparent,
+                        flexibleSpace: _showAlternativeWidget
+                            ? Container(
+                                color: Colors.transparent,
+                                child: Center(
+                                  child: Text(
+                                    'Home',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                ),
+                              )
+                            : Swiper(
+                                itemBuilder: (context, index) {
+                                  return BannerItem(
+                                    Offset: _Offset,
+                                    banner: banner[index]!,
+                                  );
+                                },
+                                itemCount: banner.length,
+                                autoplay: banner.length == 1 ? false : true,
+                                duration: 500,
+                                loop: banner.length == 1 ? false : true,
+                              )),
+                    SliverList(
+                      delegate: SliverChildListDelegate([
+                        Container(
+                          height: 30,
                         ),
-                      ],
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ads.isEmpty
+                                ? Container()
+                                : HomeAdd(
+                                    ads: ads,
+                                  ),
+                          ],
+                        ),
+                        ...tags.map((e) {
+                          return SectionWidget(
+                            tag: e!,
+                          );
+                        })
+                      ]),
                     ),
-                    ...tags.map((e) {
-                      return SectionWidget(
-                        tag: e!,
-                      );
-                    })
-                  ]),
+                  ],
                 ),
-              ],
-            ),
     );
   }
 }
@@ -154,7 +170,10 @@ class HomeAdd extends StatelessWidget {
       child: Swiper(
         itemCount: ads!.length,
         loop: ads!.length != 1,
-        itemBuilder: (context, index) => NetworkImageChecker(imageUrl: ads![index]!.file,),
+        itemBuilder: (context, index) => NetworkImageChecker(
+          imageUrl: ads![index]!.file,
+          fit: BoxFit.fill,
+        ),
       ),
     );
   }
@@ -175,8 +194,9 @@ class BannerItem extends StatelessWidget {
       background: Stack(
         children: [
           Center(
-            child: NetworkImageChecker(imageUrl: banner.thumbnail,
-              ),
+            child: NetworkImageChecker(
+              imageUrl: banner.thumbnail,
+            ),
           ),
           Container(
             height: MediaQuery.of(context).size.height *
@@ -307,22 +327,25 @@ class _SectionWidgetState extends State<SectionWidget> {
                           margin: EdgeInsets.all(6),
                           width: MediaQuery.of(context).size.width * 0.367,
                           height: MediaQuery.of(context).size.width * 0.5,
-                          decoration: BoxDecoration(
-                            
-                              boxShadow: [
-                                BoxShadow(
-                                    offset: Offset(-1, 1),
-                                    color: Colors.black,
-                                    blurRadius: 3,
-                                    spreadRadius: 3)
-                              ]),
+                          decoration: BoxDecoration(boxShadow: [
+                            BoxShadow(
+                                offset: Offset(-1, 1),
+                                color: Colors.black,
+                                blurRadius: 3,
+                                spreadRadius: 3)
+                          ]),
                           child: Stack(
                             children: [
-                              SizedBox.expand(child: NetworkImageChecker(imageUrl: e!.image!)),
+                              SizedBox.expand(
+                                  child: NetworkImageChecker(
+                                imageUrl: e!.image!,
+                                fit: BoxFit.fitHeight,
+                              )),
                               Padding(
                                 padding: const EdgeInsets.all(12.0),
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(),
                                     Container(),
@@ -335,8 +358,8 @@ class _SectionWidgetState extends State<SectionWidget> {
                                           shadows: [
                                             Shadow(
                                                 blurRadius: 6,
-                                                color:
-                                                    Colors.white.withOpacity(0.4))
+                                                color: Colors.white
+                                                    .withOpacity(0.4))
                                           ]),
                                     )
                                   ],

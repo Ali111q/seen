@@ -5,6 +5,7 @@ import 'package:seen/like_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
+import 'ad_video.dart';
 import 'model/ad.dart';
 
 class ContentScreen extends StatefulWidget {
@@ -80,14 +81,18 @@ class _ContentScreenState extends State<ContentScreen> {
                 height: MediaQuery.of(context).size.height * 0.28,
                 child: GestureDetector(
                   onTap: () {
-                    if (_playing) {
-                      _videoPlayerController.pause();
-                    } else {
-                      _videoPlayerController.play();
+                    if (_chewieController != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => VideoScreen(
+                            videoPlayerController:
+                                _chewieController!.videoPlayerController,
+                            name: widget.ad.local_title,
+                          ),
+                        ),
+                      );
                     }
-                    setState(() {
-                      _playing = !_playing;
-                    });
                   },
                   child: Stack(
                     children: [

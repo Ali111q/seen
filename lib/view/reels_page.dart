@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controlller/reels_controller.dart';
+import 'package:seen/helper/image_checker.dart';
 import 'package:seen/layout/reel_player.dart';
 import 'package:seen/model/reel.dart';
 
@@ -63,12 +64,18 @@ class ReelPgaeWidget extends StatelessWidget {
                   child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.width * 0.46,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(reel.image),
-                              fit: BoxFit.cover)),
+                      // decoration: BoxDecoration(
+                      //     image: DecorationImage(
+                      //         image: NetworkImage(reel.image),
+                      //         fit: BoxFit.cover)),
                       child: Stack(
                         children: [
+                          SizedBox.expand(
+                            child: NetworkImageChecker(
+                              imageUrl: reel.image,
+                              fit: BoxFit.fitWidth,
+                            ),
+                          ),
                           Positioned(
                             left: 20,
                             child: ClipPath(
