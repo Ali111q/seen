@@ -52,7 +52,8 @@ class Home extends StatelessWidget {
             statusBarIconBrightness:
                 Brightness.light, // Customize the status bar icon color
             systemNavigationBarColor:
-                Colors.black, // Customize the navigation bar color
+                Colors.black,
+                systemStatusBarContrastEnforced: false, // Customize the navigation bar color
             systemNavigationBarIconBrightness:
                 Brightness.light, // Customize the navigation bar icon color
           ),

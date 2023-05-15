@@ -30,14 +30,15 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
   Duration _bufferedDuration = Duration.zero;
   double _total_duration = 0.0;
   int showAd = 0;
-
   @override
   void initState() {
     super.initState();
     setState(() {
       isLoading = true;
     });
+    
     FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
@@ -49,9 +50,26 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
         autoPlay: true,
         looping: true,
         showControls: false,
+        // fullScreenByDefault: true,
+        // customControls: Center(child: Text('sdads')),
         aspectRatio: MediaQuery.of(widget.context).size.height /
             MediaQuery.of(widget.context).size.width);
     _videoPlayerController!.addListener(() {
+        if(_chewieController!.videoPlayerController.value.isBuffering)
+        {
+          print('object');
+          setState(() {
+          isLoading = true;
+            
+          });
+        }else{
+          print('notObject');
+
+            setState(() {
+          isLoading = false;
+            
+          });
+        }
       setState(() {
         _bufferedDuration = _videoPlayerController!.value.buffered.fold(
             Duration.zero,
@@ -91,19 +109,29 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
       ListTile(
         textColor: Colors.white,
         title: Text('480'),
-        onTap: () async {
+            onTap: () async {
+          bool isFirst = true;
+          Duration? time = await _videoPlayerController!.position;
+          _videoPlayerController!.dispose();
           _videoPlayerController =
               VideoPlayerController.network(widget.link[0]);
+          if (_videoPlayerController!.value.isPlaying) {
+            _chewieController!.pause();
+          }
+          _chewieController!.dispose();
+          var _newChewieController = ChewieController(
+              videoPlayerController: _videoPlayerController!,
+              autoPlay: true,
+              looping: true,
+              showControls: false,
+              aspectRatio: MediaQuery.of(widget.context).size.width /
+                  MediaQuery.of(widget.context).size.height);
 
           setState(() {
-            _chewieController = ChewieController(
-                videoPlayerController: _videoPlayerController!,
-                autoPlay: true,
-                looping: true,
-                showControls: false,
-                aspectRatio: MediaQuery.of(widget.context).size.width /
-                    MediaQuery.of(widget.context).size.height);
+            _chewieController = _newChewieController;
           });
+          print(time);
+
           _videoPlayerController!.addListener(() {
             setState(() {
               _bufferedDuration = _videoPlayerController!.value.buffered.fold(
@@ -121,6 +149,15 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
               _total_duration = _videoPlayerController!
                   .value.duration.inMilliseconds
                   .toDouble();
+              if (isFirst &&
+                  _chewieController!
+                      .videoPlayerController.value.isInitialized) {
+                print(time);
+                setState(() {
+                  _chewieController!.videoPlayerController.seekTo(time!);
+                  isFirst = false;
+                });
+              }
             });
           });
           Navigator.of(context).pop();
@@ -129,7 +166,8 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
       ListTile(
         textColor: Colors.white,
         title: Text('720'),
-        onTap: () async {
+            onTap: () async {
+          bool isFirst = true;
           Duration? time = await _videoPlayerController!.position;
           _videoPlayerController!.dispose();
           _videoPlayerController =
@@ -149,7 +187,8 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
           setState(() {
             _chewieController = _newChewieController;
           });
-          _chewieController!.seekTo(time!);
+          print(time);
+
           _videoPlayerController!.addListener(() {
             setState(() {
               _bufferedDuration = _videoPlayerController!.value.buffered.fold(
@@ -167,6 +206,15 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
               _total_duration = _videoPlayerController!
                   .value.duration.inMilliseconds
                   .toDouble();
+              if (isFirst &&
+                  _chewieController!
+                      .videoPlayerController.value.isInitialized) {
+                print(time);
+                setState(() {
+                  _chewieController!.videoPlayerController.seekTo(time!);
+                  isFirst = false;
+                });
+              }
             });
           });
           Navigator.of(context).pop();
@@ -391,6 +439,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                                       Container(
                                         width: 20,
                                       ),
+                                     if(!isLoading)  
                                       GestureDetector(
                                         onTap: showControls
                                             ? () {
@@ -486,6 +535,12 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                       ),
                     ),
                   ),
+          
+          if(isLoading)Center(
+            child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+          )
           ],
         ),
       ),
@@ -496,14 +551,19 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
   showControlsFunction() async {
     if (showControls) {
       setState(() {
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
         showControls = false;
       });
     } else {
       setState(() {
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
+
         showControls = true;
       });
       await Future.delayed(Duration(seconds: 7));
       setState(() {
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+
         showControls = false;
       });
     }
@@ -527,7 +587,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
               ),
             ),
             Text(
-              _durationToString(_videoPlayerController!.value.duration),
+              _durationToString(_videoPlayerController!.value.duration- _videoPlayerController!.value.position, isFull:''),
               style: TextStyle(color: Colors.white),
             ),
             SizedBox(width: 12.0),
@@ -594,8 +654,34 @@ class CustomTrackShape extends RoundedRectSliderTrackShape {
   }
 }
 
-String _durationToString(Duration duration) {
-  return duration.inMinutes.remainder(60).toString().padLeft(2, '0') +
+String _durationToString(Duration duration, {String? isFull}) {
+  if (isFull !=null) {
+    
+  if(duration.inHours == 0){
+    return '-'+
+    duration.inMinutes.remainder(60).toString().padLeft(2, '0') +
+      ':' +
+      duration.inSeconds.remainder(60).toString().padLeft(2, '0');}else{
+ return'-'+
+ duration.inHours.remainder(60).toString().padLeft(1, '0') +
+      ':' +
+    duration.inMinutes.remainder(60).toString().padLeft(2, '0') +
       ':' +
       duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+      }
+  }else{
+      if(duration.inHours == 0){
+    return
+    duration.inMinutes.remainder(60).toString().padLeft(2, '0') +
+      ':' +
+      duration.inSeconds.remainder(60).toString().padLeft(2, '0');}else{
+ return
+ duration.inHours.remainder(60).toString().padLeft(1, '0') +
+      ':' +
+    duration.inMinutes.remainder(60).toString().padLeft(2, '0') +
+      ':' +
+      duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+      }
+  }
+  
 }
