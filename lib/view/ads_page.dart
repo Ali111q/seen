@@ -2,7 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:seen/controlller/ads_controller.dart';
+import 'package:seen/controller/ads_controller.dart';
 
 import 'package:seen/view/launch_screen.dart';
 import 'package:url_launcher/url_launcher.dart';

@@ -30,4 +30,5 @@ const String logoutUrl = '$url/logout';
 const String commentUrl = '$url/comment';
 String likeUrl(id) => '$url/like?reel_id=$id';
 const String loginCheckUrl = '$url/check-login';
-String searchUrl(String? search)=>'$url/search?search=${search??''}';
+String searchUrl(String? search) => '$url/search?search=${search ?? ''}';
+const String editProfileUrl = '$url/update';

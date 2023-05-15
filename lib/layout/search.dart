@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seen/controlller/show_controller.dart';
+import 'package:seen/controller/show_controller.dart';
 import 'package:seen/layout/Episode.dart';
 import 'package:seen/model/show.dart';
 import '../utils/colors.dart' as myColors;
@@ -41,16 +41,26 @@ class _SearchScreenState extends State<SearchScreen> {
                       borderSide: BorderSide(color: Colors.white))),
             ),
           ),
-          body: ListView(children: [
-            ...list.map((e) => ListTile(
-              onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder:(context) => EpisodeScreen(e.id),));
-              },
-              title: Text(e.name, style: TextStyle(color: Colors.white),),
-            subtitle: Text(e.year!, style: TextStyle(color: Colors.grey),),
-            leading: Image.network(e.image!),
-            ))
-          ],),
+          body: ListView(
+            children: [
+              ...list.map((e) => ListTile(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => EpisodeScreen(e.id),
+                      ));
+                    },
+                    title: Text(
+                      e.name,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    subtitle: Text(
+                      e.year!,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    leading: Image.network(e.image!),
+                  ))
+            ],
+          ),
         ));
   }
 }

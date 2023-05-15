@@ -20,7 +20,7 @@ class SharedService {
   }
 
   void saveUser(User user) {
-    shared.setString('token', user.token);
+    if (user.token != null) shared.setString('token', user.token!);
     shared.setString('name', user.name);
     shared.setString('email', user.email);
     shared.setString('image', user.image);

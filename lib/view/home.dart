@@ -1,7 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seen/controlller/home_controller.dart';
+import 'package:seen/controller/home_controller.dart';
 import 'package:seen/helper/image_checker.dart';
 import 'package:seen/jj.dart';
 import 'package:seen/layout/Episode.dart';

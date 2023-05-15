@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:seen/controlller/ads_controller.dart';
-import 'package:seen/controlller/home_controller.dart';
-import 'package:seen/controlller/reels_controller.dart';
-import 'package:seen/controlller/user_controller.dart';
+import 'package:seen/controller/ads_controller.dart';
+import 'package:seen/controller/home_controller.dart';
+import 'package:seen/controller/reels_controller.dart';
+import 'package:seen/controller/user_controller.dart';
 import 'package:seen/layout/profile.dart';
 
-import 'controlller/setting_controller.dart';
-import 'controlller/show_controller.dart';
+import 'controller/setting_controller.dart';
+import 'controller/show_controller.dart';
 import 'launch_scrteen.dart';
 import 'layout/login.dart';
 import 'layout/main_layout.dart';

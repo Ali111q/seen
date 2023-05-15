@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:seen/controlller/reels_controller.dart';
+import 'package:seen/controller/reels_controller.dart';
 import 'package:seen/helper/image_checker.dart';
 import 'package:seen/layout/reel_player.dart';
 import 'package:seen/model/reel.dart';

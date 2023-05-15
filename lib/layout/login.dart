@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import '../controlller/user_controller.dart';
+import '../controller/user_controller.dart';
 import "../utils//colors.dart" as myColors;
 
 class Login extends StatefulWidget {
@@ -243,7 +243,14 @@ class InputLogin extends StatelessWidget {
           child: TextField(
             obscureText: pass,
             controller: controller,
-            style: TextStyle(color: myColors.grey, fontSize: w * 0.05),
+            style:
+                TextStyle(color: myColors.grey, fontSize: w * 0.05, shadows: [
+              Shadow(
+                offset: Offset(0, -4),
+                color: myColors.sceondBackGround,
+                blurRadius: 10,
+              ),
+            ]),
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),

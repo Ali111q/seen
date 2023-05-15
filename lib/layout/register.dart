@@ -3,8 +3,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:seen/controlller/user_controller.dart';
+import 'package:seen/controller/user_controller.dart';
 import 'package:seen/layout/login.dart';
+import 'package:seen/model/user.dart';
 import "../utils//colors.dart" as myColors;
 
 class RegisterScreen extends StatefulWidget {
@@ -20,9 +21,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController password = TextEditingController();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<UserController>(context, listen: false).clearImage();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    Map? image = Provider.of<UserController>(context).image;
     double h = size.height;
     double w = size.width;
     return Container(
@@ -45,20 +53,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.transparent,
-                      border: Border.all(color: Color(0xffA8A8A8))),
-                  child: Icon(
-                    Icons.person,
-                    color: Color(0xffA8A8A8),
-                    size: 80,
-                  )),
-              Text(
-                'رفع صورة',
-                style: TextStyle(color: Color(0xffA8A8A8)),
+              GestureDetector(
+                onTap: () {
+                  Provider.of<UserController>(context, listen: false)
+                      .pickImage();
+                },
+                child: Container(
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.transparent,
+                        border: Border.all(color: Color(0xffA8A8A8))),
+                    child: image != null
+                        ? CircleAvatar(
+                            backgroundImage: FileImage(image['file']),
+                            radius: MediaQuery.of(context).size.width * 0.13,
+                          )
+                        : Icon(
+                            Icons.person,
+                            color: Color(0xffA8A8A8),
+                            size: 80,
+                          )),
               ),
+              if (image == null)
+                Text(
+                  'رفع صورة',
+                  style: TextStyle(color: Color(0xffA8A8A8)),
+                ),
               Container(
                 height: 30,
               ),
@@ -92,7 +112,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               GestureDetector(
                 onTap: () {
                   Provider.of<UserController>(context, listen: false)
-                      .register(email.text, name.text, password.text);
+                      .register(email.text, name.text, password.text)
+                      .then((value) {
+                    Navigator.of(context).pop();
+                  });
                 },
                 child: ProfileButton(
                   w: w,

@@ -2,8 +2,8 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:seen/controlller/reels_controller.dart';
-import 'package:seen/controlller/user_controller.dart';
+import 'package:seen/controller/reels_controller.dart';
+import 'package:seen/controller/user_controller.dart';
 import 'package:seen/model/user.dart';
 
 import 'package:video_player/video_player.dart';
@@ -29,7 +29,9 @@ class _ContentScreenState extends State<ContentScreen> {
   @override
   void initState() {
     super.initState();
-    initializePlayer();
+    initializePlayer().then((value) {
+      setState(() {});
+    });
     Provider.of<ReelsController>(context, listen: false).view(
       widget.reel.id,
     );
@@ -53,7 +55,8 @@ ${widget.reel.isLiked}
   }
 
   Future initializePlayer() async {
-    _videoPlayerController = VideoPlayerController.network(widget.src!);
+    _videoPlayerController = VideoPlayerController.network(widget.src!,
+        videoPlayerOptions: VideoPlayerOptions(allowBackgroundPlayback: false));
     await Future.wait([_videoPlayerController.initialize()]);
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController,

@@ -18,11 +18,11 @@
 		</data>
 		<key>Modules/BSImageView.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		g08bmX+KNbnvDpS8by/0269nsDo=
+		uqjisavIsGDlvPUHFa5jqdWry8s=
 		</data>
 		<key>Modules/BSImageView.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		3/qdLceKRHJhKslXWnSxRh2IMII=
+		h7+QeVBs7BRVCtDqUb21hPUWhck=
 		</data>
 		<key>Modules/BSImageView.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Modules/BSImageView.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		A9LVxc6H+S00v8O35k7CaxFSkc8=
+		QAOcFLCqv5pYCZsx2BsMb9YWQeE=
 		</data>
 		<key>Modules/BSImageView.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Modules/BSImageView.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		9CqCvtyeFihbd/D2wRfNvPK2LjU=
+		2BZDK8/oXCpLNlKdwVhG2dEYsAw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -81,22 +81,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			g08bmX+KNbnvDpS8by/0269nsDo=
+			uqjisavIsGDlvPUHFa5jqdWry8s=
 			</data>
 			<key>hash2</key>
 			<data>
-			AjnC7k5Pci/oNC19Siy3ZMid7lEGdyiHZbk1yIX4K2Y=
+			h6p1W/Z45iIFQfLkBH6jkzIHDOoy6L/2LXcHI59H7lI=
 			</data>
 		</dict>
 		<key>Modules/BSImageView.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			3/qdLceKRHJhKslXWnSxRh2IMII=
+			h7+QeVBs7BRVCtDqUb21hPUWhck=
 			</data>
 			<key>hash2</key>
 			<data>
-			/px+axz3Ftq828vbnHdLuZqTubtcIyesKJwuQlmz8pQ=
+			rM+8IAhrjMVywniRTwvtjIad9r5HACNdDV+7r2XVfiU=
 			</data>
 		</dict>
 		<key>Modules/BSImageView.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
@@ -125,11 +125,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			A9LVxc6H+S00v8O35k7CaxFSkc8=
+			QAOcFLCqv5pYCZsx2BsMb9YWQeE=
 			</data>
 			<key>hash2</key>
 			<data>
-			RwpHSyFez1rziAoxSz72KzzHiVdjRXwQMfLE5exofHI=
+			9ODzD2dsSQ+yWV+1lWxufPMOrCuv6ad5zDA/lXouboU=
 			</data>
 		</dict>
 		<key>Modules/BSImageView.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
@@ -158,11 +158,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9CqCvtyeFihbd/D2wRfNvPK2LjU=
+			2BZDK8/oXCpLNlKdwVhG2dEYsAw=
 			</data>
 			<key>hash2</key>
 			<data>
-			xZiNrN7cAd07dn3oltWdnfCdaJtyIwK1VAPntiDiTwE=
+			LUmBJjttC3/rThMCsnV4zWLR/LtjQiXBYF5GwoNqDLg=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
-import 'package:seen/controlller/home_controller.dart';
+import 'package:seen/controller/home_controller.dart';
 import 'package:seen/model/tag.dart';
 import 'package:seen/view/home.dart';
 

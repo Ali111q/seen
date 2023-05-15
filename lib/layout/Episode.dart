@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:seen/controlller/show_controller.dart';
+import 'package:seen/controller/show_controller.dart';
 import 'package:seen/model/episode.dart';
 import 'package:seen/model/season.dart';
 import 'package:seen/model/show.dart';
@@ -9,7 +9,7 @@ import 'package:seen/view/launch_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../controlller/home_controller.dart';
+import '../controller/home_controller.dart';
 import '../utils/colors.dart' as myColors;
 import '../view/home.dart';
 

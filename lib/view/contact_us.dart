@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:seen/controlller/setting_controller.dart';
+import 'package:seen/controller/setting_controller.dart';
 import 'package:seen/model/setting.dart';
 
 class ContactUs extends StatefulWidget {
@@ -176,13 +176,15 @@ class _ContactUsState extends State<ContactUs> {
             width: MediaQuery.of(context).size.width * 0.9,
             height: MediaQuery.of(context).size.width * 0.2,
             child: Center(
-              child:setting.email==null? Container():  Text(
-                setting.email!,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 26,
-                ),
-              ),
+              child: setting.email == null
+                  ? Container()
+                  : Text(
+                      setting.email!,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 26,
+                      ),
+                    ),
             ),
           ),
         )
