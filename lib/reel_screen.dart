@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controller/reels_controller.dart';
@@ -25,7 +28,7 @@ class ContentScreen extends StatefulWidget {
 class _ContentScreenState extends State<ContentScreen> {
   late VideoPlayerController _videoPlayerController;
   ChewieController? _chewieController;
-
+  bool _showControlls = true;
   @override
   void initState() {
     super.initState();
@@ -54,18 +57,30 @@ ${widget.reel.isLiked}
 ''');
   }
 
-  Future initializePlayer() async {
-    _videoPlayerController = VideoPlayerController.network(widget.src!,
-        videoPlayerOptions: VideoPlayerOptions(allowBackgroundPlayback: false));
-    await Future.wait([_videoPlayerController.initialize()]);
-    _chewieController = ChewieController(
-      videoPlayerController: _videoPlayerController,
-      autoPlay: true,
-      showControls: false,
-      looping: true,
-    );
-    setState(() {});
-  }
+Future<void> initializePlayer() async {
+  final cachedVideoPath = await cacheNetworkVideo(widget.src!);
+
+  _videoPlayerController = VideoPlayerController.file(File(cachedVideoPath));
+  await _videoPlayerController.initialize();
+
+  _chewieController = ChewieController(
+    videoPlayerController: _videoPlayerController,
+    autoPlay: true,
+    showControls: false,
+    looping: true,
+  );
+
+  setState(() {});
+}
+
+Future<String> cacheNetworkVideo(String videoUrl) async {
+  final videoCacheManager = CacheManager(Config(
+    'cacheCustomkey', stalePeriod: const Duration(hours: 4), maxNrOfCacheObjects: 100
+  ));
+  final file = await videoCacheManager.getSingleFile(videoUrl);
+  return file.path;
+}
+
 
   @override
   void dispose() {
@@ -81,24 +96,37 @@ ${widget.reel.isLiked}
         if (_chewieController != null &&
             _chewieController!.videoPlayerController.value.isInitialized) {
           _videoPlayerController.pause();
+          setState(() {
+            _showControlls = false;
+          });
+          
         }
       },
       onLongPressEnd: (e) {
         if (_chewieController != null &&
             _chewieController!.videoPlayerController.value.isInitialized) {
           _videoPlayerController.play();
+      setState(() {
+        _showControlls  = true;
+      });
         }
       },
       onLongPressCancel: () {
         if (_chewieController != null &&
             _chewieController!.videoPlayerController.value.isInitialized) {
           _videoPlayerController.play();
+            setState(() {
+        _showControlls  = true;
+      });
         }
       },
       onLongPressMoveUpdate: (e) {
         if (_chewieController != null &&
             _chewieController!.videoPlayerController.value.isInitialized) {
           _videoPlayerController.play();
+            setState(() {
+        _showControlls  = true;
+      });
         }
       },
       child: Stack(
@@ -114,40 +142,70 @@ ${widget.reel.isLiked}
               'assets/images/loading.gif',
               height: MediaQuery.of(context).size.width * 0.8,
             ),
-          Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                  Colors.transparent,
-                  Colors.black.withOpacity(0.2)
-                ])),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
+          AnimatedOpacity(
+            duration: Duration(milliseconds: 100),
+            opacity:  _chewieController != null&& _showControlls?1:0,
+            child: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                    Colors.transparent,
+                    Colors.black.withOpacity(0.2)
+                  ])),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            if (Provider.of<UserController>(context,
+                                        listen: false)
+                                    .user !=
+                                null) {
+                              print('${widget.reel.likes_count} l l l l l l ');
+          
+                              setState(() {
+                                widget.isLiked = !widget.isLiked;
+                              });
+                              Provider.of<ReelsController>(context, listen: false)
+                                  .like(
+                                      widget.reel.id,
+                                      Provider.of<UserController>(context,
+                                              listen: false)
+                                          .user!
+                                          .token);
+                            } else {
+                              _videoPlayerController.pause();
+                              Navigator.of(context)
+                                  .pushNamed('/login')
+                                  .then((value) {
+                                _videoPlayerController.play();
+                              });
+                            }
+                          },
+                          icon: Icon(
+                            Icons.favorite,
+                            color: widget.isLiked ? Colors.red : Colors.white,
+                          )),
+                      Text(
+                        widget.reel.likes_count.toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      IconButton(
                         onPressed: () {
-                          if (Provider.of<UserController>(context,
-                                      listen: false)
+                          if (Provider.of<UserController>(context, listen: false)
                                   .user !=
                               null) {
-                            print('${widget.reel.likes_count} l l l l l l ');
-
-                            setState(() {
-                              widget.isLiked = !widget.isLiked;
-                            });
-                            Provider.of<ReelsController>(context, listen: false)
-                                .like(
-                                    widget.reel.id,
-                                    Provider.of<UserController>(context,
-                                            listen: false)
-                                        .user!
-                                        .token);
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return Comments(id: widget.reel.id);
+                                });
                           } else {
                             _videoPlayerController.pause();
                             Navigator.of(context)
@@ -157,79 +215,53 @@ ${widget.reel.isLiked}
                             });
                           }
                         },
-                        icon: Icon(
-                          Icons.favorite,
-                          color: widget.isLiked ? Colors.red : Colors.white,
-                        )),
-                    Text(
-                      widget.reel.likes_count.toString(),
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        if (Provider.of<UserController>(context, listen: false)
-                                .user !=
-                            null) {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return Comments(id: widget.reel.id);
-                              });
-                        } else {
-                          _videoPlayerController.pause();
-                          Navigator.of(context)
-                              .pushNamed('/login')
-                              .then((value) {
-                            _videoPlayerController.play();
-                          });
-                        }
-                      },
-                      icon: SvgPicture.asset('assets/images/comment.svg'),
-                    ),
-                    Text(
-                      widget.reel.comments_count.toString(),
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon:
-                          SvgPicture.asset('assets/images/seen_colorsless.svg'),
-                    ),
-                    Text(
-                      widget.reel.views_count.toString(),
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    children: [
+                        icon: SvgPicture.asset('assets/images/comment.svg'),
+                      ),
                       Text(
-                        widget.reel.title,
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      )
+                        widget.reel.comments_count.toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon:
+                            SvgPicture.asset('assets/images/seen_colorsless.svg'),
+                      ),
+                      Text(
+                        widget.reel.views_count.toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ],
                   ),
-                ),
-                if (widget.reel.ad != null)
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Row(
                       children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          height: MediaQuery.of(context).size.width * 0.06,
-                          color: Colors.white,
-                          child: Image.network(widget.reel.ad!.file),
+                        Text(
+                          widget.reel.title,
+                          style: TextStyle(color: Colors.white, fontSize: 20),
                         )
                       ],
                     ),
                   ),
-                Container(
-                  height: 50,
-                )
-              ],
+                  if (widget.reel.ad != null)
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            height: MediaQuery.of(context).size.width * 0.06,
+                            color: Colors.white,
+                            child: Image.network(widget.reel.ad!.file),
+                          )
+                        ],
+                      ),
+                    ),
+                  Container(
+                    height: 50,
+                  )
+                ],
+              ),
             ),
           )
         ],
