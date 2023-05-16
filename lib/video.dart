@@ -563,6 +563,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
       await Future.delayed(Duration(seconds: 7));
       setState(() {
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+        
 
         showControls = false;
       });

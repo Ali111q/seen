@@ -224,12 +224,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "flutter_statusbar_manager",
-      "rootUri": "file:///C:/Users/MK/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_statusbar_manager-2.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.1"
-    },
-    {
       "name": "flutter_svg",
       "rootUri": "file:///C:/Users/MK/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.0.4",
       "packageUri": "lib/",
@@ -794,7 +788,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-05-15T17:10:20.405895Z",
+  "generated": "2023-05-15T19:19:25.988845Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

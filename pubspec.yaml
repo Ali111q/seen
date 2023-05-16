@@ -57,7 +57,6 @@ dependencies:
   cached_network_image: ^3.2.3
   flutter_windowmanager: ^0.2.0
   flutter_cache_manager: ^3.3.0
-  flutter_statusbar_manager: ^2.0.0
 
 dev_dependencies:
   flutter_test:
