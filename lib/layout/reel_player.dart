@@ -61,13 +61,10 @@ class _ReelSlideNavigatorState extends State<ReelSlideNavigator>
                   child: Swiper(
                     controller: _controller,
                     itemBuilder: (BuildContext context, int index) {
-                      return PageStorage(
-                        bucket: PageStorageBucket(),
-                        child: ContentScreen(
-                          src: reels[index].url,
-                          reel: reels[index],
-                          isLiked: reels[index].isLiked,
-                        ),
+                      return ContentScreen(
+                        src: reels[index].url,
+                        reel: reels[index],
+                        isLiked: reels[index].isLiked,
                       );
                       // return MyWidget();
                     },
@@ -75,7 +72,7 @@ class _ReelSlideNavigatorState extends State<ReelSlideNavigator>
                     scrollDirection: Axis.vertical,
                     onIndexChanged: (int index) {
                       setState(() {
-                        _currentPageIndex = index;
+                        _currentPageIndex = index;  
                       });
                     },
                     autoplay: false,

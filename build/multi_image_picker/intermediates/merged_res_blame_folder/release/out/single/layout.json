@@ -1,0 +1,246 @@
+[
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/design_layout_snackbar.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/design_layout_snackbar.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/select_dialog_multichoice_material.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/design_navigation_menu_item.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/design_navigation_menu_item.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/design_bottom_navigation_item.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/design_bottom_navigation_item.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_popup_menu_header_item_layout.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/design_layout_tab_icon.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/design_layout_tab_icon.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/select_dialog_item_material.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/select_dialog_item_material.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/design_bottom_sheet_dialog.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/design_bottom_sheet_dialog.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/design_navigation_item_subheader.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_action_menu_layout.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/detail_item.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-jetified-FishBun-0.11.2-7:/layout/detail_item.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_search_view.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_search_view.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_select_dialog_material.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_list_menu_item_radio.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_list_menu_item_checkbox.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_screen_content_include.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_screen_content_include.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/activity_detail_actiivy.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-jetified-FishBun-0.11.2-7:/layout/activity_detail_actiivy.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/mtrl_layout_snackbar_include.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/mtrl_layout_snackbar_include.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_dialog_title_material.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/header_item.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-jetified-FishBun-0.11.2-7:/layout/header_item.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/thumb_item.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-jetified-FishBun-0.11.2-7:/layout/thumb_item.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/mtrl_layout_snackbar.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/mtrl_layout_snackbar.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_tooltip.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_tooltip.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/notification_template_icon_group.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-core-1.6.0-4:/layout/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_cascading_menu_item_layout.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_cascading_menu_item_layout.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_activity_chooser_view.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_action_bar_up_container.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/design_navigation_item_header.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/design_navigation_item_header.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/activity_photo_picker.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-jetified-FishBun-0.11.2-7:/layout/activity_photo_picker.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/activity_photo_album.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-jetified-FishBun-0.11.2-7:/layout/activity_photo_album.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_screen_simple_overlay_action_mode.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/design_navigation_menu.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/design_navigation_menu.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_screen_toolbar.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/design_layout_snackbar_include.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/design_layout_snackbar_include.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/notification_template_part_chronometer.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-core-1.6.0-4:/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_expanded_menu_layout.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_alert_dialog_button_bar_material.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/notification_action_tombstone.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-core-1.6.0-4:/layout/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_action_mode_bar.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_alert_dialog_material.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_list_menu_item_icon.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_action_bar_title_item.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/design_menu_item_action_area.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/design_menu_item_action_area.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/design_text_input_password_icon.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/design_text_input_password_icon.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_alert_dialog_title_material.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/album_item.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-jetified-FishBun-0.11.2-7:/layout/album_item.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/select_dialog_singlechoice_material.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/design_navigation_item_separator.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/design_navigation_item_separator.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_popup_menu_item_layout.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_screen_simple.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_screen_simple.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_action_mode_close_item_material.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_action_menu_item_layout.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/notification_action.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-core-1.6.0-4:/layout/notification_action.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/abc_list_menu_item_layout.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-appcompat-1.0.0-2:/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/design_navigation_item.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/design_navigation_item.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/custom_dialog.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-core-1.6.0-4:/layout/custom_dialog.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/design_layout_tab_text.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout/design_layout_tab_text.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout/notification_template_part_time.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-core-1.6.0-4:/layout/notification_template_part_time.xml"
+    }
+]

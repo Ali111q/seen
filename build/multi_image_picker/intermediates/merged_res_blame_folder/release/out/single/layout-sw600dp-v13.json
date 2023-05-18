@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout-sw600dp-v13/mtrl_layout_snackbar.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout-sw600dp-v13/mtrl_layout_snackbar.xml"
+    },
+    {
+        "merged": "com.vitanov.multiimagepicker.multi_image_picker-merged_res-19:/layout-sw600dp-v13/design_layout_snackbar.xml",
+        "source": "com.vitanov.multiimagepicker.multi_image_picker-material-1.0.0-3:/layout-sw600dp-v13/design_layout_snackbar.xml"
+    }
+]

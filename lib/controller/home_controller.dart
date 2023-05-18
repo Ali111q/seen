@@ -62,9 +62,10 @@ class HomeController extends ChangeNotifier {
 
   // }
 
-  Future<void> getCashedHome() async {
+  Future<void> _getCashedHome() async {
             banner.clear();
         ads.clear();
+        tags.clear();
     Dio dio = Dio();
     DioCacheManager cacheManager = DioCacheManager(CacheConfig());
     dio.interceptors.add(cacheManager.interceptor);
@@ -113,7 +114,7 @@ class HomeController extends ChangeNotifier {
   Future<void> getHome() async {
    
 
-    await getCashedHome();
+    await _getCashedHome();
     Dio dio = Dio();
     DioCacheManager cacheManager = DioCacheManager(CacheConfig());
     dio.interceptors.add(cacheManager.interceptor);
@@ -137,6 +138,7 @@ class HomeController extends ChangeNotifier {
         homeError = false;
             banner.clear();
         ads.clear();
+        tags.clear();
         json['data']['banner'].forEach((e) {
           banner.add(Episode.fromJson(e));
         });
@@ -160,11 +162,6 @@ class HomeController extends ChangeNotifier {
   }
 
   Future<void> getEpisode(id, {sections}) async {
-<<<<<<< Updated upstream
-=======
- 
-
->>>>>>> Stashed changes
     Dio dio = Dio();
     DioCacheManager cacheManager = DioCacheManager(CacheConfig());
     Options options =
@@ -179,19 +176,10 @@ class HomeController extends ChangeNotifier {
         var json = _res.data;
         if (json['success']) {
           print('object');
-<<<<<<< Updated upstream
           for (var element in tags) {
             element!.clearShow();
           }
           episode = null;
-=======
-             for (var element in tags) {
-      element!.clearShow();
-    }
-    episode = null;
-
-
->>>>>>> Stashed changes
 
           for (var element in json['data']['data']) {
             if (sections == null) {

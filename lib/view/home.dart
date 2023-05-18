@@ -1,5 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controller/home_controller.dart';
 import 'package:seen/helper/image_checker.dart';
@@ -9,6 +10,7 @@ import 'package:seen/model/ad.dart';
 import 'package:seen/model/episode.dart';
 import 'package:seen/model/tag.dart';
 import 'package:seen/view/launch_screen.dart';
+import '../helper/overlay_loading.dart';
 import '../utils/colors.dart' as myColors;
 
 class MainScreen extends StatefulWidget {
@@ -26,10 +28,13 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
-
-    Provider.of<HomeController>(context, listen: false).getHome().then((value) {
-  
-    });
+ 
+    Provider.of<HomeController>(context, listen: false)
+        .getHome()
+        .then((value) {
+   
+        });
+        
   }
 
   @override
@@ -96,6 +101,7 @@ class _MainScreenState extends State<MainScreen> {
               : CustomScrollView(
                   controller: _scrollController,
                   slivers: [
+                   
                     SliverAppBar(
                         expandedHeight:
                             MediaQuery.of(context).size.height * 0.55,
@@ -125,7 +131,6 @@ class _MainScreenState extends State<MainScreen> {
                               )),
                     SliverList(
                       delegate: SliverChildListDelegate([
-                   
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -136,7 +141,7 @@ class _MainScreenState extends State<MainScreen> {
                                   ),
                           ],
                         ),
-                        ...tags.map((e) {
+                        ...tags.getRange(0, 1).map((e) {
                           return SectionWidget(
                             tag: e!,
                           );
@@ -188,30 +193,40 @@ class BannerItem extends StatelessWidget {
       background: Stack(
         children: [
           Center(
-            child: NetworkImageChecker(
-              imageUrl: banner.thumbnail,
-              fit: BoxFit.fitWidth,
-              width: MediaQuery.of(context).size.width,
-            ),
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height *
-                0.55 *
-                ((1000 - _Offset) / 1000),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.transparent,
-                  Colors.transparent,
-                  Color(0xff0A1D2D).withOpacity(0.6),
-                  Color(0xff091726),
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+            child: ShaderMask(
+               shaderCallback: (rect) {
+    return LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [Colors.white, Colors.transparent],
+    ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
+  },
+  blendMode: BlendMode.dstIn,
+              child: NetworkImageChecker(
+                imageUrl: banner.thumbnail,
+                fit: BoxFit.fitWidth,
+                width: MediaQuery.of(context).size.width,
               ),
             ),
           ),
+          // Container(
+          //   height: MediaQuery.of(context).size.height *
+          //       0.55 *
+          //       ((1000 - _Offset) / 1000),
+          //   width: MediaQuery.of(context).size.width,
+          //   decoration: BoxDecoration(
+          //     gradient: LinearGradient(
+          //       colors: [
+          //         Colors.transparent,
+          //         Colors.transparent,
+          //         Color(0xff0A1D2D).withOpacity(0.6),
+          //         Color(0xff091726),
+          //       ],
+          //       begin: Alignment.topCenter,
+          //       end: Alignment.bottomCenter,
+          //     ),
+          //   ),
+          // ),
           Positioned(
               right: MediaQuery.of(context).size.width * 0.2,
               left: MediaQuery.of(context).size.width * 0.2,
@@ -229,15 +244,16 @@ class BannerItem extends StatelessWidget {
                     ),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                   
                     children: [
-                      ...banner.tags.map((e) => Text(
+                      ...banner.tags.getRange(0, 3).map((e) => Text(
                             ' $e .',
                             style: TextStyle(
                               color: Colors.grey,
                               fontSize: 18,
                             ),
                           )),
+                     
                       Text(' 2022',
                           style: TextStyle(
                             color: Colors.grey,

@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "io.adaptant.labs.flutter_windowmanager-merged_res-10:/drawable/notification_icon_background.xml",
+        "source": "io.adaptant.labs.flutter_windowmanager-core-1.6.0-1:/drawable/notification_icon_background.xml"
+    },
+    {
+        "merged": "io.adaptant.labs.flutter_windowmanager-merged_res-10:/drawable/notification_tile_bg.xml",
+        "source": "io.adaptant.labs.flutter_windowmanager-core-1.6.0-1:/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "io.adaptant.labs.flutter_windowmanager-merged_res-10:/drawable/notification_bg.xml",
+        "source": "io.adaptant.labs.flutter_windowmanager-core-1.6.0-1:/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "io.adaptant.labs.flutter_windowmanager-merged_res-10:/drawable/notification_bg_low.xml",
+        "source": "io.adaptant.labs.flutter_windowmanager-core-1.6.0-1:/drawable/notification_bg_low.xml"
+    }
+]

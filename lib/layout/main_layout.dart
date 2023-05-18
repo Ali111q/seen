@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controller/setting_controller.dart';
@@ -118,7 +119,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     return SizedBox(
       height: h * 0.08,
       child: Container(
-        color: myColors.dark,
+        color: Color(0xff161616),
         child: Padding(
           padding: const EdgeInsets.only(top: 14.0),
           child: Row(

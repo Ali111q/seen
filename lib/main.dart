@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controller/ads_controller.dart';
 import 'package:seen/controller/home_controller.dart';
@@ -43,36 +44,38 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/launch',
-      theme: ThemeData(
-        useMaterial3: true,
-        fontFamily: 'font',
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor:
-                Colors.transparent, // Customize the status bar color
-            statusBarIconBrightness:
-                Brightness.light, // Customize the status bar icon color
-            systemNavigationBarColor:
-                Colors.black,
-                systemStatusBarContrastEnforced: false, // Customize the navigation bar color
-            systemNavigationBarIconBrightness:
-                Brightness.light, // Customize the navigation bar icon color
+    return OverlaySupport.global(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/launch',
+        theme: ThemeData(
+          useMaterial3: true,
+          fontFamily: 'font',
+          appBarTheme: const AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor:
+                  Colors.transparent, // Customize the status bar color
+              statusBarIconBrightness:
+                  Brightness.light, // Customize the status bar icon color
+              systemNavigationBarColor:
+                  Colors.black,
+                  systemStatusBarContrastEnforced: false, // Customize the navigation bar color
+              systemNavigationBarIconBrightness:
+                  Brightness.light, // Customize the navigation bar icon color
+            ),
           ),
+          iconTheme: const IconThemeData(color: Colors.white),
         ),
-        iconTheme: const IconThemeData(color: Colors.white),
+        routes: {
+          '/login': (context) => Login(),
+          '/register': (context) => RegisterScreen(),
+          '/home': (context) => MainLayout(),
+          '/launch': (context) => VideoSplashScreen(),
+          '/profile': (context) => ProfileScreen(),
+    
+          // '/video-player': (context) => jj()
+        },
       ),
-      routes: {
-        '/login': (context) => Login(),
-        '/register': (context) => RegisterScreen(),
-        '/home': (context) => MainLayout(),
-        '/launch': (context) => VideoSplashScreen(),
-        '/profile': (context) => ProfileScreen(),
-
-        // '/video-player': (context) => jj()
-      },
     );
   }
 }
