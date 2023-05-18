@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 #Thu May 18 19:09:12 AST 2023
+=======
+#Tue May 16 18:15:03 AST 2023
+>>>>>>> Stashed changes
 base.2=C\:\\Users\\MK\\Documents\\GitHub\\seen\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes3.dex
 path.2=classes3.dex
 base.1=C\:\\Users\\MK\\Documents\\GitHub\\seen\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes2.dex

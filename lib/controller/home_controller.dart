@@ -160,6 +160,11 @@ class HomeController extends ChangeNotifier {
   }
 
   Future<void> getEpisode(id, {sections}) async {
+<<<<<<< Updated upstream
+=======
+ 
+
+>>>>>>> Stashed changes
     Dio dio = Dio();
     DioCacheManager cacheManager = DioCacheManager(CacheConfig());
     Options options =
@@ -174,10 +179,19 @@ class HomeController extends ChangeNotifier {
         var json = _res.data;
         if (json['success']) {
           print('object');
+<<<<<<< Updated upstream
           for (var element in tags) {
             element!.clearShow();
           }
           episode = null;
+=======
+             for (var element in tags) {
+      element!.clearShow();
+    }
+    episode = null;
+
+
+>>>>>>> Stashed changes
 
           for (var element in json['data']['data']) {
             if (sections == null) {
