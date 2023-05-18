@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controller/show_controller.dart';
+import 'package:seen/helper/image_checker.dart';
 import 'package:seen/model/episode.dart';
 import 'package:seen/model/season.dart';
 import 'package:seen/model/show.dart';
@@ -212,6 +215,7 @@ class EpisodeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        print(episode.id);
         Provider.of<ShowController>(context, listen: false)
             .getShow(showId, episode: episode.id);
       },
@@ -282,7 +286,7 @@ class EpisodeWidget extends StatelessWidget {
             Container(
               margin: EdgeInsets.fromLTRB(5, 10, 5, 10),
               width: MediaQuery.of(context).size.width * 0.16,
-              child: Image.network(thumb),
+              child: NetworkImageChecker(imageUrl: thumb),
             ),
           ],
         ),

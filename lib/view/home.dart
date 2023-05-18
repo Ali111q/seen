@@ -26,13 +26,9 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
-    setState(() {
-      isLoading = true;
-    });
+
     Provider.of<HomeController>(context, listen: false).getHome().then((value) {
-      setState(() {
-        isLoading = false;
-      });
+  
     });
   }
 
@@ -95,14 +91,14 @@ class _MainScreenState extends State<MainScreen> {
               ),
               iconSize: 60,
             ))
-          : isLoading
+          : banner.isEmpty
               ? LaunchScreen()
               : CustomScrollView(
                   controller: _scrollController,
                   slivers: [
                     SliverAppBar(
                         expandedHeight:
-                            MediaQuery.of(context).size.height * 0.6,
+                            MediaQuery.of(context).size.height * 0.55,
                         backgroundColor: Colors.transparent,
                         flexibleSpace: _showAlternativeWidget
                             ? Container(
@@ -129,9 +125,7 @@ class _MainScreenState extends State<MainScreen> {
                               )),
                     SliverList(
                       delegate: SliverChildListDelegate([
-                        Container(
-                          height: 30,
-                        ),
+                   
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -196,11 +190,13 @@ class BannerItem extends StatelessWidget {
           Center(
             child: NetworkImageChecker(
               imageUrl: banner.thumbnail,
+              fit: BoxFit.fitWidth,
+              width: MediaQuery.of(context).size.width,
             ),
           ),
           Container(
             height: MediaQuery.of(context).size.height *
-                0.6 *
+                0.55 *
                 ((1000 - _Offset) / 1000),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(

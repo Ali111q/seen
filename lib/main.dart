@@ -16,10 +16,14 @@ import 'layout/register.dart';
 
 void main(List<String> args) {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual  ,overlays: [ SystemUiOverlay.top]);
+  })
+  
       .then((e) {
+        
     runApp(MultiProvider(
-      providers: [
+      providers: [ 
         ChangeNotifierProvider<HomeController>(create: (_) => HomeController()),
         ChangeNotifierProvider<UserController>(create: (_) => UserController()),
         ChangeNotifierProvider<ShowController>(create: (_) => ShowController()),
@@ -29,7 +33,7 @@ void main(List<String> args) {
         ChangeNotifierProvider<SettingController>(
             create: (_) => SettingController())
       ],
-      child: Home(),
+      child: const Home(),
     ));
   });
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controller/setting_controller.dart';
@@ -22,7 +20,7 @@ class MainLayout extends StatefulWidget {
   State<MainLayout> createState() => _HomeState();
 }
 
-class _HomeState extends State<MainLayout> {
+class _HomeState extends State<MainLayout> with WidgetsBindingObserver {
   List pages = [
     MainScreen(),
     ReelsPage(),
@@ -39,6 +37,14 @@ class _HomeState extends State<MainLayout> {
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+  
+       WidgetsBinding.instance?.addPostFrameCallback((_) {
+      SystemChrome.setEnabledSystemUIMode (SystemUiMode.manual , overlays:[SystemUiOverlay.top]);
+    });
+  }
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -49,13 +55,21 @@ class _HomeState extends State<MainLayout> {
         Provider.of<UserController>(context, listen: false).getUserFromShared();
       }
     });
+     WidgetsBinding.instance.addObserver(this);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays:  [SystemUiOverlay.top]);
 
     Provider.of<SettingController>(context, listen: false).getSetting();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+        WidgetsBinding.instance.removeObserver(this);
 
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

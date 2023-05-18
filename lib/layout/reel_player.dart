@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:seen/controller/user_controller.dart';
 import 'package:seen/helper/appbar.dart';
 import 'package:seen/model/reel.dart';
+import 'package:seen/view/launch_screen.dart';
 import 'package:video_player/video_player.dart';
 
 import '../controller/reels_controller.dart';
@@ -52,49 +53,45 @@ class _ReelSlideNavigatorState extends State<ReelSlideNavigator>
 
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SafeArea(
-        child: isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : Stack(
-                children: [
-                  Container(
-                    child: Swiper(
-                      controller: _controller,
-                      itemBuilder: (BuildContext context, int index) {
-                        return PageStorage(
-                          bucket: PageStorageBucket(),
-                          child: ContentScreen(
-                            src: reels[index].url,
-                            reel: reels[index],
-                            isLiked: reels[index].isLiked,
-                          ),
-                        );
-                        // return MyWidget();
-                      },
-                      itemCount: count,
-                      scrollDirection: Axis.vertical,
-                      onIndexChanged: (int index) {
-                        setState(() {
-                          _currentPageIndex = index;
-                        });
-                      },
-                      autoplay: false,
-                    ),
+      body: isLoading
+          ? LaunchScreen()
+          : Stack(
+              children: [
+                Container(
+                  child: Swiper(
+                    controller: _controller,
+                    itemBuilder: (BuildContext context, int index) {
+                      return PageStorage(
+                        bucket: PageStorageBucket(),
+                        child: ContentScreen(
+                          src: reels[index].url,
+                          reel: reels[index],
+                          isLiked: reels[index].isLiked,
+                        ),
+                      );
+                      // return MyWidget();
+                    },
+                    itemCount: count,
+                    scrollDirection: Axis.vertical,
+                    onIndexChanged: (int index) {
+                      setState(() {
+                        _currentPageIndex = index;
+                      });
+                    },
+                    autoplay: false,
                   ),
-                  Positioned(
-                    top: 20,
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: Icon(Icons.arrow_back_ios_new_sharp),
-                    ),
+                ),
+                Positioned(
+                  top: 20,
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(Icons.arrow_back_ios_new_sharp),
                   ),
-                ],
-              ),
-      ),
+                ),
+              ],
+            ),
     );
   }
 }

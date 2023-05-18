@@ -1,5 +1,6 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class _VideoScreenState extends State<VideoScreen> {
   @override
   void initState() {
     super.initState();
+     SystemChrome.setPreferredOrientations(DeviceOrientation.values);
     // Initialize the chewie controller with the passed video player controller
     _chewieController = ChewieController(
       videoPlayerController: widget.videoPlayerController,
@@ -29,6 +31,7 @@ class _VideoScreenState extends State<VideoScreen> {
   void dispose() {
     _chewieController!.dispose();
     super.dispose();
+     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
 
   @override

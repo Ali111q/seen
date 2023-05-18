@@ -62,24 +62,31 @@ class HomeController extends ChangeNotifier {
 
   // }
 
-  Future<void> getHome() async {
+  Future<void> getCashedHome() async {
+            banner.clear();
+        ads.clear();
     Dio dio = Dio();
     DioCacheManager cacheManager = DioCacheManager(CacheConfig());
-    Options options =
-        buildCacheOptions(const Duration(days: 5), forceRefresh: true);
     dio.interceptors.add(cacheManager.interceptor);
-    Response res = await dio.get(
-      homeUrl,
-      options: options,
-    );
-    if (res.statusCode == 200) {
-      print(res.data);
 
-      var json = res.data;
+    // Make the request and use the cached data if available
+    Response<dynamic> response = await dio.get(
+      homeUrl,
+      options: buildCacheOptions(
+        const Duration(days: 5),
+        forceRefresh: false,
+        subKey:
+            'home-data', // Optional: Specify a subkey to differentiate cache entries
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      print(response.data);
+
+      var json = response.data;
       if (json['success']) {
         homeError = false;
-        banner.clear();
-        ads.clear();
+
 
         json['data']['banner'].forEach((e) {
           banner.add(Episode.fromJson(e));
@@ -96,19 +103,63 @@ class HomeController extends ChangeNotifier {
         });
 
         notifyListeners();
-        return;
+      } else {
+        homeError = true;
+        notifyListeners();
       }
     }
+  }
 
-    notifyListeners();
+  Future<void> getHome() async {
+   
+
+    await getCashedHome();
+    Dio dio = Dio();
+    DioCacheManager cacheManager = DioCacheManager(CacheConfig());
+    dio.interceptors.add(cacheManager.interceptor);
+
+    // Make the request and use the cached data if available
+    Response<dynamic> response = await dio.get(
+      homeUrl,
+      options: buildCacheOptions(
+        const Duration(days: 5),
+        forceRefresh: true,
+        subKey:
+            'home-data', // Optional: Specify a subkey to differentiate cache entries
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      print(response.data);
+
+      var json = response.data;
+      if (json['success']) {
+        homeError = false;
+            banner.clear();
+        ads.clear();
+        json['data']['banner'].forEach((e) {
+          banner.add(Episode.fromJson(e));
+        });
+
+        if (tags.isEmpty) {
+          json['data']['categories'].forEach((e) {
+            tags.add(Tag.fromJson(e));
+          });
+        }
+
+        json['data']['ads'].forEach((e) {
+          ads.add(Ad.fromJson(e));
+        });
+
+        notifyListeners();
+      } else {
+        homeError = true;
+        notifyListeners();
+      }
+    }
   }
 
   Future<void> getEpisode(id, {sections}) async {
-    for (var element in tags) {
-      element!.clearShow();
-    }
-    episode = null;
-
     Dio dio = Dio();
     DioCacheManager cacheManager = DioCacheManager(CacheConfig());
     Options options =
@@ -122,6 +173,12 @@ class HomeController extends ChangeNotifier {
       if (_res.statusCode == 200) {
         var json = _res.data;
         if (json['success']) {
+          print('object');
+          for (var element in tags) {
+            element!.clearShow();
+          }
+          episode = null;
+
           for (var element in json['data']['data']) {
             if (sections == null) {
               tags
@@ -140,10 +197,10 @@ class HomeController extends ChangeNotifier {
   }
 
   Future<void> getAdInVideo() async {
-    for (var element in tags) {
-      element!.clearShow();
-    }
-    episode = null;
+    // for (var element in tags) {
+    //   element!.clearShow();
+    // }
+    // episode = null;
 
     Dio dio = Dio();
     DioCacheManager cacheManager = DioCacheManager(CacheConfig());
@@ -165,10 +222,10 @@ class HomeController extends ChangeNotifier {
   }
 
   Future<void> getCats() async {
-    for (var element in tags) {
-      element!.clearShow();
-    }
-    episode = null;
+    // for (var element in tags) {
+    //   element!.clearShow();
+    // }
+    // episode = null;
     Dio dio = Dio();
     DioCacheManager cacheManager = DioCacheManager(CacheConfig());
     Options options =

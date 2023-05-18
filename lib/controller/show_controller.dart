@@ -13,18 +13,19 @@ class ShowController extends ChangeNotifier {
   List<Season> seasons = [];
   int selectedEpisode = 0;
   Show? show;
-  Future<void> getShow(id, {episode}) async {
+  Future<void> getShow(id, { episode}) async {
     seasons = [];
     banner = null;
-    episode = null;
     notifyListeners();
 
     http.Response _res =
         await http.get(Uri.parse(getShowUrl(id, episode: episode)));
 
     if (_res.statusCode == 200) {
+    
       var json = jsonDecode(_res.body);
       if (json['success']) {
+        print(json);
         banner = Episode.fromJson(json['data']['first_episode']);
         show = Show.fromJson(json['data']['shows']);
 
