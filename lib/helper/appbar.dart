@@ -33,7 +33,7 @@ class MyAppBar extends AppBar {
                         });
                       }
                     },
-                    child: SvgPicture.asset('assets/images/person.svg')),
+                    child:  Provider.of<UserController>(context).user != null? CircleAvatar(backgroundImage: NetworkImage( Provider.of<UserController>(context).user!.image), backgroundColor: Colors.transparent, ): SvgPicture.asset('assets/images/person.svg')),
                 Container(
                   width: 20,
                 ),

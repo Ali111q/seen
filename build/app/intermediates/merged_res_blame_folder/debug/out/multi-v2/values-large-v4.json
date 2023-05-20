@@ -4,7 +4,7 @@
             "outputFile": "com.dorto.seen.app-mergeDebugResources-25:/values-large-v4/values-large-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\MK\\.gradle\\caches\\transforms-3\\4107427a8bc3818a71bd94c66907d3a7\\transformed\\material-1.0.0\\res\\values-large-v4\\values-large-v4.xml",
+                    "source": "C:\\Users\\ali\\.gradle\\caches\\transforms-3\\4107427a8bc3818a71bd94c66907d3a7\\transformed\\material-1.0.0\\res\\values-large-v4\\values-large-v4.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\MK\\.gradle\\caches\\transforms-3\\1f8e748d741b9631b107061c054d17ec\\transformed\\appcompat-1.0.0\\res\\values-large-v4\\values-large-v4.xml",
+                    "source": "C:\\Users\\ali\\.gradle\\caches\\transforms-3\\1f8e748d741b9631b107061c054d17ec\\transformed\\appcompat-1.0.0\\res\\values-large-v4\\values-large-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",

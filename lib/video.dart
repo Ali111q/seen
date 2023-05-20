@@ -43,7 +43,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-    _videoPlayerController = VideoPlayerController.network(widget.link[2]);
+    _videoPlayerController = VideoPlayerController.network("https://seen-iq-dorto.s3.me-south-1.amazonaws.com/episode/1/1/1/1684439370seenvideo.m3u8");
 
     _chewieController = ChewieController(
         videoPlayerController: _videoPlayerController!,

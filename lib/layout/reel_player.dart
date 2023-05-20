@@ -58,7 +58,7 @@ class _ReelSlideNavigatorState extends State<ReelSlideNavigator>
           : Stack(
               children: [
                 Container(
-                  child: Swiper(
+                  child: reels.length>1? Swiper(
                     controller: _controller,
                     itemBuilder: (BuildContext context, int index) {
                       return ContentScreen(
@@ -76,7 +76,7 @@ class _ReelSlideNavigatorState extends State<ReelSlideNavigator>
                       });
                     },
                     autoplay: false,
-                  ),
+                  ): ContentScreen(reel: reels[0], isLiked: reels[0].isLiked),
                 ),
                 Positioned(
                   top: 20,

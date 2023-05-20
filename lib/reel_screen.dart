@@ -25,36 +25,33 @@ class ContentScreen extends StatefulWidget {
   _ContentScreenState createState() => _ContentScreenState();
 }
 
-class _ContentScreenState extends State<ContentScreen> {
+class _ContentScreenState extends State<ContentScreen> with SingleTickerProviderStateMixin {
+    bool _isLiked = false;
   late VideoPlayerController _videoPlayerController;
   ChewieController? _chewieController;
+    late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
   bool _showControlls = true;
   @override
   void initState() {
     super.initState();
+     _animationController = AnimationController(
+      duration: Duration(milliseconds: 200),
+      vsync: this,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.8).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInOut,
+      ),
+    );
     initializePlayer().then((value) {
       setState(() {});
     });
     Provider.of<ReelsController>(context, listen: false).view(
       widget.reel.id,
     );
-    print('''
-asd
 
-asdsa
-darkas
-d
-asd
-
-sad
-sad
-
-sad
-s
-d
-sda
-${widget.reel.isLiked}
-''');
   }
 
 Future<void> initializePlayer() async {
@@ -86,12 +83,53 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
   void dispose() {
     _videoPlayerController.dispose();
     _chewieController!.dispose();
+        _animationController.dispose();
     super.dispose();
+  }
+   void _handleDoubleTap() {
+    setState(() {
+      _isLiked = true;
+    });
+    _animationController.forward();
+    Future.delayed(Duration(milliseconds: 500), () {
+      setState(() {
+        _isLiked = false;
+      });
+      _animationController.reverse();
+    });
+     if (Provider.of<UserController>(context,
+                                        listen: false)
+                                    .user !=
+                                null) {
+          
+          if (!widget
+          .isLiked) {
+               setState(() {
+                                widget.isLiked = true;
+                              });
+                              Provider.of<ReelsController>(context, listen: false)
+                                  .like(
+                                      widget.reel.id,
+                                      Provider.of<UserController>(context,
+                                              listen: false)
+                                          .user!
+                                          .token);
+          }
+                           
+                            } else {
+                              _videoPlayerController.pause();
+                              Navigator.of(context)
+                                  .pushNamed('/login')
+                                  .then((value) {
+                                _videoPlayerController.play();
+                              });
+                            }
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onLongPress: () {
         if (_chewieController != null &&
             _chewieController!.videoPlayerController.value.isInitialized) {
@@ -129,6 +167,7 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
       });
         }
       },
+      onDoubleTap: _handleDoubleTap,
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -167,7 +206,6 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
                                         listen: false)
                                     .user !=
                                 null) {
-                              print('${widget.reel.likes_count} l l l l l l ');
           
                               setState(() {
                                 widget.isLiked = !widget.isLiked;
@@ -191,11 +229,15 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
                           icon: Icon(
                             Icons.favorite,
                             color: widget.isLiked ? Colors.red : Colors.white,
-                          )),
+                          ),
+                        ),
+
                       Text(
                         widget.reel.likes_count.toString(),
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white, fontSize: 19),
+                        
                       ),
+                      
                       IconButton(
                         onPressed: () {
                           if (Provider.of<UserController>(context, listen: false)
@@ -219,7 +261,8 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
                       ),
                       Text(
                         widget.reel.comments_count.toString(),
-                        style: TextStyle(color: Colors.white),
+                                              style: TextStyle(color: Colors.white, fontSize: 19),
+
                       ),
                       IconButton(
                         onPressed: () {},
@@ -228,7 +271,8 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
                       ),
                       Text(
                         widget.reel.views_count.toString(),
-                        style: TextStyle(color: Colors.white),
+                                               style: TextStyle(color: Colors.white, fontSize: 19),
+
                       ),
                     ],
                   ),
@@ -263,7 +307,26 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
                 ],
               ),
             ),
-          )
+          ),
+           Center(
+          child: AnimatedOpacity(
+            duration: Duration(milliseconds: 300),
+            opacity: _isLiked?1:0,
+            child: AnimatedBuilder(
+              animation: _animationController,
+              builder: (BuildContext context, Widget? child) {
+                return Transform.scale(
+                  scale: _isLiked ? _scaleAnimation.value : 1.0,
+                  child: Icon(
+                    Icons.favorite,
+                    color:  Colors.grey,
+                    size: 80.0,
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
         ],
       ),
     );

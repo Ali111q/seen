@@ -76,7 +76,7 @@ class _LoginState extends State<Login> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print('object');
+                  
                     Provider.of<UserController>(context, listen: false)
                         .login(email.text, password.text)
                         .then((value) {
