@@ -9,10 +9,8 @@ import 'package:seen/model/episode.dart';
 import 'package:seen/model/season.dart';
 import 'package:seen/model/show.dart';
 import 'package:seen/view/launch_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
-import '../controller/home_controller.dart';
+// ignore: library_prefixes
 import '../utils/colors.dart' as myColors;
 import '../view/home.dart';
 
@@ -261,12 +259,12 @@ class EpisodeWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      ...episode.tags.map(
+                      ...episode.tags.getRange(0, 5).map(
                         (e) => Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Text(
                             e,
-                            style: TextStyle(color: Color(0xff707070)),
+                            style: const TextStyle(color: Color(0xff707070)),
                           ),
                         ),
                       )

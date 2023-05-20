@@ -141,7 +141,7 @@ class _MainScreenState extends State<MainScreen> {
                                   ),
                           ],
                         ),
-                        ...tags.getRange(0, 1).map((e) {
+                        ...tags.map((e) {
                           return SectionWidget(
                             tag: e!,
                           );

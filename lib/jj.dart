@@ -3,7 +3,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:seen/video.dart';
 
-import 'new_video.dart';
 
 class jj extends StatelessWidget {
   const jj({super.key, required this.link});

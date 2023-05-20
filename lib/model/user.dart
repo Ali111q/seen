@@ -6,7 +6,7 @@ class User {
       required this.image});
   final String name;
   final String email;
-  final String? token;
+   String? token;
   final String image;
 
   factory User.fromJson(Map<String, dynamic> json) {

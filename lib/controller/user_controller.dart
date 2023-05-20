@@ -120,7 +120,7 @@ class UserController extends ChangeNotifier {
 
   Future<void> editProfile(String? name) async {
     _service.initialize();
-
+    String? token = user!.token;
     http.Response _res = await http.post(Uri.parse(editProfileUrl), body: {
       'name': name,
       if (image != null) 'image': image!['base64']
@@ -133,7 +133,8 @@ class UserController extends ChangeNotifier {
       var json = await jsonDecode(_res.body);
       if (json['success']) {
         print(json);
-        user = User.fromJson(json['data']);
+        user = User.fromJson(json['data'][0]);
+        user!.token = token; 
         _service.saveUser(user!);
       }
     }
