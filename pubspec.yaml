@@ -58,6 +58,7 @@ dependencies:
   flutter_windowmanager: ^0.2.0
   flutter_cache_manager: ^3.3.0
   overlay_support: ^2.1.0
+  collection: ^1.17.0
 
 dev_dependencies:
   flutter_test:

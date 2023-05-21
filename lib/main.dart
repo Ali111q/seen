@@ -24,7 +24,7 @@ void main(List<String> args) {
       .then((e) {
         
     runApp(MultiProvider(
-      providers: [ 
+      providers: [
         ChangeNotifierProvider<HomeController>(create: (_) => HomeController()),
         ChangeNotifierProvider<UserController>(create: (_) => UserController()),
         ChangeNotifierProvider<ShowController>(create: (_) => ShowController()),

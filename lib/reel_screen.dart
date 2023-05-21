@@ -7,11 +7,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controller/reels_controller.dart';
 import 'package:seen/controller/user_controller.dart';
-import 'package:seen/model/user.dart';
 
 import 'package:video_player/video_player.dart';
 
-import 'like_icon.dart';
 import 'model/reel.dart';
 
 class ContentScreen extends StatefulWidget {

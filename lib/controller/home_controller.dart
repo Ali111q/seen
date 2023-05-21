@@ -160,43 +160,92 @@ class HomeController extends ChangeNotifier {
       }
     }
   }
+Future<void> getCachedEpisode(id, int index, {sections}) async {
+  Dio dio = Dio();
+  DioCacheManager cacheManager = DioCacheManager(CacheConfig());
+  dio.interceptors.add(cacheManager.interceptor);
+  Options options = buildCacheOptions(
+    const Duration(days: 5),
+    forceRefresh: false,
+    subKey: 'episode-data', // Optional: Specify a subkey to differentiate cache entries
+  );
+  dio.options.headers = header;
 
-  Future<void> getEpisode(id, {sections}) async {
-    Dio dio = Dio();
-    DioCacheManager cacheManager = DioCacheManager(CacheConfig());
-    Options options =
-        buildCacheOptions(const Duration(days: 5), forceRefresh: true);
-    dio.interceptors.add(cacheManager.interceptor);
-    dio.options.headers = header;
+  try {
+    // Make the request and use the cached data if available
+    Response<dynamic> response = await dio.get(
+      getEpisodeUrl(id),
+      options: options,
+    );
 
-    try {
-      Response _res = await dio.get(getEpisodeUrl(id));
+    if (response.statusCode == 200) {
+      var json = response.data;
+      if (json['success']) {
+        if (sections == null) {
+          tags[index]!.clearShow();
+        } else {
+          catTags[index]!.clearShow();
+        }
 
-      if (_res.statusCode == 200) {
-        var json = _res.data;
-        if (json['success']) {
-          print('object');
-          for (var element in tags) {
-            element!.clearShow();
-          }
-          episode = null;
-
-          for (var element in json['data']['data']) {
-            if (sections == null) {
-              tags
-                  .firstWhere((element) => element!.id == id)!
-                  .addShow(Show.fromJson(element));
-            } else {
-              catTags
-                  .firstWhere((element) => element!.id == id)!
-                  .addShow(Show.fromJson(element));
-            }
-            notifyListeners();
+        for (var element in json['data']['data']) {
+          print(element);
+          if (sections == null) {
+            tags[index]!.addShow(Show.fromJson(element));
+          } else {
+            catTags[index].addShow(Show.fromJson(element));
           }
         }
+
+        notifyListeners();
       }
-    } catch (e) {}
-  }
+    }
+  } catch (e) {}
+}
+
+Future<void> getEpisode(id, int index, {sections}) async {
+  await getCachedEpisode(id, index, sections: sections);
+
+  Dio dio = Dio();
+  DioCacheManager cacheManager = DioCacheManager(CacheConfig());
+  dio.interceptors.add(cacheManager.interceptor);
+  Options options = buildCacheOptions(
+    const Duration(days: 5),
+    forceRefresh: true,
+    subKey: 'episode-data', // Optional: Specify a subkey to differentiate cache entries
+  );
+  dio.options.headers = header;
+
+  try {
+    // Make the request and force a refresh to get the latest data
+    Response<dynamic> response = await dio.get(
+      getEpisodeUrl(id),
+      options: options,
+    );
+
+    if (response.statusCode == 200) {
+      var json = response.data;
+      if (json['success']) {
+        if (sections == null) {
+          tags[index]!.clearShow();
+        } else {
+          catTags[index]!.clearShow();
+        }
+
+        for (var element in json['data']['data']) {
+          print(element);
+          if (sections == null) {
+            tags[index]!.addShow(Show.fromJson(element));
+          } else {
+            catTags[index].addShow(Show.fromJson(element));
+          }
+        }
+
+        notifyListeners();
+      }
+    }
+  } catch (e) {}
+}
+
 
   Future<void> getAdInVideo() async {
     // for (var element in tags) {

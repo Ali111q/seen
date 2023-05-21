@@ -1,4 +1,5 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
@@ -141,9 +142,10 @@ class _MainScreenState extends State<MainScreen> {
                                   ),
                           ],
                         ),
-                        ...tags.map((e) {
+                        ...tags.mapIndexed((index ,e) {
                           return SectionWidget(
                             tag: e!,
+                            index: index ,
                           );
                         })
                       ]),
@@ -294,9 +296,10 @@ class BannerItem extends StatelessWidget {
 }
 
 class SectionWidget extends StatefulWidget {
-  const SectionWidget({super.key, required this.tag, this.section});
+  const SectionWidget({super.key, required this.tag, this.section, required this.index});
   final Tag tag;
   final String? section;
+  final  int index;
   @override
   State<SectionWidget> createState() => _SectionWidgetState();
 }
@@ -307,7 +310,7 @@ class _SectionWidgetState extends State<SectionWidget> {
     // TODO: implement initState
     super.initState();
     Provider.of<HomeController>(context, listen: false)
-        .getEpisode(widget.tag.id, sections: widget.section);
+        .getEpisode(widget.tag.id,widget. index, sections: widget.section);
   }
 
   @override

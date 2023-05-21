@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -28,9 +29,10 @@ class _SectionsPageState extends State<SectionsPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          ...tags.map((e) => SectionWidget(
+          ...tags.mapIndexed((index, e) => SectionWidget(
                 tag: e,
                 section: '',
+                index: index,
               ))
         ],
       ),
