@@ -259,7 +259,7 @@ class EpisodeWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      ...episode.tags.getRange(0, 5).map(
+                      ...episode.tags.map(
                         (e) => Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Text(

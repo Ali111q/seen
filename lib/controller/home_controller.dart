@@ -13,54 +13,19 @@ import '../utils/constant.dart';
 import '../model/tag.dart';
 
 class HomeController extends ChangeNotifier {
+  bool bannerOpen = true;
   bool homeError = false;
-  List<Episode?> banner = [];
+  List<Episode> banner = [];
   List<Tag?> tags = [];
   List<Ad?> ads = [];
   Ad? adInVideo;
   List? episode;
   List<Tag> catTags = [];
   Map<String, String> header = {'lang': window.locale.languageCode};
-  // Future<void> getHome() async {
-  //   http.Response res = await http.get(Uri.parse(homeUrl), headers: header);
-  //   print(res.statusCode);
-
-  //   if (res.statusCode == 200) {
-  //     try {
-  //       homeError = false ;
-  //       notifyListeners();
-  //         banner.clear();
-  //     ads.clear();
-  //     var json = jsonDecode(res.body);
-  //     if (json['success']) {
-  //       json['data']['banner'].forEach((e) {
-  //         banner.add(Episode.fromJson(e));
-  //       });
-  //       if (tags.isEmpty) {
-  //         json['data']['categories'].forEach((e) {
-  //           tags.add(Tag.fromJson(e));
-  //         });
-  //       }
-
-  //       json['data']['ads'].forEach((e) {
-  //         ads.add(Ad.fromJson(e));
-  //       });
-  //       notifyListeners();
-  //       return;
-
-  //     }
-  //      homeError = true;
-  //   notifyListeners();
-  //   return;
-  //     } catch (e) {
-  //           homeError = true;
-  //   notifyListeners();
-  //   return;
-  //     }
-
-  //   }
-
-  // }
+  changebanner(bool state){
+    bannerOpen = state;
+    notifyListeners();
+  }
 
   Future<void> _getCashedHome() async {
             banner.clear();
@@ -140,7 +105,9 @@ class HomeController extends ChangeNotifier {
         ads.clear();
         tags.clear();
         json['data']['banner'].forEach((e) {
+          
           banner.add(Episode.fromJson(e));
+          print(e);
         });
 
         if (tags.isEmpty) {

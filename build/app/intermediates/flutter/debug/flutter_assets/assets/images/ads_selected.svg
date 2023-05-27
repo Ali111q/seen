@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33.683" height="30.439" viewBox="0 0 33.683 30.439">
+  <g id="Group_384" data-name="Group 384" transform="translate(3 -1)">
+    <g id="Group_145" data-name="Group 145" transform="translate(0.246 1)">
+      <path id="Path_122" data-name="Path 122" d="M41.81,888.4a4.808,4.808,0,0,0,2.757,3.413c.163.071.272.446.274.681.02,2.51.011,5.019.013,7.529,0,.449-.113,1.028.455,1.152a1.71,1.71,0,0,0,1.154-.284,60.066,60.066,0,0,1,12.188-6.459c.475-.172.965-.305,1.455-.431.465-.119.939-.2,1.45-.312V883.109a18.13,18.13,0,0,1-7.275-3.248c-2.835-1.9-5.579-3.943-8.362-5.924h-.457a1.131,1.131,0,0,0-.619,1.18c.022,2.733.01,5.466.01,8.237a4.74,4.74,0,0,0-3.043,3.519Z" transform="translate(-41.81 -873.937)" fill="#FFFFFF"/>
+      <path id="Path_123" data-name="Path 123" d="M75.059,884.475H67.449v.854q0,4.6,0,9.2a2.331,2.331,0,0,1-.033.68c-.788,2.5-1.592,5-2.384,7.48-1.419.14-1.958.474-2.123,1.282-.15.734.185,1.317,1.041,1.816H69.58c1.159-3.077,2.334-6.148,3.472-9.233.52-1.409.489-1.42,2.006-1.42Z" transform="translate(-44.621 -875.343)" fill="#FFFFFF"/>
+    </g>
+    <text id="A.D" transform="translate(-3 19.379)" fill="#919191" font-size="13" font-family="HelveticaNowDisplay-ExtraBold, Helvetica Now Display" font-weight="800" style="display: absolute;"><tspan x="0" y="0">A.D</tspan></text>
+  </g>
+</svg>

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:seen/controller/home_controller.dart';
 import 'package:seen/controller/setting_controller.dart';
 import 'package:seen/helper/appbar.dart';
 import 'package:seen/helper/loading.dart';
@@ -22,7 +23,7 @@ class MainLayout extends StatefulWidget {
 }
 
 class _HomeState extends State<MainLayout> with WidgetsBindingObserver {
-  List pages = [
+  List<Widget> pages = [
     MainScreen(),
     ReelsPage(),
     ContactUs(),
@@ -40,11 +41,13 @@ class _HomeState extends State<MainLayout> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-  
-       WidgetsBinding.instance?.addPostFrameCallback((_) {
-      SystemChrome.setEnabledSystemUIMode (SystemUiMode.manual , overlays:[SystemUiOverlay.top]);
+
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+          overlays: [SystemUiOverlay.top]);
     });
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -56,21 +59,23 @@ class _HomeState extends State<MainLayout> with WidgetsBindingObserver {
         Provider.of<UserController>(context, listen: false).getUserFromShared();
       }
     });
-     WidgetsBinding.instance.addObserver(this);
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays:  [SystemUiOverlay.top]);
+    WidgetsBinding.instance.addObserver(this);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.top]);
 
     Provider.of<SettingController>(context, listen: false).getSetting();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-        WidgetsBinding.instance.removeObserver(this);
-
+    WidgetsBinding.instance.removeObserver(this);
   }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -85,6 +90,7 @@ class _HomeState extends State<MainLayout> with WidgetsBindingObserver {
       )),
       child: Scaffold(
           appBar: MyAppBar(context, titleText: 'titleText'),
+          extendBodyBehindAppBar:_currentIndex == 0 ? Provider.of<HomeController>(context).bannerOpen:false,
           backgroundColor: Colors.transparent,
           body: _currentPage,
           bottomNavigationBar: CustomNavigationBar(
@@ -127,28 +133,30 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               buildNavBarItem(
-                  iconPath: 'assets/images/ads.png',
+                  iconPath: 'assets/images/ads.svg',
                   iconWidth: w * 0.1,
                   index: 4,
-                  isSvg: false),
+                  isSvg: true,
+                  selectedSvg: 'assets/images/ads_selected.svg'
+                  ),
               buildNavBarItem(
-                  iconPath: 'assets/images/sections.png',
+                  iconPath: 'assets/images/sections.svg',
                   iconWidth: w * 0.1,
                   index: 3,
-                  isSvg: false),
+                  isSvg: true),
               buildNavBarItem(
-                  iconPath: 'assets/images/call_us.png',
-                  iconWidth: w * 0.1,
+                  iconPath: 'assets/images/call.svg',
+                  iconWidth: w * 0.80,
                   index: 2,
-                  isSvg: false),
+                  isSvg: true),
               buildNavBarItem(
-                  iconPath: 'assets/images/bs.svg',
-                  iconWidth: w * 0.075,
+                  iconPath: 'assets/images/reel.svg',
+                  iconWidth: w * 0.80,
                   index: 1,
                   isSvg: true),
               buildNavBarItem(
                   iconPath: 'assets/images/seen.svg',
-                  iconWidth: w * 0.12,
+                  iconWidth: w * 0.14,
                   index: 0,
                   isSvg: true),
             ],
@@ -158,26 +166,28 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     );
   }
 
-  Widget buildNavBarItem({
-    required String iconPath,
-    required double iconWidth,
-    required int index,
-    required bool isSvg,
-  }) {
+  Widget buildNavBarItem(
+      {required String iconPath,
+      required double iconWidth,
+      required int index,
+      required bool isSvg,
+      String? selectedSvg}) {
     return Expanded(
       child: GestureDetector(
         onTap: () => widget.onTabTapped(index),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 15.0),
           child: isSvg
               ? SvgPicture.asset(
-                  iconPath,
+                 selectedSvg !=null? widget.currentIndex == index? selectedSvg: iconPath: iconPath,
                   width: iconWidth,
-                  color: index == 0
-                      ? null
-                      : widget.currentIndex == index
-                          ? Colors.white
-                          : Colors.grey,
+                  color: selectedSvg == null
+                      ? index == 0
+                          ? null
+                          : widget.currentIndex == index
+                              ? Colors.white
+                              : Colors.grey
+                      : null,
                 )
               : ImageIcon(
                   AssetImage(

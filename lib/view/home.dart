@@ -1,6 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controller/home_controller.dart';
@@ -47,6 +48,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _scrollListener() {
+     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual  ,overlays: [ SystemUiOverlay.top]);
     setState(() {
       _Offset = _scrollController.offset;
     });
@@ -56,19 +58,24 @@ class _MainScreenState extends State<MainScreen> {
       setState(() {
         _showAlternativeWidget = true;
       });
+        Provider.of<HomeController>(context, listen: false).changebanner(false);
+
     } else {
       setState(() {
         _showAlternativeWidget = false;
       });
+        Provider.of<HomeController>(context, listen: false).changebanner(true);
+
     }
   }
-
   @override
   Widget build(BuildContext context) {
+   
     List<Ad?> ads = Provider.of<HomeController>(context).ads;
-    List<Episode?> banner = Provider.of<HomeController>(context).banner;
+    List<Episode> banner = Provider.of<HomeController>(context).banner;
     List<Tag?> tags = Provider.of<HomeController>(context).tags;
     bool isError = Provider.of<HomeController>(context).homeError;
+     int bannerCount = banner.length;
     print(isError);
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -89,8 +96,8 @@ class _MainScreenState extends State<MainScreen> {
               },
               icon: Center(
                 child: AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
-                    child: Icon(
+                    duration: const Duration(milliseconds: 300),
+                    child: const Icon(
                       Icons.refresh_rounded,
                       color: Colors.white,
                     )),
@@ -110,7 +117,7 @@ class _MainScreenState extends State<MainScreen> {
                         flexibleSpace: _showAlternativeWidget
                             ? Container(
                                 color: Colors.transparent,
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     'Home',
                                     style: TextStyle(
@@ -120,14 +127,16 @@ class _MainScreenState extends State<MainScreen> {
                               )
                             : Swiper(
                                 itemBuilder: (context, index) {
+                                  print(banner[index].local_name);
+                                  print(index);
                                   return BannerItem(
                                     Offset: _Offset,
-                                    banner: banner[index]!,
+                                    banner: banner[index],
                                   );
                                 },
-                                itemCount: banner.length,
+                                itemCount: bannerCount ,
                                 autoplay: banner.length == 1 ? false : true,
-                                duration: 500,
+                                duration: 1000,
                                 loop: banner.length == 1 ? false : true,
                               )),
                     SliverList(
@@ -171,9 +180,14 @@ class HomeAdd extends StatelessWidget {
       child: Swiper(
         itemCount: ads!.length,
         loop: ads!.length != 1,
-        itemBuilder: (context, index) => NetworkImageChecker(
-          imageUrl: ads![index]!.file,
-          fit: BoxFit.fill,
+        itemBuilder: (context, index) => Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.white)
+          ),
+          child: NetworkImageChecker(
+            imageUrl: ads![index]!.file,
+            fit: BoxFit.fill,
+          ),
         ),
       ),
     );
@@ -248,7 +262,7 @@ class BannerItem extends StatelessWidget {
                   Row(
                    
                     children: [
-                      ...banner.tags.getRange(0, 3).map((e) => Text(
+                      ...banner.tags.map((e) => Text(
                             ' $e .',
                             style: TextStyle(
                               color: Colors.grey,
@@ -344,10 +358,10 @@ class _SectionWidgetState extends State<SectionWidget> {
                           height: MediaQuery.of(context).size.width * 0.5,
                           decoration: BoxDecoration(boxShadow: [
                             BoxShadow(
-                                offset: Offset(-1, 1),
-                                color: Colors.black,
+                                offset: Offset(4, 7),
+                                color: Colors.black, 
                                 blurRadius: 3,
-                                spreadRadius: 3)
+                               )
                           ]),
                           child: Stack(
                             children: [
@@ -359,6 +373,7 @@ class _SectionWidgetState extends State<SectionWidget> {
                               Padding(
                                 padding: const EdgeInsets.all(12.0),
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
