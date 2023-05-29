@@ -13,10 +13,10 @@ import 'package:video_player/video_player.dart';
 import 'model/reel.dart';
 
 class ContentScreen extends StatefulWidget {
-  final String? src;
+  final String src;
   final ReelVideo reel;
   bool isLiked;
-  ContentScreen({Key? key, this.src, required this.reel, required this.isLiked})
+  ContentScreen({Key? key, required this.src, required this.reel, required this.isLiked})
       : super(key: key);
 
   @override
@@ -53,6 +53,7 @@ class _ContentScreenState extends State<ContentScreen> with SingleTickerProvider
   }
 
 Future<void> initializePlayer() async {
+  print(widget.src);
   final cachedVideoPath = await cacheNetworkVideo(widget.src!);
 
   _videoPlayerController = VideoPlayerController.file(File(cachedVideoPath));

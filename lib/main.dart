@@ -18,7 +18,9 @@ import 'layout/register.dart';
 void main(List<String> args) {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual  ,overlays: [ SystemUiOverlay.top]);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual  ,overlays: [ SystemUiOverlay.top]);
+      // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky, overlays: [SystemUiOverlay.top]);
+
   })
   
       .then((e) {

@@ -76,10 +76,10 @@ class _ReelSlideNavigatorState extends State<ReelSlideNavigator>
                       });
                     },
                     autoplay: false,
-                  ): ContentScreen(reel: reels[0], isLiked: reels[0].isLiked),
+                  ): ContentScreen(reel: reels[0], isLiked: reels[0].isLiked, src: reels[0].url,),
                 ),
                 Positioned(
-                  top: 20,
+                  top: 40,
                   child: IconButton(
                     onPressed: () {
                       Navigator.of(context).pop();
