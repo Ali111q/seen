@@ -4,7 +4,7 @@
             "outputFile": "com.dorto.seen.app-mergeDebugResources-25:/values-nb/values-nb.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\ali\\.gradle\\caches\\transforms-3\\1f8e748d741b9631b107061c054d17ec\\transformed\\appcompat-1.0.0\\res\\values-nb\\values-nb.xml",
+                    "source": "/Users/alihazem/.gradle/caches/transforms-3/1f8e748d741b9631b107061c054d17ec/transformed/appcompat-1.0.0/res/values-nb/values-nb.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,24 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\ali\\.gradle\\caches\\transforms-3\\270e9501dde0430a83746f97bf9ab544\\transformed\\core-1.8.0\\res\\values-nb\\values-nb.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "39",
-                        "startColumns": "4",
-                        "startOffsets": "3519",
-                        "endColumns": "100",
-                        "endOffsets": "3615"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\ali\\.gradle\\caches\\transforms-3\\eed6c775712772b7adb51f80912e1f44\\transformed\\jetified-exoplayer-core-2.18.1\\res\\values-nb\\values-nb.xml",
+                    "source": "/Users/alihazem/.gradle/caches/transforms-3/eed6c775712772b7adb51f80912e1f44/transformed/jetified-exoplayer-core-2.18.1/res/values-nb/values-nb.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
@@ -52,6 +35,23 @@
                         "startOffsets": "2747,2823,2885,2949,3020,3100,3178,3272,3369",
                         "endColumns": "75,61,63,70,79,77,93,96,70",
                         "endOffsets": "2818,2880,2944,3015,3095,3173,3267,3364,3435"
+                    }
+                },
+                {
+                    "source": "/Users/alihazem/.gradle/caches/transforms-3/270e9501dde0430a83746f97bf9ab544/transformed/core-1.8.0/res/values-nb/values-nb.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "39",
+                        "startColumns": "4",
+                        "startOffsets": "3519",
+                        "endColumns": "100",
+                        "endOffsets": "3615"
                     }
                 }
             ]

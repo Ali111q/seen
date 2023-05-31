@@ -16,24 +16,26 @@ class ContentScreen extends StatefulWidget {
   final String src;
   final ReelVideo reel;
   bool isLiked;
-  ContentScreen({Key? key, required this.src, required this.reel, required this.isLiked})
+  ContentScreen(
+      {Key? key, required this.src, required this.reel, required this.isLiked})
       : super(key: key);
 
   @override
   _ContentScreenState createState() => _ContentScreenState();
 }
 
-class _ContentScreenState extends State<ContentScreen> with SingleTickerProviderStateMixin {
-    bool _isLiked = false;
+class _ContentScreenState extends State<ContentScreen>
+    with SingleTickerProviderStateMixin {
+  bool _isLiked = false;
   late VideoPlayerController _videoPlayerController;
   ChewieController? _chewieController;
-    late AnimationController _animationController;
+  late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   bool _showControlls = true;
   @override
   void initState() {
     super.initState();
-     _animationController = AnimationController(
+    _animationController = AnimationController(
       duration: Duration(milliseconds: 200),
       vsync: this,
     );
@@ -49,43 +51,41 @@ class _ContentScreenState extends State<ContentScreen> with SingleTickerProvider
     Provider.of<ReelsController>(context, listen: false).view(
       widget.reel.id,
     );
-
   }
 
-Future<void> initializePlayer() async {
-  print(widget.src);
-  final cachedVideoPath = await cacheNetworkVideo(widget.src!);
+  Future<void> initializePlayer() async {
+    print(widget.src);
+    final cachedVideoPath = await cacheNetworkVideo(widget.src!);
 
-  _videoPlayerController = VideoPlayerController.file(File(cachedVideoPath));
-  await _videoPlayerController.initialize();
+    _videoPlayerController = VideoPlayerController.file(File(cachedVideoPath));
+    await _videoPlayerController.initialize();
 
-  _chewieController = ChewieController(
-    videoPlayerController: _videoPlayerController,
-    autoPlay: true,
-    showControls: false,
-    looping: true,
-  );
+    _chewieController = ChewieController(
+      videoPlayerController: _videoPlayerController,
+      autoPlay: true,
+      showControls: false,
+      looping: true,
+    );
 
-  setState(() {});
-}
+    setState(() {});
+  }
 
-Future<String> cacheNetworkVideo(String videoUrl) async {
-  final videoCacheManager = CacheManager(Config(
-    'cacheCustomkey', stalePeriod: const Duration(hours: 4), maxNrOfCacheObjects: 100
-  ));
-  final file = await videoCacheManager.getSingleFile(videoUrl);
-  return file.path;
-}
-
+  Future<String> cacheNetworkVideo(String videoUrl) async {
+    final videoCacheManager = CacheManager(Config('cacheCustomkey',
+        stalePeriod: const Duration(hours: 4), maxNrOfCacheObjects: 100));
+    final file = await videoCacheManager.getSingleFile(videoUrl);
+    return file.path;
+  }
 
   @override
   void dispose() {
     _videoPlayerController.dispose();
     _chewieController!.dispose();
-        _animationController.dispose();
+    _animationController.dispose();
     super.dispose();
   }
-   void _handleDoubleTap() {
+
+  void _handleDoubleTap() {
     setState(() {
       _isLiked = true;
     });
@@ -96,33 +96,21 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
       });
       _animationController.reverse();
     });
-     if (Provider.of<UserController>(context,
-                                        listen: false)
-                                    .user !=
-                                null) {
-          
-          if (!widget
-          .isLiked) {
-               setState(() {
-                                widget.isLiked = true;
-                              });
-                              Provider.of<ReelsController>(context, listen: false)
-                                  .like(
-                                      widget.reel.id,
-                                      Provider.of<UserController>(context,
-                                              listen: false)
-                                          .user!
-                                          .token);
-          }
-                           
-                            } else {
-                              _videoPlayerController.pause();
-                              Navigator.of(context)
-                                  .pushNamed('/login')
-                                  .then((value) {
-                                _videoPlayerController.play();
-                              });
-                            }
+    if (Provider.of<UserController>(context, listen: false).user != null) {
+      if (!widget.isLiked) {
+        setState(() {
+          widget.isLiked = true;
+        });
+        Provider.of<ReelsController>(context, listen: false).like(
+            widget.reel.id,
+            Provider.of<UserController>(context, listen: false).user!.token);
+      }
+    } else {
+      _videoPlayerController.pause();
+      Navigator.of(context).pushNamed('/login').then((value) {
+        _videoPlayerController.play();
+      });
+    }
   }
 
   @override
@@ -136,34 +124,33 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
           setState(() {
             _showControlls = false;
           });
-          
         }
       },
       onLongPressEnd: (e) {
         if (_chewieController != null &&
             _chewieController!.videoPlayerController.value.isInitialized) {
           _videoPlayerController.play();
-      setState(() {
-        _showControlls  = true;
-      });
+          setState(() {
+            _showControlls = true;
+          });
         }
       },
       onLongPressCancel: () {
         if (_chewieController != null &&
             _chewieController!.videoPlayerController.value.isInitialized) {
           _videoPlayerController.play();
-            setState(() {
-        _showControlls  = true;
-      });
+          setState(() {
+            _showControlls = true;
+          });
         }
       },
       onLongPressMoveUpdate: (e) {
         if (_chewieController != null &&
             _chewieController!.videoPlayerController.value.isInitialized) {
           _videoPlayerController.play();
-            setState(() {
-        _showControlls  = true;
-      });
+          setState(() {
+            _showControlls = true;
+          });
         }
       },
       onDoubleTap: _handleDoubleTap,
@@ -182,7 +169,7 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
             ),
           AnimatedOpacity(
             duration: Duration(milliseconds: 100),
-            opacity:  _chewieController != null&& _showControlls?1:0,
+            opacity: _chewieController != null && _showControlls ? 1 : 0,
             child: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -200,46 +187,43 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       IconButton(
-                          onPressed: () {
-                            if (Provider.of<UserController>(context,
-                                        listen: false)
-                                    .user !=
-                                null) {
-          
-                              setState(() {
-                                widget.isLiked = !widget.isLiked;
-                              });
-                              Provider.of<ReelsController>(context, listen: false)
-                                  .like(
-                                      widget.reel.id,
-                                      Provider.of<UserController>(context,
-                                              listen: false)
-                                          .user!
-                                          .token);
-                            } else {
-                              _videoPlayerController.pause();
-                              Navigator.of(context)
-                                  .pushNamed('/login')
-                                  .then((value) {
-                                _videoPlayerController.play();
-                              });
-                            }
-                          },
-                          icon: Icon(
-                            Icons.favorite,
-                            color: widget.isLiked ? Colors.red : Colors.white,
-                          ),
+                        onPressed: () {
+                          if (Provider.of<UserController>(context,
+                                      listen: false)
+                                  .user !=
+                              null) {
+                            setState(() {
+                              widget.isLiked = !widget.isLiked;
+                            });
+                            Provider.of<ReelsController>(context, listen: false)
+                                .like(
+                                    widget.reel.id,
+                                    Provider.of<UserController>(context,
+                                            listen: false)
+                                        .user!
+                                        .token);
+                          } else {
+                            _videoPlayerController.pause();
+                            Navigator.of(context)
+                                .pushNamed('/login')
+                                .then((value) {
+                              _videoPlayerController.play();
+                            });
+                          }
+                        },
+                        icon: Icon(
+                          Icons.favorite,
+                          color: widget.isLiked ? Colors.red : Colors.white,
                         ),
-
+                      ),
                       Text(
                         widget.reel.likes_count.toString(),
                         style: TextStyle(color: Colors.white, fontSize: 19),
-                        
                       ),
-                      
                       IconButton(
                         onPressed: () {
-                          if (Provider.of<UserController>(context, listen: false)
+                          if (Provider.of<UserController>(context,
+                                      listen: false)
                                   .user !=
                               null) {
                             showModalBottomSheet(
@@ -260,18 +244,16 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
                       ),
                       Text(
                         widget.reel.comments_count.toString(),
-                                              style: TextStyle(color: Colors.white, fontSize: 19),
-
+                        style: TextStyle(color: Colors.white, fontSize: 19),
                       ),
                       IconButton(
                         onPressed: () {},
-                        icon:
-                            SvgPicture.asset('assets/images/seen_colorsless.svg'),
+                        icon: SvgPicture.asset(
+                            'assets/images/seen_colorsless.svg'),
                       ),
                       Text(
                         widget.reel.views_count.toString(),
-                                               style: TextStyle(color: Colors.white, fontSize: 19),
-
+                        style: TextStyle(color: Colors.white, fontSize: 19),
                       ),
                     ],
                   ),
@@ -286,7 +268,7 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
                       ],
                     ),
                   ),
-                  if (widget.reel.ad != null)
+                  widget.reel.ad!=null?
                     Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Row(
@@ -299,7 +281,7 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
                           )
                         ],
                       ),
-                    ),
+                    ):Container(),
                   Container(
                     height: 50,
                   )
@@ -307,25 +289,25 @@ Future<String> cacheNetworkVideo(String videoUrl) async {
               ),
             ),
           ),
-           Center(
-          child: AnimatedOpacity(
-            duration: Duration(milliseconds: 300),
-            opacity: _isLiked?1:0,
-            child: AnimatedBuilder(
-              animation: _animationController,
-              builder: (BuildContext context, Widget? child) {
-                return Transform.scale(
-                  scale: _isLiked ? _scaleAnimation.value : 1.0,
-                  child: Icon(
-                    Icons.favorite,
-                    color:  Colors.grey,
-                    size: 80.0,
-                  ),
-                );
-              },
+          Center(
+            child: AnimatedOpacity(
+              duration: Duration(milliseconds: 300),
+              opacity: _isLiked ? 1 : 0,
+              child: AnimatedBuilder(
+                animation: _animationController,
+                builder: (BuildContext context, Widget? child) {
+                  return Transform.scale(
+                    scale: _isLiked ? _scaleAnimation.value : 1.0,
+                    child: Icon(
+                      Icons.favorite,
+                      color: Colors.grey,
+                      size: 80.0,
+                    ),
+                  );
+                },
+              ),
             ),
           ),
-        ),
         ],
       ),
     );

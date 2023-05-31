@@ -30,13 +30,10 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
- 
+
     Provider.of<HomeController>(context, listen: false)
         .getHome()
-        .then((value) {
-   
-        });
-        
+        .then((value) {});
   }
 
   @override
@@ -48,7 +45,8 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _scrollListener() {
-     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual  ,overlays: [ SystemUiOverlay.top]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.top]);
     setState(() {
       _Offset = _scrollController.offset;
     });
@@ -58,24 +56,22 @@ class _MainScreenState extends State<MainScreen> {
       setState(() {
         _showAlternativeWidget = true;
       });
-        Provider.of<HomeController>(context, listen: false).changebanner(false);
-
+      Provider.of<HomeController>(context, listen: false).changebanner(false);
     } else {
       setState(() {
         _showAlternativeWidget = false;
       });
-        Provider.of<HomeController>(context, listen: false).changebanner(true);
-
+      Provider.of<HomeController>(context, listen: false).changebanner(true);
     }
   }
+
   @override
   Widget build(BuildContext context) {
-   
     List<Ad?> ads = Provider.of<HomeController>(context).ads;
     List<Episode> banner = Provider.of<HomeController>(context).banner;
     List<Tag?> tags = Provider.of<HomeController>(context).tags;
     bool isError = Provider.of<HomeController>(context).homeError;
-     int bannerCount = banner.length;
+    int bannerCount = banner.length;
     print(isError);
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -109,7 +105,6 @@ class _MainScreenState extends State<MainScreen> {
               : CustomScrollView(
                   controller: _scrollController,
                   slivers: [
-                   
                     SliverAppBar(
                         expandedHeight:
                             MediaQuery.of(context).size.height * 0.55,
@@ -134,7 +129,7 @@ class _MainScreenState extends State<MainScreen> {
                                     banner: banner[index],
                                   );
                                 },
-                                itemCount: bannerCount ,
+                                itemCount: bannerCount,
                                 autoplay: banner.length == 1 ? false : true,
                                 duration: 1000,
                                 loop: banner.length == 1 ? false : true,
@@ -151,10 +146,10 @@ class _MainScreenState extends State<MainScreen> {
                                   ),
                           ],
                         ),
-                        ...tags.mapIndexed((index ,e) {
+                        ...tags.mapIndexed((index, e) {
                           return SectionWidget(
                             tag: e!,
-                            index: index ,
+                            index: index,
                           );
                         })
                       ]),
@@ -181,9 +176,7 @@ class HomeAdd extends StatelessWidget {
         itemCount: ads!.length,
         loop: ads!.length != 1,
         itemBuilder: (context, index) => Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.white)
-          ),
+          decoration: BoxDecoration(border: Border.all(color: Colors.white)),
           child: NetworkImageChecker(
             imageUrl: ads![index]!.file,
             fit: BoxFit.fill,
@@ -210,14 +203,14 @@ class BannerItem extends StatelessWidget {
         children: [
           Center(
             child: ShaderMask(
-               shaderCallback: (rect) {
-    return LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: [Colors.white, Colors.transparent],
-    ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
-  },
-  blendMode: BlendMode.dstIn,
+              shaderCallback: (rect) {
+                return LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.white, Colors.transparent],
+                ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
+              },
+              blendMode: BlendMode.dstIn,
               child: NetworkImageChecker(
                 imageUrl: banner.thumbnail,
                 fit: BoxFit.fitWidth,
@@ -260,7 +253,6 @@ class BannerItem extends StatelessWidget {
                     ),
                   ),
                   Row(
-                   
                     children: [
                       ...banner.tags.map((e) => Text(
                             ' $e .',
@@ -269,7 +261,6 @@ class BannerItem extends StatelessWidget {
                               fontSize: 18,
                             ),
                           )),
-                     
                       Text(' 2022',
                           style: TextStyle(
                             color: Colors.grey,
@@ -310,10 +301,11 @@ class BannerItem extends StatelessWidget {
 }
 
 class SectionWidget extends StatefulWidget {
-  const SectionWidget({super.key, required this.tag, this.section, required this.index});
+  const SectionWidget(
+      {super.key, required this.tag, this.section, required this.index});
   final Tag tag;
   final String? section;
-  final  int index;
+  final int index;
   @override
   State<SectionWidget> createState() => _SectionWidgetState();
 }
@@ -324,7 +316,7 @@ class _SectionWidgetState extends State<SectionWidget> {
     // TODO: implement initState
     super.initState();
     Provider.of<HomeController>(context, listen: false)
-        .getEpisode(widget.tag.id,widget. index, sections: widget.section);
+        .getEpisode(widget.tag.id, widget.index, sections: widget.section);
   }
 
   @override
@@ -344,7 +336,9 @@ class _SectionWidgetState extends State<SectionWidget> {
           scrollDirection: Axis.horizontal,
           reverse: true,
           child: widget.tag.shows!.isEmpty
-              ? LaunchScreen()
+              ? Container(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  child: LaunchScreen())
               : Row(children: [
                   ...widget.tag.shows!.map((e) => GestureDetector(
                         onTap: () {
@@ -358,10 +352,10 @@ class _SectionWidgetState extends State<SectionWidget> {
                           height: MediaQuery.of(context).size.width * 0.5,
                           decoration: BoxDecoration(boxShadow: [
                             BoxShadow(
-                                offset: Offset(4, 7),
-                                color: Colors.black, 
-                                blurRadius: 3,
-                               )
+                              offset: Offset(4, 7),
+                              color: Colors.black,
+                              blurRadius: 3,
+                            )
                           ]),
                           child: Stack(
                             children: [
