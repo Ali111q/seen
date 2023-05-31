@@ -45,8 +45,8 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _scrollListener() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.top]);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+    //     overlays: [SystemUiOverlay.top]);
     setState(() {
       _Offset = _scrollController.offset;
     });

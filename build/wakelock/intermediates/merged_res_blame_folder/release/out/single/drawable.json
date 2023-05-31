@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "creativemaybeno.wakelock-merged_res-10:/drawable/notification_tile_bg.xml",
+        "source": "creativemaybeno.wakelock-core-1.6.0-1:/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "creativemaybeno.wakelock-merged_res-10:/drawable/notification_bg.xml",
+        "source": "creativemaybeno.wakelock-core-1.6.0-1:/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "creativemaybeno.wakelock-merged_res-10:/drawable/notification_icon_background.xml",
+        "source": "creativemaybeno.wakelock-core-1.6.0-1:/drawable/notification_icon_background.xml"
+    },
+    {
+        "merged": "creativemaybeno.wakelock-merged_res-10:/drawable/notification_bg_low.xml",
+        "source": "creativemaybeno.wakelock-core-1.6.0-1:/drawable/notification_bg_low.xml"
+    }
+]

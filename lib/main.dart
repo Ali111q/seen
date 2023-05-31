@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -17,10 +18,21 @@ import 'layout/register.dart';
 
 void main(List<String> args) {
   WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) {
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual  ,overlays: [ SystemUiOverlay.top]);
-      // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky, overlays: [SystemUiOverlay.top]);
+      // 
+  WidgetsBinding.instance!.addPostFrameCallback((_) {
+    print('object');
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual ,overlays:[ SystemUiOverlay.top] );
+  });
 
+  GestureBinding.instance!.pointerRouter.addGlobalRoute((PointerEvent event) {
+    // Handle tap event
+    print('secondWorks');
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual ,overlays:[ SystemUiOverlay.top] );
+  });
+  
   })
   
       .then((e) {

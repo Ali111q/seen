@@ -1,0 +1,173 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.dorto.seen"
+4    android:versionCode="12"
+5    android:versionName="1.4.7" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="20"
+8-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:2:5-66
+11-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:2:22-64
+12    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+12-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:3:5-81
+12-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:3:22-78
+13    <!-- Required for writing to external storage -->
+14    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+14-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:5:5-80
+14-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:5:22-77
+15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+15-->[com.google.android.exoplayer:exoplayer-core:2.18.1] /Users/alihazem/.gradle/caches/transforms-3/eed6c775712772b7adb51f80912e1f44/transformed/jetified-exoplayer-core-2.18.1/AndroidManifest.xml:24:5-79
+15-->[com.google.android.exoplayer:exoplayer-core:2.18.1] /Users/alihazem/.gradle/caches/transforms-3/eed6c775712772b7adb51f80912e1f44/transformed/jetified-exoplayer-core-2.18.1/AndroidManifest.xml:24:22-76
+16
+17    <application
+18        android:name="android.app.Application"
+18-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:6:39-72
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.8.0] /Users/alihazem/.gradle/caches/transforms-3/270e9501dde0430a83746f97bf9ab544/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
+20        android:hardwareAccelerated="true"
+20-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:6:73-107
+21        android:icon="@mipmap/ic_launcher"
+21-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:6:108-142
+22        android:label="seen" >
+22-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:6:18-38
+23        <activity
+23-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:7:9-18:20
+24            android:name="com.dorto.seen.MainActivity"
+24-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:7:19-47
+25            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+25-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:7:138-288
+26            android:exported="true"
+26-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:7:48-71
+27            android:hardwareAccelerated="false"
+27-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:7:289-324
+28            android:largeHeap="true"
+28-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:7:325-349
+29            android:launchMode="singleTop"
+29-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:7:72-102
+30            android:theme="@style/LaunchTheme"
+30-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:7:103-137
+31            android:windowSoftInputMode="adjustResize" >
+31-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:7:350-392
+32
+33            <!--
+34                 Specifies an Android theme to apply to this Activity as soon as
+35                 the Android process has started. This theme is visible to the user
+36                 while the Flutter UI initializes. After that, this theme continues
+37                 to determine the Window background behind the Flutter UI.
+38            -->
+39            <meta-data
+39-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:12:13-120
+40                android:name="io.flutter.embedding.android.NormalTheme"
+40-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:12:24-79
+41                android:resource="@style/NormalTheme" />
+41-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:12:80-117
+42
+43            <intent-filter>
+43-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:13:13-16:29
+44                <action android:name="android.intent.action.MAIN" />
+44-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:14:17-68
+44-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:14:25-66
+45
+46                <category android:name="android.intent.category.LAUNCHER" />
+46-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:15:17-76
+46-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:15:27-74
+47            </intent-filter>
+48            <!-- Provide required visibility configuration for API level 30 and above -->
+49        </activity>
+50        <!--
+51             Don't delete the meta-data below.
+52             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+53        -->
+54        <meta-data
+54-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:21:9-72
+55            android:name="flutterEmbedding"
+55-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:21:20-51
+56            android:value="2" />
+56-->/Users/alihazem/Documents/GitHub/seen/android/app/src/main/AndroidManifest.xml:21:52-69
+57
+58        <provider
+58-->[:image_picker_android] /Users/alihazem/Documents/GitHub/seen/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-18:20
+59            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+59-->[:image_picker_android] /Users/alihazem/Documents/GitHub/seen/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-82
+60            android:authorities="com.dorto.seen.flutter.image_provider"
+60-->[:image_picker_android] /Users/alihazem/Documents/GitHub/seen/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-74
+61            android:exported="false"
+61-->[:image_picker_android] /Users/alihazem/Documents/GitHub/seen/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-37
+62            android:grantUriPermissions="true" >
+62-->[:image_picker_android] /Users/alihazem/Documents/GitHub/seen/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-47
+63            <meta-data
+63-->[:image_picker_android] /Users/alihazem/Documents/GitHub/seen/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
+64                android:name="android.support.FILE_PROVIDER_PATHS"
+64-->[:image_picker_android] /Users/alihazem/Documents/GitHub/seen/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
+65                android:resource="@xml/flutter_image_picker_file_paths" />
+65-->[:image_picker_android] /Users/alihazem/Documents/GitHub/seen/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
+66        </provider>
+67
+68        <activity
+68-->[:url_launcher_android] /Users/alihazem/Documents/GitHub/seen/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-13:74
+69            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+69-->[:url_launcher_android] /Users/alihazem/Documents/GitHub/seen/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-74
+70            android:exported="false"
+70-->[:url_launcher_android] /Users/alihazem/Documents/GitHub/seen/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-37
+71            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+71-->[:url_launcher_android] /Users/alihazem/Documents/GitHub/seen/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-71
+72
+73        <provider
+73-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:12:9-20:20
+74            android:name="com.sangcomz.fishbun.FishBunFileProvider"
+74-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:13:13-68
+75            android:authorities="com.dorto.seen.fishbunfileprovider"
+75-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:14:13-71
+76            android:exported="false"
+76-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:15:13-37
+77            android:grantUriPermissions="true" >
+77-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:16:13-47
+78            <meta-data
+78-->[:image_picker_android] /Users/alihazem/Documents/GitHub/seen/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
+79                android:name="android.support.FILE_PROVIDER_PATHS"
+79-->[:image_picker_android] /Users/alihazem/Documents/GitHub/seen/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
+80                android:resource="@xml/provider_paths" />
+80-->[:image_picker_android] /Users/alihazem/Documents/GitHub/seen/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
+81        </provider>
+82
+83        <activity
+83-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:22:9-25:51
+84            android:name="com.sangcomz.fishbun.ui.album.AlbumActivity"
+84-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:23:13-71
+85            android:label="@string/album"
+85-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:24:13-42
+86            android:theme="@style/FishBunTheme" />
+86-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:25:13-48
+87        <activity
+87-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:26:9-28:51
+88            android:name="com.sangcomz.fishbun.ui.picker.PickerActivity"
+88-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:27:13-73
+89            android:theme="@style/FishBunTheme" />
+89-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:28:13-48
+90        <activity
+90-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:29:9-31:54
+91            android:name="com.sangcomz.fishbun.ui.detail.DetailActivity"
+91-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:30:13-73
+92            android:theme="@style/DetailViewTheme" />
+92-->[com.sangcomz:FishBun:0.11.2] /Users/alihazem/.gradle/caches/transforms-3/6b54f150cfee8f4ccfbbb06194c880bb/transformed/jetified-FishBun-0.11.2/AndroidManifest.xml:31:13-51
+93
+94        <uses-library
+94-->[androidx.window:window:1.0.0-beta04] /Users/alihazem/.gradle/caches/transforms-3/dee59bb480020f42d53c2ea15e4501f7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+95            android:name="androidx.window.extensions"
+95-->[androidx.window:window:1.0.0-beta04] /Users/alihazem/.gradle/caches/transforms-3/dee59bb480020f42d53c2ea15e4501f7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+96            android:required="false" />
+96-->[androidx.window:window:1.0.0-beta04] /Users/alihazem/.gradle/caches/transforms-3/dee59bb480020f42d53c2ea15e4501f7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+97        <uses-library
+97-->[androidx.window:window:1.0.0-beta04] /Users/alihazem/.gradle/caches/transforms-3/dee59bb480020f42d53c2ea15e4501f7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+98            android:name="androidx.window.sidecar"
+98-->[androidx.window:window:1.0.0-beta04] /Users/alihazem/.gradle/caches/transforms-3/dee59bb480020f42d53c2ea15e4501f7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+99            android:required="false" />
+99-->[androidx.window:window:1.0.0-beta04] /Users/alihazem/.gradle/caches/transforms-3/dee59bb480020f42d53c2ea15e4501f7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+100    </application>
+101
+102</manifest>

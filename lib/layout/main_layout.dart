@@ -93,14 +93,17 @@ class _HomeState extends State<MainLayout> with WidgetsBindingObserver {
           extendBodyBehindAppBar:_currentIndex == 0 ? Provider.of<HomeController>(context).bannerOpen:false,
           backgroundColor: Colors.transparent,
           body: _currentPage,
-          bottomNavigationBar: CustomNavigationBar(
-            currentIndex: _currentIndex,
-            onTabTapped: (int index) {
-              setState(() {
-                _currentIndex = index;
-                _currentPage = pages[index];
-              });
-            },
+          bottomNavigationBar: Padding(
+            padding:  EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: CustomNavigationBar(
+              currentIndex: _currentIndex,
+              onTabTapped: (int index) {
+                setState(() {
+                  _currentIndex = index;
+                  _currentPage = pages[index];
+                });
+              },
+            ),
           )),
     );
   }
