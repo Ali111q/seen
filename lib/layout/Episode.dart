@@ -11,6 +11,7 @@ import 'package:seen/model/show.dart';
 import 'package:seen/view/launch_screen.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 // ignore: library_prefixes
+import '../jj.dart';
 import '../utils/colors.dart' as myColors;
 import '../view/home.dart';
 
@@ -113,6 +114,18 @@ class _EpisodeScreenState extends State<EpisodeScreen>
                         : BannerItem(
                             Offset: _Offset,
                             banner: banner!,
+                            onTap: (){ Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return jj(
+                            link: [
+                              banner.url_480,
+                              banner.url_720,
+                              banner.url_1080
+                            ],
+                          );
+                        })).then((value) {
+                          setState(() {});
+                        });},
                           ),
                   ),
                   SliverList(

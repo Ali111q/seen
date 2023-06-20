@@ -1,0 +1,11 @@
+framework module better_player {
+  umbrella header "better_player-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module better_player.Swift {
+  header "better_player-Swift.h"
+  requires objc
+}

@@ -57,8 +57,8 @@ class _ContactUsState extends State<ContactUs> {
                             fontFamily: 'font',
                             fontSize: 22),
                       ),
-                      SvgPicture.asset(
-                        'assets/images/seen.svg',
+                      Image.asset(
+                        'assets/images/seen.png',
                         width: 100,
                       ),
                       Text(
@@ -106,60 +106,65 @@ class _ContactUsState extends State<ContactUs> {
                     color: Color(0xff0A3249),
                     borderRadius: BorderRadius.circular(33),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  child: Stack(
                     children: [
-                      setting!.asia == null
-                          ? Container()
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  'Asia',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 25),
+                      Image.asset('assets/images/call.png'),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          setting!.asia == null
+                              ? Container()
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      'Asia',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 25),
+                                    ),
+                                    Text(
+                                      setting.asia!,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 25),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  setting.asia!,
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 25),
-                                )
-                              ],
-                            ),
-                      setting.zain == null
-                          ? Container()
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  'Zain',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 25),
+                          setting.zain == null
+                              ? Container()
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      'Zain',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 25),
+                                    ),
+                                    Text(
+                                      setting.zain!,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 25),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  setting.zain!,
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 25),
+                          setting.korek == null
+                              ? Container()
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      'Korek',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 25),
+                                    ),
+                                    Text(
+                                      setting.korek!,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 25),
+                                    )
+                                  ],
                                 )
-                              ],
-                            ),
-                      setting.korek == null
-                          ? Container()
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  'Korek',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 25),
-                                ),
-                                Text(
-                                  setting.korek!,
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 25),
-                                )
-                              ],
-                            )
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -172,19 +177,33 @@ class _ContactUsState extends State<ContactUs> {
           elevation: 3,
           color: Color(0xff0A3249),
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 8),
+            // padding: EdgeInsets.symmetric(vertical: 8),
             width: MediaQuery.of(context).size.width * 0.9,
             height: MediaQuery.of(context).size.width * 0.2,
-            child: Center(
-              child: setting.email == null
-                  ? Container()
-                  : Text(
-                      setting.email!,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 26,
-                      ),
-                    ),
+            decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(33),
+            ),
+            child: ClipRRect(
+          borderRadius: BorderRadius.circular(33),
+              child: Stack(
+                children: [
+                  Positioned(
+                    right: 2,
+                    top: 11,
+                    child: Image.asset('assets/images/email.png')),
+                  Center(
+                    child: setting.email == null
+                        ? Container()
+                        : Text(
+                            setting.email!,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 26,
+                            ),
+                          ),
+                  ),
+                ],
+              ),
             ),
           ),
         )

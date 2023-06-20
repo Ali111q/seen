@@ -1,7 +1,9 @@
 # This is a generated file; do not edit or check into version control.
+better_player=/Users/alihazem/.pub-cache/hosted/pub.dev/better_player-0.0.83/
 flutter_plugin_android_lifecycle=/Users/alihazem/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.9/
 flutter_to_airplay=/Users/alihazem/.pub-cache/hosted/pub.dev/flutter_to_airplay-2.0.4/
 flutter_windowmanager=/Users/alihazem/.pub-cache/hosted/pub.dev/flutter_windowmanager-0.2.0/
+fluttertoast=/Users/alihazem/.pub-cache/hosted/pub.dev/fluttertoast-8.2.2/
 image_picker=/Users/alihazem/.pub-cache/hosted/pub.dev/image_picker-0.8.7/
 image_picker_android=/Users/alihazem/.pub-cache/hosted/pub.dev/image_picker_android-0.8.6/
 image_picker_for_web=/Users/alihazem/.pub-cache/hosted/pub.dev/image_picker_for_web-2.1.12/
@@ -19,6 +21,7 @@ shared_preferences_linux=/Users/alihazem/.pub-cache/hosted/pub.dev/shared_prefer
 shared_preferences_web=/Users/alihazem/.pub-cache/hosted/pub.dev/shared_preferences_web-2.0.5/
 shared_preferences_windows=/Users/alihazem/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.1.4/
 sqflite=/Users/alihazem/.pub-cache/hosted/pub.dev/sqflite-2.2.8+2/
+toast=/Users/alihazem/.pub-cache/hosted/pub.dev/toast-0.3.0/
 url_launcher=/Users/alihazem/.pub-cache/hosted/pub.dev/url_launcher-6.1.10/
 url_launcher_android=/Users/alihazem/.pub-cache/hosted/pub.dev/url_launcher_android-6.0.31/
 url_launcher_ios=/Users/alihazem/.pub-cache/hosted/pub.dev/url_launcher_ios-6.1.4/

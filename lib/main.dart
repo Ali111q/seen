@@ -19,24 +19,23 @@ import 'layout/register.dart';
 void main(List<String> args) {
   WidgetsFlutterBinding.ensureInitialized();
 
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) {
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual  ,overlays: [ SystemUiOverlay.top]);
-      // 
-  WidgetsBinding.instance!.addPostFrameCallback((_) {
-    print('object');
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual ,overlays:[ SystemUiOverlay.top] );
-  });
+    //
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      print('object');
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+          overlays: [SystemUiOverlay.top]);
+    });
 
-  GestureBinding.instance!.pointerRouter.addGlobalRoute((PointerEvent event) {
-    // Handle tap event
-    print('secondWorks');
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual ,overlays:[ SystemUiOverlay.top] );
-  });
-  
-  })
-  
-      .then((e) {
-        
+    GestureBinding.instance!.pointerRouter.addGlobalRoute((PointerEvent event) {
+      // Handle tap event
+      print('secondWorks');
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+          overlays: [SystemUiOverlay.top]);
+    });
+  }).then((e) {
     runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider<HomeController>(create: (_) => HomeController()),
@@ -71,9 +70,9 @@ class Home extends StatelessWidget {
                   Colors.transparent, // Customize the status bar color
               statusBarIconBrightness:
                   Brightness.light, // Customize the status bar icon color
-              systemNavigationBarColor:
-                  Colors.black,
-                  systemStatusBarContrastEnforced: false, // Customize the navigation bar color
+              systemNavigationBarColor: Colors.black,
+              systemStatusBarContrastEnforced:
+                  false, // Customize the navigation bar color
               systemNavigationBarIconBrightness:
                   Brightness.light, // Customize the navigation bar icon color
             ),
@@ -86,7 +85,7 @@ class Home extends StatelessWidget {
           '/home': (context) => MainLayout(),
           '/launch': (context) => VideoSplashScreen(),
           '/profile': (context) => ProfileScreen(),
-    
+
           // '/video-player': (context) => jj()
         },
       ),

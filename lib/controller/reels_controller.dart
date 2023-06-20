@@ -64,6 +64,7 @@ class ReelsController extends ChangeNotifier {
           reelVideos = [];
           count = json['data']['total'];
           for (var element in json['data']['data']) {
+            print(element);
             reelVideos.add(ReelVideo.fromJson(element));
           }
           notifyListeners();

@@ -12,6 +12,7 @@ import 'package:seen/model/ad.dart';
 import 'package:seen/model/episode.dart';
 import 'package:seen/model/tag.dart';
 import 'package:seen/view/launch_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../helper/overlay_loading.dart';
 import '../utils/colors.dart' as myColors;
 
@@ -31,9 +32,11 @@ class _MainScreenState extends State<MainScreen> {
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
 
-    Provider.of<HomeController>(context, listen: false)
-        .getHome()
-        .then((value) {});
+    // Provider.of<HomeController>(context, listen: false)
+    //     .getHome()
+    //     .then((value) {});
+    Provider.of<HomeController>(context, listen: false).changebanner(true);
+    Provider.of<HomeController>(context, listen: false).getCats();
   }
 
   @override
@@ -127,12 +130,26 @@ class _MainScreenState extends State<MainScreen> {
                                   return BannerItem(
                                     Offset: _Offset,
                                     banner: banner[index],
+                                    onTap: (){
+                                       Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return jj(
+                            link: [
+                              banner[index].url_480,
+                              banner[index].url_720,
+                              banner[index].url_1080
+                            ],
+                          );
+                        })).then((value) {
+                          setState(() {_scrollController.animateTo(500, duration: Duration(microseconds: 2), curve: Curves.bounceIn);});
+                        });
+                                    },
                                   );
                                 },
                                 itemCount: bannerCount,
                                 autoplay: banner.length == 1 ? false : true,
                                 duration: 1000,
-                                loop: banner.length == 1 ? false : true,
+                                loop: true,
                               )),
                     SliverList(
                       delegate: SliverChildListDelegate([
@@ -163,9 +180,11 @@ class _MainScreenState extends State<MainScreen> {
 class HomeAdd extends StatelessWidget {
   HomeAdd({
     this.ads,
+
     super.key,
   });
   List<Ad?>? ads;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -175,11 +194,22 @@ class HomeAdd extends StatelessWidget {
       child: Swiper(
         itemCount: ads!.length,
         loop: ads!.length != 1,
-        itemBuilder: (context, index) => Container(
-          decoration: BoxDecoration(border: Border.all(color: Colors.white)),
-          child: NetworkImageChecker(
-            imageUrl: ads![index]!.file,
-            fit: BoxFit.fill,
+        itemBuilder: (context, index) => GestureDetector(
+          onTap: ()async {
+            if (await canLaunchUrl(Uri.parse(ads![index]!.website?? ads![index]!.instagram??''))) {
+            launchUrl(Uri.parse(ads![index]!.website?? ads![index]!.instagram??''));
+            }else{
+              toast('invalid url');
+            }
+    
+
+          },
+          child: Container(
+            decoration: BoxDecoration(border: Border.all(color: Colors.white)),
+            child: NetworkImageChecker(
+              imageUrl: ads![index]!.file,
+              fit: BoxFit.fill,
+            ),
           ),
         ),
       ),
@@ -187,15 +217,22 @@ class HomeAdd extends StatelessWidget {
   }
 }
 
-class BannerItem extends StatelessWidget {
+class BannerItem extends StatefulWidget {
   const BannerItem({
     super.key,
     required double Offset,
-    required this.banner,
+    required this.banner, 
+    required this.onTap
   }) : _Offset = Offset;
 
   final double _Offset;
   final Episode banner;
+final onTap;
+  @override
+  State<BannerItem> createState() => _BannerItemState();
+}
+
+class _BannerItemState extends State<BannerItem> {
   @override
   Widget build(BuildContext context) {
     return FlexibleSpaceBar(
@@ -212,7 +249,7 @@ class BannerItem extends StatelessWidget {
               },
               blendMode: BlendMode.dstIn,
               child: NetworkImageChecker(
-                imageUrl: banner.thumbnail,
+                imageUrl: widget.banner.thumbnail,
                 fit: BoxFit.fitWidth,
                 width: MediaQuery.of(context).size.width,
               ),
@@ -241,20 +278,21 @@ class BannerItem extends StatelessWidget {
               left: MediaQuery.of(context).size.width * 0.2,
               top: MediaQuery.of(context).size.height *
                   0.35 *
-                  ((400 - _Offset) / 400),
+                  ((400 - widget._Offset) / 400),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    banner.local_name!,
+                    widget.banner.local_name!,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
                     ),
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ...banner.tags.map((e) => Text(
+                      ...widget.banner.tags.map((e) => Text(
                             ' $e .',
                             style: TextStyle(
                               color: Colors.grey,
@@ -268,22 +306,13 @@ class BannerItem extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    'الحلقة ${banner.episode_num} الموسم ${banner.season_num}',
+                    'الحلقة ${widget.banner.episode_num} الموسم ${widget.banner.season_num}',
                     style: TextStyle(color: Colors.white),
                   ),
                   ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return jj(
-                            link: [
-                              banner.url_480,
-                              banner.url_720,
-                              banner.url_1080
-                            ],
-                          );
-                        }));
-                      },
+                      onPressed: 
+                       widget.onTap
+                      ,
                       child: Text('عرض الان',
                           style: TextStyle(color: Colors.black)),
                       style: ElevatedButton.styleFrom(
@@ -322,6 +351,7 @@ class _SectionWidgetState extends State<SectionWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Align(
             alignment: Alignment.centerRight,
@@ -339,61 +369,66 @@ class _SectionWidgetState extends State<SectionWidget> {
               ? Container(
                   height: MediaQuery.of(context).size.height * 0.3,
                   child: LaunchScreen())
-              : Row(children: [
-                  ...widget.tag.shows!.map((e) => GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => EpisodeScreen(e!.id),
-                          ));
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(6),
-                          width: MediaQuery.of(context).size.width * 0.367,
-                          height: MediaQuery.of(context).size.width * 0.5,
-                          decoration: BoxDecoration(boxShadow: [
-                            BoxShadow(
-                              offset: Offset(4, 7),
-                              color: Colors.black,
-                              blurRadius: 3,
-                            )
-                          ]),
-                          child: Stack(
-                            children: [
-                              SizedBox.expand(
-                                  child: NetworkImageChecker(
-                                imageUrl: e!.image!,
-                                fit: BoxFit.fitHeight,
-                              )),
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(),
-                                    Container(),
-                                    Text(
-                                      e!.name,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          shadows: [
-                                            Shadow(
-                                                blurRadius: 6,
-                                                color: Colors.white
-                                                    .withOpacity(0.4))
-                                          ]),
-                                    )
-                                  ],
+              : Align(
+                      alignment: Alignment.centerRight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ...widget.tag.shows!.map((e) => GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => EpisodeScreen(e!.id),
+                            ));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(6),
+                            width: MediaQuery.of(context).size.width * 0.367,
+                            height: MediaQuery.of(context).size.width * 0.5,
+                            decoration: BoxDecoration(boxShadow: [
+                              BoxShadow(
+                                offset: Offset(4, 7),
+                                color: Colors.black,
+                                blurRadius: 3,
+                              )
+                            ]),
+                            child: Stack(
+                              children: [
+                                SizedBox.expand(
+                                    child: NetworkImageChecker(
+                                  imageUrl: e!.image!,
+                                  fit: BoxFit.fitHeight,
+                                )),
+                                Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(),
+                                      Container(),
+                                      Text(
+                                        e!.name,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            shadows: [
+                                              Shadow(
+                                                  blurRadius: 6,
+                                                  color: Colors.white
+                                                      .withOpacity(0.4))
+                                            ]),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ))
-                ]),
+                        ))
+                  ]),
+              ),
         ),
         Container(
           height: 30,

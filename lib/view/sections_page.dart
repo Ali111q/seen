@@ -19,7 +19,7 @@ class _SectionsPageState extends State<SectionsPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<HomeController>(context, listen: false).getCats();
+   
   }
 
   @override

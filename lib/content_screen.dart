@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:seen/like_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -28,16 +31,32 @@ class _ContentScreenState extends State<ContentScreen> {
     initializePlayer();
   }
 
-  Future initializePlayer() async {
-    _videoPlayerController = VideoPlayerController.network(widget.src!);
-    await Future.wait([_videoPlayerController.initialize()]);
+ Future<void> initializePlayer() async {
+    print(widget.src);
+    // final cachedVideoPath = await cacheNetworkVideo(widget.src!);
+
+    _videoPlayerController = VideoPlayerController.network(widget.ad.file);
+    // await _videoPlayerController.initialize();
+
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController,
       autoPlay: true,
       showControls: false,
+      autoInitialize: true,
       looping: true,
     );
+    _videoPlayerController.addListener(() { if (_videoPlayerController.value.isInitialized) {
     setState(() {});
+      
+    }});
+    _chewieController!.setVolume(0);
+
+  }
+    Future<String> cacheNetworkVideo(String videoUrl) async {
+    final videoCacheManager = CacheManager(Config('cacheCustomkey',
+        stalePeriod: const Duration(hours: 4), maxNrOfCacheObjects: 100));
+    final file = await videoCacheManager.getSingleFile(videoUrl, );
+    return file.path;
   }
 
   @override
@@ -46,6 +65,7 @@ class _ContentScreenState extends State<ContentScreen> {
     _chewieController!.dispose();
     super.dispose();
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -77,47 +97,51 @@ class _ContentScreenState extends State<ContentScreen> {
         ),
         _chewieController != null &&
                 _chewieController!.videoPlayerController.value.isInitialized
-            ? Container(
-                height: MediaQuery.of(context).size.height * 0.28,
-                child: GestureDetector(
-                  onTap: () {
-                    if (_chewieController != null) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => VideoScreen(
-                            videoPlayerController:
-                                _chewieController!.videoPlayerController,
-                            name: widget.ad.local_title,
+            ? Hero(
+              tag: widget.ad.id.toString(),
+              child: Container(
+                  height: MediaQuery.of(context).size.height * 0.28,
+                  child: GestureDetector(
+                    onTap: () {
+                      if (_videoPlayerController.value.isInitialized) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => VideoScreen(
+                              tag: widget.ad.id.toString(),
+                              videoPlayerController:
+                                  _chewieController!.videoPlayerController,
+                              name: widget.ad.local_title,
+                            ),
                           ),
+                        );
+                      }
+                    },
+                    child: Stack(
+                      children: [
+                        Chewie(
+                          controller: _chewieController!,
                         ),
-                      );
-                    }
-                  },
-                  child: Stack(
-                    children: [
-                      Chewie(
-                        controller: _chewieController!,
-                      ),
-                      Positioned(
-                        child: VideoProgressIndicator(_videoPlayerController,
-                            allowScrubbing: false),
-                      ),
-                      if (!_playing)
-                        Center(
-                          child: Icon(
-                            Icons.play_arrow,
-                            size: 44,
-                            color: Colors.white,
-                          ),
-                        )
-                    ],
+                        Positioned(
+                          child: VideoProgressIndicator(_chewieController!.videoPlayerController,
+                              allowScrubbing: false),
+                        ),
+                        if (!_playing)
+                          Center(
+                            child: Icon(
+                              Icons.play_arrow,
+                              size: 44,
+                              color: Colors.white,
+                            ),
+                          )
+                      ],
+                    ),
                   ),
                 ),
-              )
-            : Image.asset(
-                'assets/images/loading.gif',
-                height: MediaQuery.of(context).size.height * 0.4,
+            )
+            : Image.network(
+                widget.ad.thumbnail!,
+                // height: MediaQuery.of(context).size.height * 0.4,
               ),
         Padding(
           padding: const EdgeInsets.all(10.0),

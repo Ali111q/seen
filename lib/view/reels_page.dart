@@ -30,7 +30,9 @@ class _ReelsPageState extends State<ReelsPage> {
         children: [
           ...Provider.of<ReelsController>(context)
               .reelsCat
-              .map((e) => ReelPgaeWidget(e))
+              .map((e) {
+                print(e.id);
+                return ReelPgaeWidget(e);})
         ],
       ),
     );
@@ -45,6 +47,7 @@ class ReelPgaeWidget extends StatelessWidget {
   final Reel reel;
   @override
   Widget build(BuildContext context) {
+print(reel.local_name);
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(

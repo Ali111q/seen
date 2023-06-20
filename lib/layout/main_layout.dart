@@ -29,8 +29,8 @@ class _HomeState extends State<MainLayout> with WidgetsBindingObserver {
     ContactUs(),
     SectionsPage(),
     AdsPage(),
-  ];
-  int _currentIndex = 0;
+  ].reversed.toList();
+  int _currentIndex = 4;
   Widget _currentPage = MainScreen();
   void onTabTapped(int index) {
     setState(() {
@@ -59,6 +59,7 @@ class _HomeState extends State<MainLayout> with WidgetsBindingObserver {
         Provider.of<UserController>(context, listen: false).getUserFromShared();
       }
     });
+    Provider.of<HomeController>(context, listen: false).getHome();
     WidgetsBinding.instance.addObserver(this);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.top]);
@@ -90,20 +91,19 @@ class _HomeState extends State<MainLayout> with WidgetsBindingObserver {
       )),
       child: Scaffold(
           appBar: MyAppBar(context, titleText: 'titleText'),
-          extendBodyBehindAppBar:_currentIndex == 0 ? Provider.of<HomeController>(context).bannerOpen:false,
+          extendBodyBehindAppBar: _currentIndex == 4
+              ? Provider.of<HomeController>(context).bannerOpen
+              : false,
           backgroundColor: Colors.transparent,
           body: _currentPage,
-          bottomNavigationBar: Padding(
-            padding:  EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: CustomNavigationBar(
-              currentIndex: _currentIndex,
-              onTabTapped: (int index) {
-                setState(() {
-                  _currentIndex = index;
-                  _currentPage = pages[index];
-                });
-              },
-            ),
+          bottomNavigationBar: CustomNavigationBar(
+            currentIndex: _currentIndex,
+            onTabTapped: (int index) {
+              setState(() {
+                _currentIndex = index;
+                _currentPage = pages[index];
+              });
+            },
           )),
     );
   }
@@ -125,47 +125,116 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     final h = MediaQuery.of(context).size.height;
     final w = MediaQuery.of(context).size.width;
 
-    return SizedBox(
-      height: h * 0.08,
-      child: Container(
-        color: Color(0xff161616),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 14.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              buildNavBarItem(
-                  iconPath: 'assets/images/ads.svg',
-                  iconWidth: w * 0.1,
-                  index: 4,
-                  isSvg: true,
-                  selectedSvg: 'assets/images/ads_selected.svg'
-                  ),
-              buildNavBarItem(
-                  iconPath: 'assets/images/sections.svg',
-                  iconWidth: w * 0.1,
-                  index: 3,
-                  isSvg: true),
-              buildNavBarItem(
-                  iconPath: 'assets/images/call.svg',
-                  iconWidth: w * 0.80,
-                  index: 2,
-                  isSvg: true),
-              buildNavBarItem(
-                  iconPath: 'assets/images/reel.svg',
-                  iconWidth: w * 0.80,
-                  index: 1,
-                  isSvg: true),
-              buildNavBarItem(
-                  iconPath: 'assets/images/seen.svg',
-                  iconWidth: w * 0.14,
-                  index: 0,
-                  isSvg: true),
-            ],
-          ),
-        ),
-      ),
+//     return SizedBox(
+
+//       child: Container(
+//         color: Color(0xff161616),
+//  height: h * 0.085,
+
+//         child: Padding(
+//           padding: const EdgeInsets.only(top: 15.0),
+//           child: Row(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//             children: [
+//               buildNavBarItem(
+//                   iconPath: 'assets/images/ads.svg',
+//                   iconWidth: w * 0.1,
+//                   index: 4,
+//                   isSvg: true,
+//                   selectedSvg: 'assets/images/ads_selected.svg'
+//                   ),
+//               buildNavBarItem(
+//                   iconPath: 'assets/images/sections.svg',
+//                   iconWidth: w * 0.1,
+//                   index: 3,
+//                   isSvg: true),
+//               buildNavBarItem(
+//                   iconPath: 'assets/images/call.svg',
+//                   iconWidth: w * 0.80,
+//                   index: 2,
+//                   isSvg: true),
+//               buildNavBarItem(
+//                   iconPath: 'assets/images/reel.svg',
+//                   iconWidth: w * 0.80,
+//                   index: 1,
+//                   isSvg: true),
+//               buildNavBarItem(
+//                   iconPath: 'assets/images/seen.png',
+//                   iconWidth: w * 0.14,
+//                   index: 0,
+
+//                   isSvg: false),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+
+    return Theme(
+      data: ThemeData(
+          splashColor: Colors.transparent, highlightColor: Colors.transparent),
+      child: BottomNavigationBar(
+          backgroundColor: Color(0xff161616),
+          onTap: (e) {
+            widget.onTabTapped(e);
+          },
+          useLegacyColorScheme: false,
+          // selectedItemColor: Colors.green,
+          enableFeedback: false,
+          type: BottomNavigationBarType.fixed,
+          currentIndex: widget.currentIndex,
+          selectedIconTheme: IconThemeData(color: Colors.white),
+          // iconSize: 16,
+          items: [
+            BottomNavigationBarItem(
+              backgroundColor: Color(0xff161616),
+              icon: SvgPicture.asset('assets/images/ads.svg'),
+              label: '',
+              activeIcon: SvgPicture.asset(
+                'assets/images/ads_selected.svg',
+
+              ),
+            ),
+            BottomNavigationBarItem(
+              backgroundColor: Color(0xff161616),
+              icon: SvgPicture.asset(
+                'assets/images/section.svg',
+                  width: 30,
+              ),
+              label: '',
+              activeIcon: SvgPicture.asset(
+                'assets/images/section.svg',
+                color: Colors.white,
+                width: 30,
+              ),
+            ),
+            BottomNavigationBarItem(
+              backgroundColor: Color(0xff161616),
+              icon: SvgPicture.asset('assets/images/call.svg'),
+              label: '',
+              activeIcon: SvgPicture.asset(
+                'assets/images/call.svg',
+                color: Colors.white,
+              ),
+            ),
+            BottomNavigationBarItem(
+              backgroundColor: Color(0xff161616),
+              icon: SvgPicture.asset('assets/images/reel.svg'),
+              label: '',
+              activeIcon: SvgPicture.asset(
+                'assets/images/reel.svg',
+                color: Colors.white,
+              ),
+            ),
+            BottomNavigationBarItem(
+                backgroundColor: Color(0xff161616),
+                icon: Image.asset(
+                  'assets/images/seen.png',
+                  height: 27,
+                ),
+                label: '')
+          ]),
     );
   }
 
@@ -175,14 +244,19 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       required int index,
       required bool isSvg,
       String? selectedSvg}) {
-    return Expanded(
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.16,
       child: GestureDetector(
         onTap: () => widget.onTabTapped(index),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15.0),
           child: isSvg
               ? SvgPicture.asset(
-                 selectedSvg !=null? widget.currentIndex == index? selectedSvg: iconPath: iconPath,
+                  selectedSvg != null
+                      ? widget.currentIndex == index
+                          ? selectedSvg
+                          : iconPath
+                      : iconPath,
                   width: iconWidth,
                   color: selectedSvg == null
                       ? index == 0
@@ -192,12 +266,12 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                               : Colors.grey
                       : null,
                 )
-              : ImageIcon(
-                  AssetImage(
+              : Image(
+                  image: AssetImage(
                     iconPath,
                   ),
-                  color:
-                      widget.currentIndex == index ? Colors.white : Colors.grey,
+                  // color:
+                  //     widget.currentIndex == index ? Colors.white : Colors.grey,
                 ),
         ),
       ),

@@ -1,0 +1,11 @@
+framework module HLSCachingReverseProxyServer {
+  umbrella header "HLSCachingReverseProxyServer-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module HLSCachingReverseProxyServer.Swift {
+  header "HLSCachingReverseProxyServer-Swift.h"
+  requires objc
+}

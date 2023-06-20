@@ -52,24 +52,10 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
         showControls: false,
         // fullScreenByDefault: true,
         // customControls: Center(child: Text('sdads')),
-        aspectRatio: MediaQuery.of(widget.context).size.height /
+        aspectRatio: (MediaQuery.of(widget.context).size.width*1.7)/
             MediaQuery.of(widget.context).size.width);
     _videoPlayerController!.addListener(() {
-        if(_chewieController!.videoPlayerController.value.isBuffering)
-        {
-          print('object');
-          setState(() {
-          isLoading = true;
-            
-          });
-        }else{
-          print('notObject');
-
-            setState(() {
-          isLoading = false;
-            
-          });
-        }
+       
       setState(() {
         _bufferedDuration = _videoPlayerController!.value.buffered.fold(
             Duration.zero,
@@ -87,7 +73,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
             _videoPlayerController!.value.duration.inMilliseconds.toDouble();
       });
     });
-    setState(() {});
+    setState(() {isLoading = false;});
     Provider.of<HomeController>(context, listen: false).getAdInVideo();
   }
 
@@ -124,8 +110,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
               autoPlay: true,
               looping: true,
               showControls: false,
-              aspectRatio: MediaQuery.of(widget.context).size.width /
-                  MediaQuery.of(widget.context).size.height);
+              aspectRatio: (MediaQuery.of(widget.context).size.width*1.7)/MediaQuery.of(widget.context).size.width);
 
           setState(() {
             _chewieController = _newChewieController;
@@ -181,8 +166,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
               autoPlay: true,
               looping: true,
               showControls: false,
-              aspectRatio: MediaQuery.of(widget.context).size.width /
-                  MediaQuery.of(widget.context).size.height);
+              aspectRatio: (MediaQuery.of(widget.context).size.width*1.7)/MediaQuery.of(widget.context).size.width);
 
           setState(() {
             _chewieController = _newChewieController;
@@ -238,8 +222,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
               autoPlay: true,
               looping: true,
               showControls: false,
-              aspectRatio: MediaQuery.of(widget.context).size.width /
-                  MediaQuery.of(widget.context).size.height);
+              aspectRatio: (MediaQuery.of(widget.context).size.width*1.7)/MediaQuery.of(widget.context).size.width);
 
           setState(() {
             _chewieController = _newChewieController;
@@ -403,8 +386,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                       ),
                       Spacer(),
                       Center(
-                        child: !_videoPlayerController!.value.isInitialized &&
-                                !_videoPlayerController!.value.isBuffering
+                        child: !_videoPlayerController!.value.isInitialized 
                             ? CircularProgressIndicator(
                                 color: Colors.white,
                               )
@@ -432,7 +414,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                                                 }
                                               : null,
                                           icon: Icon(Icons.replay_5_sharp),
-                                          iconSize: 60,
+                                          iconSize: 40,
                                           color: Colors.white.withOpacity(0.6),
                                         ),
                                       ),
@@ -463,13 +445,13 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                                           child: isPlay
                                               ? Icon(
                                                   Icons.play_arrow,
-                                                  size: 80,
+                                                  size: 60,
                                                   color: Colors.black
                                                       .withOpacity(0.6),
                                                 )
                                               : Icon(
                                                   Icons.pause_sharp,
-                                                  size: 80,
+                                                  size: 60,
                                                   color: Colors.black
                                                       .withOpacity(0.6),
                                                 ),
@@ -491,7 +473,7 @@ class _ChewieDemoState extends State<VideoPlayerWidget> {
                                                 }
                                               : null,
                                           icon: Icon(Icons.forward_5_rounded),
-                                          iconSize: 60,
+                                          iconSize: 40,
                                           color: Colors.white.withOpacity(0.6),
                                         ),
                                       ),

@@ -161,9 +161,10 @@ Future<void> getCachedEpisode(id, int index, {sections}) async {
           } else {
             catTags[index].addShow(Show.fromJson(element));
           }
+            notifyListeners();
         }
 
-        notifyListeners();
+      
       }
     }
   } catch (e) {}

@@ -50,7 +50,7 @@ class _ReelSlideNavigatorState extends State<ReelSlideNavigator>
   Widget build(BuildContext context) {
     List<ReelVideo> reels = Provider.of<ReelsController>(context).reelVideos;
     int count = Provider.of<ReelsController>(context).count;
-
+  print(reels);
     return Scaffold(
       backgroundColor: Colors.black,
       body: isLoading
@@ -61,6 +61,7 @@ class _ReelSlideNavigatorState extends State<ReelSlideNavigator>
                   child: reels.length>1? Swiper(
                     controller: _controller,
                     itemBuilder: (BuildContext context, int index) {
+                      print('object');
                       return ContentScreen(
                         src: reels[index].url,
                         reel: reels[index],

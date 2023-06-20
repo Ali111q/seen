@@ -3,6 +3,7 @@ import 'package:flutter_gif/flutter_gif.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controller/setting_controller.dart';
 import 'package:seen/controller/user_controller.dart';
+import 'package:toast/toast.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoSplashScreen extends StatefulWidget {
@@ -12,6 +13,9 @@ class VideoSplashScreen extends StatefulWidget {
 
 class _VideoSplashScreenState extends State<VideoSplashScreen>
     with SingleTickerProviderStateMixin {
+
+  ToastContext toastContext = ToastContext();
+
   // late FlutterGifController controller;
   @override
   void initState() {
@@ -19,6 +23,7 @@ class _VideoSplashScreenState extends State<VideoSplashScreen>
 
     Provider.of<UserController>(context, listen: false).getUserFromShared();
     // controller = FlutterGifController(vsync: this);
+    toastContext.init(context);
 
     _push();
   }

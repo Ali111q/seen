@@ -47,14 +47,14 @@ class MyAppBar extends AppBar {
                 Container(
                   width: 20,
                 ),
-                if (Platform.isIOS)
-                  AirPlayRoutePickerView(
-                    tintColor: Colors.white,
-                    activeTintColor: Colors.white,
-                    backgroundColor: Colors.transparent,
-                    onClosePickerView: () {},
-                    onShowPickerView: () {},
-                  ),
+                // if (Platform.isIOS)
+                //   AirPlayRoutePickerView(
+                //     tintColor: Colors.white,
+                //     activeTintColor: Colors.white,
+                //     backgroundColor: Colors.transparent,
+                //     onClosePickerView: () {},
+                //     onShowPickerView: () {},
+                //   ),
               ],
             ),
             actions: [

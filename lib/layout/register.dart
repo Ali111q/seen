@@ -114,7 +114,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Provider.of<UserController>(context, listen: false)
                       .register(email.text, name.text, password.text)
                       .then((value) {
-                    Navigator.of(context).pop();
+                    // Navigator.of(context).pop();
                   });
                 },
                 child: ProfileButton(
@@ -132,8 +132,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Container(
                 height: 30,
               ),
-              SvgPicture.asset(
-                'assets/images/seen.svg',
+              Image.asset(
+                'assets/images/seen.png',
                 width: 150,
               ),
             ],

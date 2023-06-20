@@ -54,7 +54,7 @@ class ReelVideo {
         comments_count: json['comments_count'],
         likes_count: json['likes_count'],
         thumbnail: json['thumbnail'],
-        ad: Ad.fromJson(json['ads']),
+        ad: json['ads'] != null ? Ad.fromJson(json['ads']) : null,
         isLiked: json['isLiked']);
   }
 }

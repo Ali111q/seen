@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:overlay_support/overlay_support.dart';
 import 'package:seen/helper/image_picker.dart';
 import 'package:seen/utils/constant.dart';
 import '../model/user.dart';
@@ -25,8 +27,10 @@ class UserController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> login(String email, String password) async {
+  Future<bool?> login(String email, String password) async {
     _service.initialize();
+    try {
+      
     http.Response _res = await http.post(Uri.parse(loginUrl),
         body: {'email': email, 'password': password},
         headers: {'Accept': 'application/json'});
@@ -36,10 +40,33 @@ class UserController extends ChangeNotifier {
         user = User.fromJson(json['data']);
         if (user != null) {
           _service.saveUser(user!);
+    notifyListeners();
+
+          return true;
         }
       }
+      
+      else{
+        print('object');
+       toast(json['message']);
+      }
     }
-    notifyListeners();
+    else if(_res.statusCode==404){
+      var json = await jsonDecode(_res.body);
+
+       toast(json['message']);
+        
+      }
+    else{
+       print('object');
+       toast('error has been occurred');
+
+       
+    }
+    } catch (e) {
+       toast('error has been occurred');
+      
+    }
   }
 
   Future<void> register(String email, String name, String password) async {
@@ -60,6 +87,15 @@ class UserController extends ChangeNotifier {
         user = User.fromJson(json['data']);
         _service.saveUser(user!);
       }
+    }
+     else if(_res.statusCode==404){
+      var json = await jsonDecode(_res.body);
+
+       toast(json['message']);
+        
+      }
+    else{
+      toast(_res.statusCode.toString());
     }
     notifyListeners();
   }

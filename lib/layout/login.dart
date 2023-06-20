@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import '../controller/user_controller.dart';
 import "../utils//colors.dart" as myColors;
@@ -15,11 +16,15 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+late FToast fToast;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+      fToast = FToast();
+    // if you want to use context from globally instead of content we need to pass navigatorKey.currentContext!
+    fToast.init(context);
   }
 
   @override
@@ -47,8 +52,8 @@ class _LoginState extends State<Login> {
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
             toolbarHeight: h * 0.15,
-            title: SvgPicture.asset(
-              'assets/images/seen.svg',
+            title: Image.asset(
+              'assets/images/seen.png',
               width: 150,
             ),
             centerTitle: true,
@@ -80,7 +85,11 @@ class _LoginState extends State<Login> {
                     Provider.of<UserController>(context, listen: false)
                         .login(email.text, password.text)
                         .then((value) {
+                          
+                     if (value!=null) {
+                       
                       Navigator.of(context).pop();
+                     }
                     });
                   },
                   child: ProfileButton(
@@ -125,41 +134,41 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                 ),
-                ProfileButton(
-                    w: w,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Gmail',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 27,
-                                fontWeight: FontWeight.w600)),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        SvgPicture.asset('assets/images/gmail.svg')
-                      ],
-                    )),
+                // ProfileButton(
+                //     w: w,
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.center,
+                //       children: [
+                //         Text('Gmail',
+                //             style: TextStyle(
+                //                 color: Colors.white,
+                //                 fontSize: 27,
+                //                 fontWeight: FontWeight.w600)),
+                //         SizedBox(
+                //           width: 15,
+                //         ),
+                //         SvgPicture.asset('assets/images/gmail.svg')
+                //       ],
+                //     )),
                 SizedBox(
                   height: 30,
                 ),
-                ProfileButton(
-                    w: w,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('facebook',
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 27,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'font')),
-                        SizedBox(
-                          width: 15,
-                        ),
-                      ],
-                    )),
+                // ProfileButton(
+                //     w: w,
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.center,
+                //       children: [
+                //         Text('facebook',
+                //             style: TextStyle(
+                //                 color: Colors.blue,
+                //                 fontSize: 27,
+                //                 fontWeight: FontWeight.w600,
+                //                 fontFamily: 'font')),
+                //         SizedBox(
+                //           width: 15,
+                //         ),
+                //       ],
+                //     )),
                 Padding(
                   padding: const EdgeInsets.only(top: 22.0, right: 40),
                   child: Row(
@@ -170,7 +179,8 @@ class _LoginState extends State<Login> {
               ],
             ),
           ),
-        ));
+        )
+        );
   }
 }
 

@@ -7,10 +7,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:seen/controller/reels_controller.dart';
 import 'package:seen/controller/user_controller.dart';
+import 'package:seen/helper/video_player.dart';
 
 import 'package:video_player/video_player.dart';
 
 import 'model/reel.dart';
+
 
 class ContentScreen extends StatefulWidget {
   final String src;
@@ -45,9 +47,9 @@ class _ContentScreenState extends State<ContentScreen>
         curve: Curves.easeInOut,
       ),
     );
-    initializePlayer().then((value) {
-      setState(() {});
-    });
+    // initializePlayer().then((value) {
+    //   setState(() {});
+    // });
     Provider.of<ReelsController>(context, listen: false).view(
       widget.reel.id,
     );
@@ -77,13 +79,13 @@ class _ContentScreenState extends State<ContentScreen>
     return file.path;
   }
 
-  @override
-  void dispose() {
-    _videoPlayerController.dispose();
-    _chewieController!.dispose();
-    _animationController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _videoPlayerController.dispose();
+  //   _chewieController!.dispose();
+  //   _animationController.dispose();
+  //   super.dispose();
+  // }
 
   void _handleDoubleTap() {
     setState(() {
@@ -118,7 +120,7 @@ class _ContentScreenState extends State<ContentScreen>
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onLongPress: () {
-        if (_chewieController != null &&
+        if (_videoPlayerController.value.isInitialized &&
             _chewieController!.videoPlayerController.value.isInitialized) {
           _videoPlayerController.pause();
           setState(() {
@@ -127,7 +129,7 @@ class _ContentScreenState extends State<ContentScreen>
         }
       },
       onLongPressEnd: (e) {
-        if (_chewieController != null &&
+        if (_videoPlayerController.value.isInitialized &&
             _chewieController!.videoPlayerController.value.isInitialized) {
           _videoPlayerController.play();
           setState(() {
@@ -136,7 +138,7 @@ class _ContentScreenState extends State<ContentScreen>
         }
       },
       onLongPressCancel: () {
-        if (_chewieController != null &&
+        if (_videoPlayerController.value.isInitialized &&
             _chewieController!.videoPlayerController.value.isInitialized) {
           _videoPlayerController.play();
           setState(() {
@@ -145,7 +147,7 @@ class _ContentScreenState extends State<ContentScreen>
         }
       },
       onLongPressMoveUpdate: (e) {
-        if (_chewieController != null &&
+        if (_videoPlayerController.value.isInitialized&&
             _chewieController!.videoPlayerController.value.isInitialized) {
           _videoPlayerController.play();
           setState(() {
@@ -157,138 +159,16 @@ class _ContentScreenState extends State<ContentScreen>
       child: Stack(
         fit: StackFit.expand,
         children: [
-          if (_chewieController != null &&
-              _chewieController!.videoPlayerController.value.isInitialized)
-            Chewie(
-              controller: _chewieController!,
-            )
-          else
-            Image.asset(
-              'assets/images/loading.gif',
-              height: MediaQuery.of(context).size.width * 0.8,
-            ),
-          AnimatedOpacity(
-            duration: Duration(milliseconds: 100),
-            opacity: _chewieController != null && _showControlls ? 1 : 0,
-            child: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                    Colors.transparent,
-                    Colors.black.withOpacity(0.2)
-                  ])),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          if (Provider.of<UserController>(context,
-                                      listen: false)
-                                  .user !=
-                              null) {
-                            setState(() {
-                              widget.isLiked = !widget.isLiked;
-                            });
-                            Provider.of<ReelsController>(context, listen: false)
-                                .like(
-                                    widget.reel.id,
-                                    Provider.of<UserController>(context,
-                                            listen: false)
-                                        .user!
-                                        .token);
-                          } else {
-                            _videoPlayerController.pause();
-                            Navigator.of(context)
-                                .pushNamed('/login')
-                                .then((value) {
-                              _videoPlayerController.play();
-                            });
-                          }
-                        },
-                        icon: Icon(
-                          Icons.favorite,
-                          color: widget.isLiked ? Colors.red : Colors.white,
-                        ),
-                      ),
-                      Text(
-                        widget.reel.likes_count.toString(),
-                        style: TextStyle(color: Colors.white, fontSize: 19),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          if (Provider.of<UserController>(context,
-                                      listen: false)
-                                  .user !=
-                              null) {
-                            showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  return Comments(id: widget.reel.id);
-                                });
-                          } else {
-                            _videoPlayerController.pause();
-                            Navigator.of(context)
-                                .pushNamed('/login')
-                                .then((value) {
-                              _videoPlayerController.play();
-                            });
-                          }
-                        },
-                        icon: SvgPicture.asset('assets/images/comment.svg'),
-                      ),
-                      Text(
-                        widget.reel.comments_count.toString(),
-                        style: TextStyle(color: Colors.white, fontSize: 19),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.asset(
-                            'assets/images/seen_colorsless.svg'),
-                      ),
-                      Text(
-                        widget.reel.views_count.toString(),
-                        style: TextStyle(color: Colors.white, fontSize: 19),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          widget.reel.title,
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        )
-                      ],
-                    ),
-                  ),
-                  widget.reel.ad!=null?
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.6,
-                            height: MediaQuery.of(context).size.width * 0.06,
-                            color: Colors.white,
-                            child: Image.network(widget.reel.ad!.file),
-                          )
-                        ],
-                      ),
-                    ):Container(),
-                  Container(
-                    height: 50,
-                  )
-                ],
-              ),
-            ),
-          ),
+          // if (_videoPlayerController.value.isInitialized &&
+          //     _chewieController!.videoPlayerController.value.isInitialized)
+           VidePlayerReel(videoUrl: widget.reel.url, src: widget.src, reel: widget.reel, isLiked: widget.isLiked,)
+          // else
+          //   Image.asset(
+          //     'assets/images/loading.gif',
+          //     height: MediaQuery.of(context).size.width * 0.8,
+          //   )
+          ,
+         
           Center(
             child: AnimatedOpacity(
               duration: Duration(milliseconds: 300),
