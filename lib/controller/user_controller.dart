@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:overlay_support/overlay_support.dart';
 import 'package:seen/helper/image_picker.dart';
