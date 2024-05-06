@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "665539239291",
+    "project_id": "seen-926c4",
+    "storage_bucket": "seen-926c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665539239291:android:75010ee57665b7a787f1de",
+        "android_client_info": {
+          "package_name": "com.dorto.seen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACR5ilbeRtHr1GA2Lx49gFd8ePdPMuFdQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

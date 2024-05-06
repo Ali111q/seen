@@ -1,0 +1,89 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter run --machine --start-paused -d 31544B33-FF4D-4576-9607-57ADF9447FB6 --devtools-server-address http://127.0.0.1:9100/ --target /Users/alihazem/Documents/GitHub/seen/lib/main.dart
+
+## exception
+
+SocketException: SocketException: Connection refused (OS Error: Connection refused, errno = 61), address = 127.0.0.1, port = 62171
+
+```
+#0      _NativeSocket.startConnect (dart:io-patch/socket_patch.dart:721:35)
+#1      _RawSocket.startConnect (dart:io-patch/socket_patch.dart:1914:26)
+#2      RawSocket.startConnect (dart:io-patch/socket_patch.dart:27:23)
+#3      Socket._startConnect (dart:io-patch/socket_patch.dart:2138:22)
+#4      Socket.startConnect (dart:io/socket.dart:805:21)
+#5      _ConnectionTarget.connect (dart:_http/http_impl.dart:2487:20)
+#6      _HttpClient._getConnection.connect (dart:_http/http_impl.dart:2926:12)
+#7      _HttpClient._getConnection (dart:_http/http_impl.dart:2931:12)
+#8      _HttpClient._openUrl (dart:_http/http_impl.dart:2786:12)
+#9      _HttpClient.openUrl (dart:_http/http_impl.dart:2623:7)
+#10     _WebSocketImpl.connect (dart:_http/websocket_impl.dart:1021:42)
+#11     WebSocket.connect (dart:_http/websocket.dart:320:22)
+#12     new IOWebSocketChannel.connect (package:web_socket_channel/io.dart:81:28)
+#13     connect (package:web_socket_channel/src/_connect_io.dart:15:24)
+#14     new WebSocketChannel.connect (package:web_socket_channel/src/channel.dart:144:16)
+#15     _defaultWebSocketBuilder (package:dds/src/dds_impl.dart:52:27)
+#16     DartDevelopmentServiceImpl.startService (package:dds/src/dds_impl.dart:80:40)
+#17     DartDevelopmentService.startDartDevelopmentService (package:dds/dds.dart:97:19)
+<asynchronous suspension>
+#18     DartDevelopmentService.startDartDevelopmentService (package:flutter_tools/src/base/dds.dart:55:22)
+<asynchronous suspension>
+#19     FlutterDevice.connect.<anonymous closure> (package:flutter_tools/src/resident_runner.dart:296:11)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[!] Flutter (Channel stable, 3.19.2, on macOS 14.4.1 23E224 darwin-arm64, locale en-IQ)
+    • Flutter version 3.19.2 on channel stable at /Users/alihazem/Downloads/flutter
+    ! The flutter binary is not on your path. Consider adding /Users/alihazem/Downloads/flutter/bin to your path.
+    ! The dart binary is not on your path. Consider adding /Users/alihazem/Downloads/flutter/bin to your path.
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision 7482962148 (8 weeks ago), 2024-02-27 16:51:22 -0500
+    • Engine revision 04817c99c9
+    • Dart version 3.3.0
+    • DevTools version 2.31.1
+    • If those were intentional, you can disregard the above warnings; however it is recommended to use "git" directly to perform update checks and upgrades.
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 33.0.2)
+    • Android SDK at /Users/alihazem/Library/Android/sdk
+    • Platform android-34, build-tools 33.0.2
+    • Java binary at: /Applications/Android Studio.app/Contents/jbr/Contents/Home/bin/java
+    • Java version OpenJDK Runtime Environment (build 17.0.6+0-17.0.6b802.4-9586694)
+    • All Android licenses accepted.
+
+[✓] Xcode - develop for iOS and macOS (Xcode 15.3)
+    • Xcode at /Applications/Xcode.app/Contents/Developer
+    • Build 15E204a
+    • CocoaPods version 1.15.2
+
+[✓] Chrome - develop for the web
+    • Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+
+[✓] Android Studio (version 2022.2)
+    • Android Studio at /Applications/Android Studio.app/Contents
+    • Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    • Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    • Java version OpenJDK Runtime Environment (build 17.0.6+0-17.0.6b802.4-9586694)
+
+[✓] VS Code (version 1.88.1)
+    • VS Code at /Applications/Visual Studio Code.app/Contents
+    • Flutter extension version 3.86.0
+
+[✓] Connected device (4 available)
+    • iPad (mobile)              • 00008030-001150391178202E            • ios            • iOS 17.4.1 21E236
+    • iPhone 15 Pro Max (mobile) • 31544B33-FF4D-4576-9607-57ADF9447FB6 • ios            • com.apple.CoreSimulator.SimRuntime.iOS-17-4 (simulator)
+    • macOS (desktop)            • macos                                • darwin-arm64   • macOS 14.4.1 23E224 darwin-arm64
+    • Chrome (web)               • chrome                               • web-javascript • Google Chrome 124.0.6367.60
+
+[✓] Network resources
+    • All expected network resources are available.
+
+! Doctor found issues in 1 category.
+```

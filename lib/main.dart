@@ -1,93 +1,86 @@
-import 'package:flutter/gestures.dart';
+import 'package:devicelocale/devicelocale.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:overlay_support/overlay_support.dart';
-import 'package:provider/provider.dart';
-import 'package:seen/controller/ads_controller.dart';
-import 'package:seen/controller/home_controller.dart';
-import 'package:seen/controller/reels_controller.dart';
-import 'package:seen/controller/user_controller.dart';
-import 'package:seen/layout/profile.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:responsive_framework/responsive_framework.dart';
+import 'package:seen/binding/root_binding.dart';
+import 'package:seen/config/style/colors.dart';
+import 'package:seen/core/language.dart';
+import 'package:seen/view/auth/login/login.dart';
+import 'package:seen/view/auth/register/register.dart';
+import 'package:seen/view/intro/intro.dart';
+import 'package:seen/view/main_layout/main_layout.dart';
+import 'package:seen/view/on_boarding/on_boarding.dart';
+import 'package:seen/view/profile/profile.dart';
+import 'package:seen/view/reels/reels.dart';
+import 'package:seen/view/show/show.dart';
+import 'package:seen/view/stream/radio.dart';
+import 'package:seen/view/stream/streamFullScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'controller/setting_controller.dart';
-import 'controller/show_controller.dart';
-import 'launch_scrteen.dart';
-import 'layout/login.dart';
-import 'layout/main_layout.dart';
-import 'layout/register.dart';
+import 'firebase_options.dart';
 
-void main(List<String> args) {
-  WidgetsFlutterBinding.ensureInitialized();
+late SharedPreferences prefs;
 
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((value) {
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual  ,overlays: [ SystemUiOverlay.top]);
-    //
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      print('object');
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-          overlays: [SystemUiOverlay.top]);
-    });
+void main(List<String> args) async {
+  await WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-    GestureBinding.instance!.pointerRouter.addGlobalRoute((PointerEvent event) {
-      // Handle tap event
-      print('secondWorks');
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-          overlays: [SystemUiOverlay.top]);
-    });
-  }).then((e) {
-    runApp(MultiProvider(
-      providers: [
-        ChangeNotifierProvider<HomeController>(create: (_) => HomeController()),
-        ChangeNotifierProvider<UserController>(create: (_) => UserController()),
-        ChangeNotifierProvider<ShowController>(create: (_) => ShowController()),
-        ChangeNotifierProvider<ReelsController>(
-            create: (_) => ReelsController()),
-        ChangeNotifierProvider<AdsController>(create: (_) => AdsController()),
-        ChangeNotifierProvider<SettingController>(
-            create: (_) => SettingController())
-      ],
-      child: const Home(),
-    ));
-  });
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+  prefs = await SharedPreferences.getInstance();
+  String deviceLocale = await Devicelocale.currentLocale ?? '';
+  print('language pre: $deviceLocale');
+  // prefs.setString('locale', deviceLocale.split('-').first);
+  prefs.setString('locale', 'ar');
+  String? locale = prefs.getString('locale');
+  Get.updateLocale(Locale(locale ?? 'ar'));
+
+  runApp(MyApp());
 }
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class MyApp extends StatelessWidget {
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return OverlaySupport.global(
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/launch',
-        theme: ThemeData(
-          useMaterial3: true,
-          fontFamily: 'font',
-          appBarTheme: const AppBarTheme(
-            systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor:
-                  Colors.transparent, // Customize the status bar color
-              statusBarIconBrightness:
-                  Brightness.light, // Customize the status bar icon color
-              systemNavigationBarColor: Colors.black,
-              systemStatusBarContrastEnforced:
-                  false, // Customize the navigation bar color
-              systemNavigationBarIconBrightness:
-                  Brightness.light, // Customize the navigation bar icon color
-            ),
-          ),
-          iconTheme: const IconThemeData(color: Colors.white),
-        ),
-        routes: {
-          '/login': (context) => Login(),
-          '/register': (context) => RegisterScreen(),
-          '/home': (context) => MainLayout(),
-          '/launch': (context) => VideoSplashScreen(),
-          '/profile': (context) => ProfileScreen(),
-
-          // '/video-player': (context) => jj()
-        },
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          appBarTheme:
+              const AppBarTheme(iconTheme: IconThemeData(color: Colors.white)),
+          canvasColor: Colors.black.withOpacity(0.7),
+          navigationBarTheme:
+              const NavigationBarThemeData(backgroundColor: Colors.black),
+          scaffoldBackgroundColor: MyColors.backGround,
+          fontFamily: GoogleFonts.almarai().fontFamily),
+      initialBinding: RootBionding(),
+      routes: {
+        '/': (context) => const IntroView(),
+        '/main': (context) => MainLayoutView(),
+        '/profile': (context) => ProfileView(),
+        '/login': (context) => LoginView(),
+        '/register': (context) => RegisterView(),
+        '/radio': (context) => RadioView(),
+        '/video-player': (context) => StreamFullScreenView(),
+        '/onBoard': (context) => OnBoardingView(),
+        '/show': (context) => ShowView(),
+        '/reel_videos': (context) => ReelsView(),
+      },
+      translations: Language(),
+      builder: (context, child) => ResponsiveBreakpoints.builder(
+        child: child!,
+        breakpoints: [
+          const Breakpoint(start: 0, end: 450, name: MOBILE),
+          const Breakpoint(start: 451, end: 800, name: TABLET),
+          const Breakpoint(start: 801, end: 1920, name: DESKTOP),
+          const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
+        ],
       ),
     );
   }

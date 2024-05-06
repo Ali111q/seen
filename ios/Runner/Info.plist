@@ -22,14 +22,49 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb440418091721584</string>
+				<string>com.googleusercontent.apps.665539239291-f7vk616rktpuf01knvuq1ghm1rts0jbn</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FacebookAppID</key>
+	<string>440418091721584</string>
+	<key>FacebookDisplayName</key>
+	<string>seen show</string>
+	<key>GIDClientID</key>
+	<string>665539239291-f7vk616rktpuf01knvuq1ghm1rts0jbn.apps.googleusercontent.com</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_googlecast._tcp</string>
+		<string>seen._googlecast._tcp</string>
+	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>This app needs access to your camera to take photos.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>${PRODUCT_NAME} uses the local network to discover Cast-enabled devices on your WiFi
+	network.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>The application does not use this feature</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app needs access to your photo library to select images.</string>
+	<string>This app needs access to your photo library to select images. used only for profile image in create account or edit profile</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -54,6 +89,10 @@
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict/>
+	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.google.GIDSignIn</string>
 	</array>
 </dict>
 </plist>

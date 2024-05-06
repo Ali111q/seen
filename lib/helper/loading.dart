@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import '../utils/colors.dart' as myColors;
 
 class Loading extends StatefulWidget {
   @override
   _LoadingState createState() => _LoadingState();
 }
 
-class _LoadingState extends State<Loading>
-    with SingleTickerProviderStateMixin {
+class _LoadingState extends State<Loading> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -41,9 +39,9 @@ class _LoadingState extends State<Loading>
               begin: Alignment(-1.0, -0.5),
               end: Alignment(1.0, 0.5),
               colors: [
-                myColors.firstBackGround,
-                myColors.sceondBackGround,
-                myColors.firstBackGround,
+                Colors.white,
+                Colors.black,
+                Colors.white,
               ],
               stops: [
                 0.0,

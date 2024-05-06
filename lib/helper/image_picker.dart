@@ -4,17 +4,23 @@ import 'package:image_picker/image_picker.dart';
 
 class SaiImagePicker {
   SaiImagePicker() {}
-  static Future<Map?> pickImage() async {
+  static Future<SaiImage?> pickImage() async {
     final picker = ImagePicker();
     XFile? pickedImage = await picker.pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       print('object');
-      return {
-        'base64': base64Encode(File(pickedImage.path).readAsBytesSync()),
-        'file': File(pickedImage.path)
-      };
+      return SaiImage(
+          BASE64: base64Encode(File(pickedImage.path).readAsBytesSync()),
+          image: File(pickedImage.path));
     }
   }
+}
+
+class SaiImage {
+  final File image;
+  final String BASE64;
+
+  SaiImage({required this.image, required this.BASE64});
 }
 
 // // functions
