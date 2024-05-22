@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:seen/common/helper/api_helper.dart';
@@ -34,6 +35,7 @@ class UserApi extends ApiHelper<User> {
         User.fromJson);
   }
 
+  Future updateUser() async {}
   Future deleteAccount() async {
     await super.delete('/user-delete');
   }

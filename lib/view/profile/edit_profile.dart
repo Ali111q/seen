@@ -16,12 +16,6 @@ class ProfileEditView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(color: Colors.white),
-        leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: Icon(Icons.arrow_back_ios),
-        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -54,6 +48,7 @@ class ProfileEditView extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ProfileEditField(
+              controller: controller.nameController,
               title: 'Name',
               initialValue: controller.user.value!.name,
               onChanged: (value) {
@@ -64,6 +59,7 @@ class ProfileEditView extends StatelessWidget {
               },
             ),
             ProfileEditField(
+              controller: controller.emailController,
               title: 'Email',
               initialValue: controller.user.value!.email,
               onChanged: (value) {
@@ -85,8 +81,9 @@ class ProfileEditField extends StatelessWidget {
   final String title;
   final String initialValue;
   final void Function(String) onChanged;
-
+  final TextEditingController? controller;
   const ProfileEditField({
+    this.controller,
     required this.title,
     required this.initialValue,
     required this.onChanged,
@@ -97,56 +94,13 @@ class ProfileEditField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
-        initialValue: initialValue,
+        controller: controller,
+        style: TextStyle(color: Colors.white),
+        // initialValue: initialValue,
         onChanged: onChanged,
         decoration: InputDecoration(
           labelText: title,
           border: OutlineInputBorder(),
-        ),
-      ),
-    );
-  }
-}
-
-class ProfileButton extends StatelessWidget {
-  final void Function()? onTap;
-  final String svgIcon;
-  final String title;
-  final Color? iconColor;
-
-  const ProfileButton({
-    required this.title,
-    required this.svgIcon,
-    this.iconColor,
-    this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 69,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              svgIcon,
-              color: iconColor,
-            ),
-            SizedBox(width: 10),
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ],
         ),
       ),
     );

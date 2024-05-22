@@ -32,7 +32,7 @@ AppBar MyAppBar(BuildContext context,
                 },
                 icon: Icon(Icons.arrow_back_ios))
             : Logo(
-                width: 15.w(context),
+                width: 18.w(context),
               ),
     title: !isSearch
         ? null
@@ -83,7 +83,7 @@ class AppBarCircleAvatar extends StatelessWidget {
           Get.toNamed('/profile');
         },
         child: CircleAvatar(
-          radius: 25,
+          radius: 27,
           backgroundImage: NetworkImage(controller.user.value!.image),
         ));
   }

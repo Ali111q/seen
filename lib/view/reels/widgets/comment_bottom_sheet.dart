@@ -39,17 +39,8 @@ class CommentBottomSheet extends StatelessWidget {
             child: Obx(
               () => ListView(
                 children: [
-                  ...List.generate(
-                      20,
-                      (index) => CommentWidget(
-                          comment: Comment(
-                              comment: Faker().person.name(),
-                              id: 2,
-                              image: Faker().image.image(),
-                              userName: Faker().person.name()))),
-                  ...controller.comments.map(
-                    (e) => CommentWidget(comment: e),
-                  ),
+                  ...controller.comments
+                      .map((element) => CommentWidget(comment: element))
                 ],
               ),
             ),

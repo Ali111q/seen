@@ -33,7 +33,7 @@ class StreamView extends StatelessWidget {
               Text("Live ",
                   style: TextStyle(
                     fontSize: 20,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 7, 255, 15),
                     fontWeight: FontWeight.w800,
                   )),
               Logo(

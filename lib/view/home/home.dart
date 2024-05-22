@@ -208,8 +208,8 @@ class HomeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // controller.getShow(show.id);
-        // Get.toNamed('/show');
+        controller.getShow(show.id);
+        Get.toNamed('/show');
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -60,6 +60,10 @@ class ReelController extends GetxController {
   }
 
   void like(String id) async {
+    ReelVideo reel =
+        reelVideos.firstWhere((element) => element.id == int.parse(id));
+    int index = reelVideos.indexOf(reel);
+    reelVideos[index] = reel.copyWith(isLiked: !reel.isLiked);
     await reelApi.getWithoutRes('/like?reel_id=$id');
   }
 

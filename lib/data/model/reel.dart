@@ -7,7 +7,6 @@ class Reel {
   final String image;
   final local_name;
   final local_title;
-  
 
   Reel(
       {required this.id,
@@ -57,6 +56,30 @@ class ReelVideo {
         thumbnail: json['thumbnail'],
         ad: json['ads'] != null ? Ad.fromJson(json['ads']) : null,
         isLiked: json['isLiked']);
+  }
+
+  ReelVideo copyWith({
+    int? id,
+    String? title,
+    String? url,
+    int? views_count,
+    int? comments_count,
+    int? likes_count,
+    String? thumbnail,
+    bool? isLiked,
+    Ad? ad,
+  }) {
+    return ReelVideo(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      url: url ?? this.url,
+      views_count: views_count ?? this.views_count,
+      comments_count: comments_count ?? this.comments_count,
+      likes_count: likes_count ?? this.likes_count,
+      thumbnail: thumbnail ?? this.thumbnail,
+      isLiked: isLiked ?? this.isLiked,
+      ad: ad ?? this.ad,
+    );
   }
 }
 

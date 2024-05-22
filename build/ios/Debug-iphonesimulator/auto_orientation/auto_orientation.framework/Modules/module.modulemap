@@ -1,0 +1,11 @@
+framework module auto_orientation {
+  umbrella header "auto_orientation-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module auto_orientation.Swift {
+  header "auto_orientation-Swift.h"
+  requires objc
+}

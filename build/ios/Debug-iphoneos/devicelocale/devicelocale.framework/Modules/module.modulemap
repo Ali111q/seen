@@ -1,0 +1,6 @@
+framework module devicelocale {
+  umbrella header "devicelocale-umbrella.h"
+
+  export *
+  module * { export * }
+}

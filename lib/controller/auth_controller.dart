@@ -200,5 +200,20 @@ class AuthController extends GetxController {
         asyncFunction: asyncFunction, loadingWidget: LoadingWidget());
   }
 
-  void updateUserProfile() {}
+  void updateUserProfile() {
+    // showLoading(asyncFunction: () async {
+    //   myUser.User? _user = await _userApi.updateProfile(
+    //       name: nameController.text, image: profileImage.value?.BASE64);
+    //   if (_user != null) {
+    //     shared.saveUser(_user);
+    //     this.user.value = _user;
+    //     Get.back();
+    //   }
+    // });
+    user.value = user.value!.copyWith(
+      email:
+          emailController.text == '' ? user.value!.email : emailController.text,
+      name: nameController.text == '' ? null : nameController.text,
+    );
+  }
 }

@@ -1,0 +1,11 @@
+framework module flutter_screen_wake {
+  umbrella header "flutter_screen_wake-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module flutter_screen_wake.Swift {
+  header "flutter_screen_wake-Swift.h"
+  requires objc
+}
